@@ -1,0 +1,30 @@
+
+.nav-sidebar>.nav-item .item a i{
+    transition: 0.3s;
+}
+
+.nav-sidebar>.nav-item .item a:hover i {
+    color:red;
+}
+
+.sidebar {
+
+    padding-bottom: 0;
+    padding-left: 0rem;
+    padding-right: 0rem;
+
+}
+
+/* style for search */
+#myInput {
+    /* background-image: url(asset/admin/img/veVector_search_icon.svg.png); */
+
+    background-position: 5px 13px;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    width: 50%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+  }

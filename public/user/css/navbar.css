@@ -1,0 +1,153 @@
+body
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/*____________var__________*/
+:root
+{
+    --main-color:#ff4838;
+}
+/*____________Nav__________*/
+nav
+{
+    position: fixed !important;
+    width: 100% !important;
+    box-shadow: 1px 1px 10px 6px #ff4838;
+    z-index: 10000;
+    
+}
+
+.navbar-brand
+{
+    font-weight: 500;
+}
+.Nav-items
+{
+    margin-left: 30px;
+    transition: .5s all;
+    border: 1px solid white;
+    border-radius: 1.5rem;
+    padding-left: 10px ;
+    padding-right: 10px ;
+    cursor: pointer;
+    
+
+}
+.Nav-items:hover
+{
+   border-color:var(--main-color);
+}
+.Nav-items:hover .into-Nav
+{
+    color: var(--main-color);
+}
+.plus-icon
+{
+    transition: all .5s;
+}
+.Nav-items:hover .plus-icon
+{
+    transform: rotateZ(360deg);
+
+}
+.end-nav-items
+{
+    margin-left: 10px;
+    transition: .5s all;
+    border: 1px solid var(--main-color);
+    border-radius: .75rem;
+    padding: 5px 15px;
+    background-color: var(--main-color);
+    color: white;
+    cursor: pointer;
+}
+.end-nav-items:hover
+{
+    background-color: white;
+    color: var(--main-color);
+}
+.dropdown-item1
+{
+    font-weight: 500;
+}
+.dropdown-item1:hover
+{
+    color: var(--main-color);
+}
+.fa-circle
+{
+    color: var(--main-color);
+    font-size: 10px;
+    visibility: hidden;
+}
+.list-item:hover .fa-circle
+{
+    visibility: inherit;
+}
+.list-item
+{
+    display: flex;
+    align-items: center;
+}
+.Minu
+{
+    color: var(--main-color);
+    display: inline-block;
+}
+.navbar-toggler 
+{
+    border: var(--main-color) 3px solid;
+}
+.nav-link
+{
+    font-size: 11px;
+    font-weight: 500;
+    
+}
+.menu
+{
+    border: 0;
+}
+/*____________End Nav__________*/
+
+.navbar-expand-lg .navbar-nav .nav-link {
+     padding-right:0 !important; 
+     padding-left: 0 !important; 
+    font-size: 15px;
+    font-weight: 600;
+    
+}
+.book
+{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: var(--main-color) !important;
+    color: white !important;
+    border: var(--main-color) 1px solid !important;
+    transition: all .3s;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.book:hover
+{
+    background-color: white !important;
+    color: var(--main-color) !important;
+}
+@media (max-width:991px)
+{
+    .menu1
+    {
+        width: 100% !important;
+        height: 50vh !important;
+    }   
+    textarea
+    {
+        height: 5vh !important;
+    }
+    
+}

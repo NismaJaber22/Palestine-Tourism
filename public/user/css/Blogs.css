@@ -1,0 +1,137 @@
+body
+{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+:root
+{
+    --main-color:#ff4838;
+}
+.Blogs
+{
+    width:90%;
+}
+.Blog
+{
+    border: 2px solid rgb(226, 226, 226);
+    border-radius: 10px;
+    background-color: white;
+    margin-bottom: 50px;
+}
+.profile-img
+{
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 3%;
+}
+.post-time
+{
+    font-size: 12px;
+    color: rgb(160, 160, 160);
+    margin-left: 60px;
+}
+.Post-image
+{
+    width: 100%;
+    height: 300px;
+}
+.Like
+{
+    border: 1px solid rgb(226, 226, 226);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+.foot-icons
+{
+    font-size: 40px;
+    border: 0;
+    padding: 5px 5px;
+    transition: all .3s;
+    cursor: pointer;
+
+}
+.num
+{
+    font-size: 20px;
+    padding: 5px 5px;
+}
+.profile-img1
+{
+    width: 30px;
+    border-radius: 50%;
+}
+.comment
+{
+    background-color: #bdbaba;
+    border-radius: 1.5rem;
+    width: 60%;
+    padding: 5%;
+    margin-bottom: 20px;
+}
+.commentes
+{
+    display: none;
+}
+/* My Blogs*/
+.My-Blogs
+{
+    background-color: #e7e4e4;
+    border: 3px solid white;
+    width: 50%;
+    position: fixed;
+     bottom: 0%;
+      top: 0%;
+      padding-top: 100px;
+      left: -50%;
+      transition: all .5s;
+}
+.My-btn
+{
+    position: fixed;
+    border-top-right-radius:50%;
+    border-bottom-right-radius:50%;
+    border-bottom-left-radius:0;
+    border-top-left-radius:0;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 0px;
+    left: 0%;
+    top:50vh;
+    transition: all .5s;
+    background-color: var(--main-color) !important;
+    border: 0;
+}
+.inner-MyBlog
+{
+    overflow-y: scroll;
+     height: 100%;
+     width: 100%;
+}
+header
+{
+    padding-top: 12vh;
+}
+@media(max-width:990px)
+{
+    .Blog
+    {
+        width: 100% !important;
+    }
+    .My-Blogs
+    {
+        width: 100%;
+        left: -100%;
+    }
+    .comment
+    {
+        width: 90%;
+    }
+
+    .mt-5 {
+        margin-top: 8px!important;
+    }
+}

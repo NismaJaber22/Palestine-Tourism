@@ -1,0 +1,178 @@
+:root
+{
+    --main-color:#ff4838;
+}
+body
+{
+    width: 100%;
+    background: linear-gradient(to top right, var(--main-color) 0%, #6c4079 100%);
+    margin: 0;
+    box-sizing: border-box;
+}
+.Dash-div
+{
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 100px;
+    box-sizing: border-box;
+    min-height: 100vh;
+    border: solid 2px rgb(153, 153, 153);
+
+}
+nav
+{
+    z-index: 1000;
+}
+.conta
+{
+    padding-top: 1px;
+    overflow: hidden;
+    padding-bottom: 50px;
+}
+.header-div
+{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    color: var(--main-color);
+    font-weight: 500;
+}
+.dash-header
+{
+   
+    display: inline-block;
+    padding: 10px;
+}
+.dash-link
+{
+    color: var(--main-color);
+}
+table
+{
+    overflow: hidden;
+    width: 100%;
+}
+td
+{
+    padding-top: 30px !important;
+    padding-bottom: 30px !important;
+}
+@media (max-width:991px)
+{
+    table
+    {
+        font-size: 5px;
+    }
+}
+.table-div
+{
+    width: 100%;
+    height: 50px;
+    background-color: var(--main-color);
+    display: flex;
+    margin-top: 30px;
+}
+.search-submit
+{
+    background-color: white;
+    color: var(--main-color);
+}
+.search-submit:hover
+{
+    border: solid 1px white !important;
+    color: white !important;
+}
+.search-input
+{
+    width: 60%;
+    display: inline;
+    margin-right: 10px;
+    margin-left: 5px;
+}
+.search-form
+{
+    width: 70%;
+    display: flex;
+    align-items: center;
+}
+.add-new-div
+{
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end
+}
+@media (max-width:991px)
+{
+    .btn-success
+    {
+        font-size: 10px;
+    }
+    .Bbb
+    {
+        font-size: 5px !important;
+
+    }
+    .btn-table
+    {
+        padding: 2px;
+        margin-left: 0px;
+        margin-right: 0px;
+        font-size: 6px;
+    }
+}
+.Add-form
+{
+    display: flex;
+    flex-direction: column;
+}
+.Explore
+{
+    height: 50px;
+    width: 10px;
+    background-color: green;
+}
+.NotExplore
+{
+    height: 50px;
+    width: 10px;
+    background-color: red;
+}
+@media(max-width:990px)
+{
+    .Explore
+    {
+        height: 10px;
+        width: 3px;
+    } 
+    .NotExplore
+   {
+    height: 10px;
+    width: 3px;
+   }
+   .container
+   {
+    max-width:100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+   }
+   table
+   {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+   }
+   .conta
+   {
+    width:100% !important;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+   }
+}

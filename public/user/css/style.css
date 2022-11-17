@@ -1,0 +1,253 @@
+body
+{
+    background-color:#FAFAFA ;
+}
+/*____________var__________*/
+:root
+{
+    --main-color:#ff4838;
+}
+
+.text-mainColor{
+   color: #ff4838;
+}
+.bg-mainColor{
+    background-color: #ff4838;
+}
+
+/*____________header__________*/
+.left-header
+{
+    background-position: center center;
+    animation: backimg 15s infinite ;
+    background-repeat: no-repeat;
+    margin: 0;
+}
+@keyframes backimg
+{
+    0%
+    {
+        background-image: url("../images/home-images/bg-highlight1.png");
+    }
+    33.33333%
+    {
+        background-image: url("../images/home-images/bg-highlight2.png");
+    }
+    66.666666%
+    {
+        background-image: url("../images/home-images/bg-highlight3.png");
+    }
+    100%
+    {
+        background-image: url("../images/home-images/bg-highlight1.png");
+    }
+}
+.right-header
+{
+    background-position: center center;
+    background-image: url("../images/home-images/hero-bg1.png");
+    box-sizing: border-box;
+    padding: 0 !important;
+    background-repeat: no-repeat;
+    margin: 0;
+}
+.into-header
+{
+    height: 100vh;
+    background-color: rgba(22,43,50,.9);
+
+}
+.into-header
+{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+#auto-write
+{
+    color: var(--main-color);
+    font-size: 70px;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+}
+#auto-write-Tourism
+{
+    color: rgba(22,43,50,.9);
+    font-size: 70px;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+    text-shadow: -2px 0 #ff4838, 0 2px #ff4838, 2px 0 #ff4838, 0 -2px #ff4838;
+
+    font-family: sans;
+}
+
+.login-btn
+{
+    width: 25%;
+    color: var(--main-color);
+    border: solid var(--main-color) 1px;
+    font-size: 30px;
+    font-weight: 500;
+    transition: all .6s;
+    margin-right: 40px;
+}
+.login-btn:hover
+{
+    background-color: var(--main-color) !important;
+    color:rgba(22,43,50,.9) !important;
+}
+.signup-btn
+{
+    width: 25%;
+    font-size: 30px;
+    font-weight: 500;
+    transition: all .6s;
+    background-color: var(--main-color) ;
+    color:rgba(22,43,50,.9) ;
+}
+.signup-btn:hover
+{
+   background-color: initial !important;
+   color: var(--main-color) !important;
+   border: solid var(--main-color) 1px !important;
+}
+@media(max-width:991px)
+{
+    .row
+    {
+        flex-direction: column !important;
+    }
+    .left-header
+    {
+        width: 100%;
+        margin-top: 0;
+        margin-bottom: 0;
+        height: 60vh;
+    }
+    .right-header
+    {
+        width: 100%;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+/*Explore Top*/
+.Top-Dests
+{
+    display: flex;
+    /* justify-content: space-between; */
+}
+.Top-Dest
+{
+    width: 30%;
+    box-shadow: 3px 4px 5px 4px #b4b2b2;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    border: 1px solid #b4b2b2;
+    padding-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.time
+{
+    background-color: var(--main-color);
+    width: 50%;
+    color: white;
+    font-size: 10px;
+    font-weight: 500;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.book-btn {
+    width: 80%;
+    color: var(--main-color);
+    border: solid var(--main-color) 1px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all .6s;
+    margin-right: 40px;
+}
+.book-btn:hover
+{
+    background-color: var(--main-color) !important;
+    color:white !important;
+}
+.book-btn:hover .fa-arrow-right
+{
+    animation: slide-right alternate .7s;
+}
+@keyframes slide-right
+{
+    50%
+    {
+        transform: translateX(50%);
+    }
+}
+.price
+{
+    color: var(--main-color);
+}
+@media(max-width:991px)
+{
+    .Top-Dests
+    {
+        flex-direction: column;
+        align-content: center;
+        flex-wrap: wrap;
+    }
+    .Top-Dest
+    {
+        width: 100%;
+    }
+
+}
+.slider
+{
+    position: static;
+}
+
+.user__image
+{
+    vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+
+ }
+
+ /* image profile */
+
+ .user__imageprofile
+{
+    width: 100%;
+    height: 20%;
+    display: block;
+ }
+
+ .p-4 {
+    padding: .5rem!important;
+
+}
+
+.my-5 {
+    margin-top: 3rem!important;
+    margin-bottom: 3rem!important;
+}
+
+.border {
+    border: var(--bs-border-width) var(--bs-border-style) #e9ecef!important;
+    border: 3px solid rgb(213, 79, 26);
+}

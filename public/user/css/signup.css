@@ -1,0 +1,105 @@
+:root
+{
+    --main-color:#ff4838;
+}
+.signup-background
+{
+    width: 100%;
+    height: 1300px;
+    background: linear-gradient(to top right, var(--main-color) 0%, #6c4079 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.signup-header
+{
+    font-size: 50px;
+    font-weight: 500;
+}
+.signup-content
+{
+    width: 50%;
+    height: 900px;
+    background-color: white;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+form
+{
+    width: 70%;
+}
+.signup-btn
+{
+    margin-top: 5vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 25px;
+    font-weight:500 ;
+}
+.signup-input
+{
+    height: 7vh;
+    text-align: left;
+    font-size: 20px;
+    font-weight:500;
+    transition: all .5s;
+}
+.signup-label
+{
+    margin-top: 3%;
+    font-size: 25px;
+    color: #5f5e5e;
+}
+#name-error
+{
+    color: red;
+    font-weight: 500;
+}
+#email-error
+{
+    color: red;
+    font-weight: 500;
+}
+#pass-error
+{
+    color: red;
+    font-weight: 500;
+}
+.btn
+{
+    transition: all .5s;
+}
+@media(max-width:991px)
+{
+    .signup-content
+    {
+        width: 100%;
+    }
+
+
+}
+ .alert{
+    padding: var(--bs-alert-padding-y-3) var(--bs-alert-padding-x);
+}
+
+.signup-label {
+    FONT-WEIGHT: 200;
+    margin-top: 3%;
+    font-size: 20px;
+    color: #5f5e5e;
+}
+
+.signup-content {
+    width: 50%;
+    height: 930px;
+    background-color: white;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}

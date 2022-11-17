@@ -1,0 +1,53 @@
+:root
+{
+    --main-color:#ff4838;
+}
+#Ticket
+{
+    width: 80%;
+    margin: 0;
+    box-sizing: border-box;
+    border: 2px solid var(--main-color);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.Ticket-header
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+   
+}
+.Place-Name
+{
+    display: inline-block;
+   
+}
+.Ticket-id
+{
+    display: inline-block;
+  
+}
+.Your-Name
+{
+    display: inline-block;
+    color: white;
+}
+.Ticket-body
+{
+    background-color: var(--main-color);
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.First-body
+{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+}
