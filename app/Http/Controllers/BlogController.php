@@ -21,24 +21,18 @@ class BlogController extends Controller
         $data=$request->validate([
             'title'=>'required|min:5|max:100',
             'text'=>'required|min:20',
-            'image'=>'mimes:png,jpg,gif',
-            'user_id'=>"required|exists:users,id",
+            'image'=>'required|image|mimes:png,jpg,gif',
+            'user_id'=>"required|exists:users,id"
 
         ]);
-        // return $data;
-        Blog::create($request->all());
-        return $request->user_id ;
+
+                $FileName=Storage::putFile("placeimage",$data['image']);
+                $data['image'] = $FileName ;
+
+              $blogs=Blog::create($data);
 
 
-        //      $FileName=Storage::putFile("blogimage",$data['image']);
-        //      $data['image'] = $FileName ;
-
-            //   $blogs=Blog::create($request->all());
-        // //     //  return view('user.BlogsHome',compact('blog'));
-
-
-        //      return $request->user_id;
-        //   return redirect(url('BlogsHome'));
+          return redirect(url('BlogsHome'));
 
                }
 

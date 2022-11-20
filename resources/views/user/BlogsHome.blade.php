@@ -13,17 +13,19 @@
 
         <div class="Explore-blogs container">
 
-                    <div class="row">
-                        @foreach ($blogs as $blog)
-                @if ($blog->status == '1')
+            <div class="row">
+                @foreach ($blogs as $blog)
+                    @if ($blog->status == '1')
                         <div class="Blog mt-5 col-5 mx-5">
                             <div class="d-flex" style="align-items: center; justify-content: flex-start;">
-                                <img src=" " class="profile-img" />
-                                <input name="user_id" value="{{$blog->user->userfname}}  {{$blog->user->userlname}}">
-                                <h5 class="user-name pt-3" name="user_id">{{$blog->user->userfname}}  {{$blog->user->userlname}}</h5>
+                                <img src="{{ asset("storage/$blog->image") }} " class="profile-img" />
+
+
+                                <h5 class="user-name pt-3">{{$blog->user->userfname}} {{$blog->user->userlname}}</h5>
+
                             </div>
                             <div class="container">
-                                <p class="post-time">10-2-2022 4:32 PM</p>
+                                <p class="post-time">{{ $blog->created_at }}</p>
 
                                 <h3 class="blog-title pb-2">{{ $blog->title }}</h3>
 
@@ -31,7 +33,7 @@
                                     <img class="Post-image" src={{ asset("storage/$blog->image") }} />
                                 </div>
                                 <div class="blog_info">
-                                    <p class="blog-text py-4">{{ $blog->text }} </p>
+                                    <textarea class="text">{{ $blog->text }}</textarea>
                                 </div>
 
                                 <div class="Like">
@@ -51,8 +53,8 @@
 
                                 <div class="comment">
                                     <div class="d-flex">
-                                        <img src='' class="profile-img1" />
-                                        <h6 class="user-name1" >aaaaaaaaaa</h6>
+                                        <img src="{{ asset("storage") }}" class="profile-img1" />
+                                        <h6 class="user-name1">name</h6>
                                     </div>
                                     <p class="post-time">10-2-2022 4:32 PM</p>
                                     <p class="comment-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
@@ -68,10 +70,9 @@
                                 </form>
                             </div>
                         </div>
-
-                          @endif
-            @endforeach
-                    </div>
+                    @endif
+                @endforeach
+            </div>
 
         </div>
     </div>
@@ -86,8 +87,7 @@
                     <i class="fa-solid fa-blog"></i>
                 </button>
             </h1>
-            <h3 class="Add-new">My Blogs
-                </h1>
+            <h3 class="Add-new">My Blogs</h3>
         </div>
     </div>
 
@@ -99,12 +99,17 @@
                     <h5 class="modal-title m-auto" id="exampleModalLabel">Add New Religious place</h5>
                 </div>
                 <div class="modal-body">
-
                     <form method="post" action="{{ url('/admin/Blog') }}" class="Add-form" enctype="multipart/form-data">
                         @csrf
                         <label style="display:flex">
                             <p class="text-center" style="width:25%; margin-top: revert;">Title</p>
                             <div style="width:100%">
+                    {{-- @foreach ($blogs as $blog) --}}
+
+
+                                <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                                {{-- @endforeach --}}
+
                                 <input name="title" placeholder="Blog Title" type="text" id="swal-input1"
                                     class="form-control  swal2-input " style="width:80%" />
                             </div>
@@ -156,4 +161,5 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
 @endsection

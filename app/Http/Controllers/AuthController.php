@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Blog;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -68,9 +69,11 @@ class AuthController extends Controller
   }
 
     public function Myprofile(){
-
-        return view('user.Myprofile');
+        $blogs=Blog::get();
+        return view('user.Myprofile',compact('blogs'));
     }
+
+
 
 
 //-----edit in profile user -----

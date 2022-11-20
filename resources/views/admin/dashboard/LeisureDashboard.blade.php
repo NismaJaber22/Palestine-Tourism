@@ -430,8 +430,12 @@
                 </table>
             </div>
 
-            {{-- {{ $places->links() }} --}}
         </div>
+
+
+        {{-- {{ $places->links() }} --}}
+
+
     </div>
 @endsection
 

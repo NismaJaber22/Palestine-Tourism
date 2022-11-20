@@ -4,25 +4,32 @@
 }
 footer
 {
-    background-color: rgba(22, 43, 50,.7);
-    width: 100%;
-    height: 50vh;
-}
+     /* position: fixed; */
+  left: 0;
+  bottom: 0;
+  width: 100%;
+ height: 45vh;
+
+  background-color: rgba(22, 43, 50,.7);
+  color: white;
+  text-align: center;
+    }
 .top-footer
 {
     width: 100%;
-    height:40vh;
+    height:37vh;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
     align-content: center;
     justify-content: space-between;
+
 }
 .bottom-footer
 {
     background-color:rgb(22, 43, 50) ;
     width: 100%;
-    height:10vh;
+    height:8vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

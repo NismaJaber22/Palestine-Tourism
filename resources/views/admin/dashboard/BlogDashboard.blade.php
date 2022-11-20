@@ -224,6 +224,8 @@
                 </table>
             </div>
 
+            {{-- {{ $blogs->links() }} --}}
+
         </div>
 
     </div>

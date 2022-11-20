@@ -454,7 +454,7 @@
                 </table>
             </div>
 
-            {{-- {{ $places->links() }} --}}
+            {{ $places->links() }}
 
         </div>
     </div>

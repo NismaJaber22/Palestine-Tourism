@@ -1,14 +1,32 @@
 {
-    "private": true,
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build"
-    },
-    "devDependencies": {
-        "axios": "^1.1.2",
-        "laravel-vite-plugin": "^0.6.0",
-        "lodash": "^4.17.19",
-        "postcss": "^8.1.14",
-        "vite": "^3.0.0"
-    }
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "axios": "^1.1.2",
+    "laravel-vite-plugin": "^0.6.0",
+    "lodash": "^4.17.19",
+    "postcss": "^8.1.14",
+    "vite": "^3.0.0"
+  },
+  "name": "palestine-tourism",
+  "description": "",
+  "version": "1.0.0",
+  "main": "vite.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NismaJaber22/Palestine-Tourism.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NismaJaber22/Palestine-Tourism/issues"
+  },
+  "homepage": "https://github.com/NismaJaber22/Palestine-Tourism#readme",
+  "dependencies": {
+    "ckeditor5": "^35.3.1",
+    "jquery": "^3.6.1"
+  }
 }

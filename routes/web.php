@@ -13,15 +13,18 @@ use App\Http\Controllers\AuthController;
 Route::get('/all',[Controller::class,'store']);
 
 
+// --------------------
+// showuserProfile
+// Route::get('/', function () {
+//     return view('user.index');
+// });
 
+Route::get('/Myprofile',[BlogController::class,'showuserProfile']);
+// --------------------
 
 Route::get('/', function () {
     return view('user.index');
 });
-
-
-
-
 
 
 Route::get('/BookNow', function () {

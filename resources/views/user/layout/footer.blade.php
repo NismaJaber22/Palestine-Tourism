@@ -42,13 +42,13 @@
             </div>
         </div>
         <div class="bottom-footer">
-            <p class="copyright" style="color:white ;">Copyright 2021 TourXPro | Design By Egens Lab</p>
+            <p class="copyright mt-3" style="color:white ;">Copyright 2021 TourXPro | Design By Egens Lab</p>
             <div class="footer-logo">
-                <a style="color:white ; display: inline-block;" class="navbar-brand" href="{{url('/')}}"><img
+                <a style="color:white ; display: inline-block;" class="navbar-brand " href="{{url('/')}}"><img
                         src="{{asset('user/images/home-images/airplane-57-48.ico')}}" style="width:50px" /> Palestine <span
                         style="color:#ff4838 ;">Tourism</span></a>
             </div>
-            <p class="bottom-footer-para" style="color:white ;">Terms & Condition <span class="vir-line"> |
+            <p class="bottom-footer-para mt-3" style="color:white ;">Terms & Condition <span class="vir-line"> |
                 </span>Privacy Policy</p>
         </div>
     </footer>
