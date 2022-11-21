@@ -9,6 +9,8 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\AuthController;
 
+//Hasan edited this!
+
 
 Route::get('/all',[Controller::class,'store']);
 
