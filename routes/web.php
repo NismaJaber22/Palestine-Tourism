@@ -9,22 +9,15 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\AuthController;
 
-//Hasan edited this!
+//Hasan 2022 edited this!
 
 
 Route::get('/all',[Controller::class,'store']);
 
 
-
-
 Route::get('/', function () {
     return view('user.index');
 });
-
-
-
-
-
 
 Route::get('/BookNow', function () {
     return view('user.BookNow');
