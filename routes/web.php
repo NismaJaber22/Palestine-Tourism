@@ -8,11 +8,25 @@ use App\Http\Controllers\PlaceCulController;
 use App\Http\Controllers\PlaceMedController;
 use App\Http\Controllers\PlaceRelController;
 use App\Http\Controllers\PlaceLeisController;
-//Hasan 2022 edited this!
+use App\Http\Controllers\PlaceMedController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\AuthController;
+
+
+Route::get('/all',[Controller::class,'store']);
+
+
+
 
 Route::get('/', function () {
     return view('user.index');
 });
+
+
+
+
+
 
 Route::get('/BookNow', function () {
     return view('user.BookNow');
