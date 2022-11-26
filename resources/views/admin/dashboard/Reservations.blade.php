@@ -1,4 +1,4 @@
-@extends('user.layout.master')
+@extends('user. layout.master')
 @section('head')
     <link rel="stylesheet" href="{{ asset('user/css/Dashboard-pages-css/ReligiousDashboard.css') }}">
 @endsection

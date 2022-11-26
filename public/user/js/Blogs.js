@@ -96,5 +96,10 @@ async function ShowDesc(Description, PlaceName) {
     })
 }
 
+function ellipsis(){
+
+
+}
+
 
 }

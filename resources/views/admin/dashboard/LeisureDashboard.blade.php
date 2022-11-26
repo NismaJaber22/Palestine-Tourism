@@ -29,7 +29,7 @@
                 </ul>
 
                 <div class="table-div">
-                    <form method="get" action="{{ url('searchRel') }}" class="search-form">
+                    <form method="get" action="{{ url('searchLeis') }}" class="search-form">
                         <input type="search" name="search" class="form-control search-input"
                             placeholder="Enter item name" />
                         <input type="submit" class="btn search-submit" value="Search" name="sib" />
@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <form enctype="multipart/form-data" class="Add-form" method="post"
-                                        action="{{ url('/admin/storeRel') }}">
+                                        action="{{ url('/admin/storeLeis') }}">
                                         @csrf
                                         <label class="d-flex">
                                             <p style="width:25%; margin-top: revert;">Name</p>
@@ -253,7 +253,7 @@
                                                         <div class="modal-body">
                                                             <form name="editform" enctype="multipart/form-data"
                                                                 class="Add-form" method="post" id='editForm'
-                                                                action="{{ url("/admin/updateRel/$place->id") }}">
+                                                                action="{{ url("/admin/updateLeis/$place->id") }}">
 
                                                                 @csrf
                                                                 <label class="d-flex">
@@ -407,7 +407,7 @@
 
                                         {{-- delete--------------------------------- --}}
                                         <form name='myForm'method="post"
-                                            action={{ url("admin/deleteRel/$place->id") }}>
+                                            action={{ url("admin/deleteLeis/$place->id") }}>
                                             @csrf
                                             @method('DELETE')
                                             <td style="width:10%;">

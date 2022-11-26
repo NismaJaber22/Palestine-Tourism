@@ -32,7 +32,7 @@
                 </ul>
 
                 <div class="table-div">
-                    <form method="POST" class="search-form">
+                    <form method="get" action="{{ url('searchCul') }}" class="search-form">
                         <input type="search" name="Research" class="form-control search-input"
                             placeholder="Enter item name" />
                         <input type="submit" class="btn search-submit" value="Search" name="sib" />
@@ -454,7 +454,7 @@
                 </table>
             </div>
 
-            {{ $places->links() }}
+            {{-- {{ $places->links() }} --}}
 
         </div>
     </div>

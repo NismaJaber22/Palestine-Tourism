@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <form enctype="multipart/form-data" class="Add-form" method="post"
-                                        action="{{ url('/admin/store') }}">
+                                        action="{{ url('/admin/storeRel') }}">
                                         @csrf
                                         <label class="d-flex">
                                             <p style="width:25%; margin-top: revert;">Name</p>

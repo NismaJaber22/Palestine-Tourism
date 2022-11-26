@@ -1,6 +1,7 @@
 @extends('user.layout.master')
 @section('head')
     <link rel="stylesheet" href="{{ asset('user/css/Blogs.css') }}">
+    {{-- <link rel="stylesheet" href="{{'node_modules/jquery/dist/jquery.js'}}"> --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.3.3/sweetalert2.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
@@ -18,11 +19,8 @@
                     @if ($blog->status == '1')
                         <div class="Blog mt-5 col-5 mx-5">
                             <div class="d-flex" style="align-items: center; justify-content: flex-start;">
-                                <img src="{{ asset("storage/$blog->image") }} " class="profile-img" />
-
-
-                                <h5 class="user-name pt-3">{{$blog->user->userfname}} {{$blog->user->userlname}}</h5>
-
+                                <img src="{{ asset('storage/' . $blog->user->image) }}" class="profile-img" />
+                                <h5 class="user-name pt-3">{{ $blog->user->userfname }} {{ $blog->user->userlname }}</h5>
                             </div>
                             <div class="container">
                                 <p class="post-time">{{ $blog->created_at }}</p>
@@ -53,7 +51,7 @@
 
                                 <div class="comment">
                                     <div class="d-flex">
-                                        <img src="{{ asset("storage") }}" class="profile-img1" />
+                                        <img src="{{ asset('storage') }}" class="profile-img1" />
                                         <h6 class="user-name1">name</h6>
                                     </div>
                                     <p class="post-time">10-2-2022 4:32 PM</p>
@@ -79,7 +77,7 @@
     </div>
 
 
-    <div class="My-Blogs">
+    <div class="My-Blogs" id="My-Blogs">
         <div class="inner-MyBlog">
             <h1 class="Add-new">Add New Blog?
                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" class="btn btn-success me-1"
@@ -99,16 +97,13 @@
                     <h5 class="modal-title m-auto" id="exampleModalLabel">Add New Religious place</h5>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="{{ url('/admin/Blog') }}" class="Add-form" enctype="multipart/form-data">
+                    <form method="post" action="{{ url('/storeBlog') }}" class="Add-form" enctype="multipart/form-data">
                         @csrf
                         <label style="display:flex">
                             <p class="text-center" style="width:25%; margin-top: revert;">Title</p>
                             <div style="width:100%">
-                    {{-- @foreach ($blogs as $blog) --}}
 
-
-                                <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-                                {{-- @endforeach --}}
+                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 
                                 <input name="title" placeholder="Blog Title" type="text" id="swal-input1"
                                     class="form-control  swal2-input " style="width:80%" />
@@ -162,4 +157,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
+    {{-- @if ($errors->has('title') || $errors->has('text') || $errors->has('image'))
+        <script>
+            $(function() {
+                $('#My-Blogs #modal').modal({
+                    show: true
+                });
+            });
+        </script>
+    @endif --}}
 @endsection

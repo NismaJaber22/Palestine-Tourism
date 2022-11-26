@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('userlname');
             $table->string('image');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp(' ')->nullable();
             $table->string('password');
             $table->text('liveIn')->default("1");
             // $table->string('gender');

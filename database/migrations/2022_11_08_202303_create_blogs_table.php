@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('text');
+            $table->text('text')->nullable();
             $table->string('image');
             $table->boolean('status')->default(false);
             $table->foreignId('user_id')->constrained();

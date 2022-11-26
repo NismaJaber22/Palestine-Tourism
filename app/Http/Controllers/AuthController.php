@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -68,47 +69,45 @@ class AuthController extends Controller
 
   }
 
-    public function Myprofile(){
-        $blogs=Blog::get();
-        return view('user.Myprofile',compact('blogs'));
-    }
+    // public function Myprofile(){
 
-
-
+    //     $blogs = Blog::get();
+    //     return view('user.MyProfile',compact('blogs'));
+    // }
 
 //-----edit in profile user -----
 public function updatemyprofile(Request $request,$id){
 
     $data=$request->validate([
-        'userfname'=>'required|min:2|max:10|',
+        'userfname'=>'min:2|max:10|',
         'userlname'=>'min:2|max:20|',
-        'email'=>'email|unique:Users,email',
+        // 'email'=>'email|unique:Users,email',
         'password'=>'min:8|max:30|confirmed',
         'liveIn',
-        // 'image'=>'image|mimes:png,jpg,gif'
+        'image'=>'image|mimes:png,jpg,gif'
     ]);
+    // $id = Auth::user()->id;
 
+    $user=User::findOrfail($id);
 
-    $user=Auth::findOrfail($id);
+    if($request->has('image')){
+         Storage::delete($user->image);
+         $fileName=Storage::putFile("placeimage",$data['image']);
+         $data['image'] = $fileName ;
+    }
+    
+    $data['password']=bcrypt($data['password']);
+    $user=User::create($data);
 
-    // if($request->has('image')){
-    //      Storage::delete($user->image);
-    //      $fileName=Storage::putFile("placeimage",$data['image']);
-    //      $data['image'] = $fileName ;
-    // }
 
     $user->update($data);
 
+    // session()->flash('success',' inserted successfuly');
 
     // return redirect(url('Myprofile'));
+//  return $request->id;
+    return $data;
 
-    // $id = Auth::user()->id;
-    // $user = User::find($id);
-
-    return 'sss';
-
-}
-
+    }
 
 }
-

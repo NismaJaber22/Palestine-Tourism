@@ -1,5 +1,7 @@
 @extends('user.layout.master')
 @section('head')
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
     <link rel="stylesheet" href="{{ asset('user/css/Dashboard-pages-css/ReligiousDashboard.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
@@ -40,10 +42,11 @@
                                 </div>
                                 <div class="modal-body">
 
-
-                                    <form method="post" action="{{ url('/admin/Blog') }}" class="Add-form"
-                                        enctype="multipart/form-data">
+                                    <form method="get" action="{{ url('/addBlog') }}" class="Add-form" enctype="multipart/form-data">
                                         @csrf
+
+                                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+
                                         <label style="display:flex">
                                             <p style="width:25%; margin-top: revert;">Title</p>
                                             <div style="width:100%">
@@ -117,7 +120,7 @@
                                 </td>
 
                                 <td>
-{{--
+                                    {{--
                                     <form action="{{ url('/editstatus') }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
 
                                         @csrf
@@ -132,18 +135,17 @@
 
                                     {{-- ----------------- --}}
                                     <div class="container mt-3">
-                                    {{-- <a href="{{ url("/editstatus/$blog->id")}}"> aaaa</a> --}}
-                                    <form action="{{ url("/editstatus/$blog->id")}}" method="POST">
+                                        {{-- <a href="{{ url("/editstatus/$blog->id")}}"> aaaa</a> --}}
+                                        <form action="{{ url("/editstatus/$blog->id") }}" method="POST">
                                             @csrf
                                             <div class="form-check">
-                                                <button name="hidden" type="submit">submit</button>
+                                                {{-- <button name="hidden" type="submit">submit</button> --}}
 
-                                                <input type="checkbox" class="form-check-input" id="status"
-                                                    name="status" value="1" {{  ($blog->status === '1' ? ' checked' : '') }}
-                                                         {{-- @if (isset($blog->status) && $blog->status) checked="checked" @endif --}}
->
+                                                <input type="checkbox" class="form-check-input"
+                                                    id="status{{ $blog->id }}" name="status" value="1"
+                                                    {{ $blog->status === '1' ? ' checked' : '' }} >
                                                 <label class="form-check-label" for="check1">Show</label>
-                                             </div>
+                                            </div>
 
                                         </form>
                                     </div>
@@ -167,8 +169,7 @@
                                                 </div>
 
                                                 <div class="modal-body">
-                                                    <form method="post"
-                                                        action="{{ url("/admin/updateBlog/$blog->id") }}"
+                                                    <form method="post" action="{{ url("/updateBlog/$blog->id") }}"
                                                         class="update-form" enctype="multipart/form-data">
                                                         @csrf
                                                         <label style="display:flex">
@@ -207,7 +208,7 @@
                                 </td>
 
                                 {{-- delete------------------------------------- --}}
-                                <form name='myForm'method="post" action={{ url("admin/deleteblog/$blog->id") }}>
+                                <form name='myForm'method="post" action={{ url("deleteblog/$blog->id") }}>
                                     @csrf
                                     @method('DELETE')
                                     <td style="width:10%;">
@@ -263,6 +264,41 @@
                         icon: "warning"
                     });
                 }
+            });
+        });
+
+
+
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('input[type="checkbox"]').change(function() {
+
+                console.log("The element with id " + this.id + " changed.");
+
+
+                var blogID = this.id.replace('status', '');
+
+                $.ajax({
+                    /* the route pointing to the post function */
+                    url: '/editstatus/' + blogID,
+                    type: 'POST',
+                    /* send the csrf-token and the input to the controller */
+                    data: {
+                        id: blogID,
+                        isChecked: this.checked
+                    },
+                    /* remind that 'data' is the response of the AjaxController */
+                    success: function(data) {
+                        $(".writeinfo").append(data.success);
+                        console.log(data.error);
+                    }
+                });
+
             });
         });
     </script>

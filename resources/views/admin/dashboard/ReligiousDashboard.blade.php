@@ -17,7 +17,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item ">
                         <a class="nav-link dash-link active" aria-current="page"
-                            href="{{ url('ReligiousDashboards') }}">Religious</a>
+                            href="{{ url('ReligiousDashboard') }}">Religious</a>
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link dash-link" href="{{ url('CulturalDashboard') }}">Cultural</a>
@@ -490,7 +490,7 @@
                 </table>
             </div>
 
-            {{ $places->links() }}
+            {{-- {{ $places->links() }} --}}
 
         </div>
 
