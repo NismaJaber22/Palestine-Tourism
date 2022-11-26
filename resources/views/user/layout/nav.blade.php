@@ -12,7 +12,7 @@
 
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0"> 
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item Nav-items">
                         <a class="nav-link into-Nav" aria-current="page" href="{{ url('/') }}">Home</a>
                     </li>
@@ -87,7 +87,7 @@
 
                     <div class="dropdown d-flex">
                         <img src="{{ asset('storage/' . Auth::user()->image) }}" type="button" alt="user photo"
-                            class="user__image dropdown-toggle w-25" data-toggle="dropdown" aria-haspopup="true"
+                            class="user__image w-25" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false" />
 
                         <h4 class="dropdown-toggle mx-4 text-mainColor" role="button" id="dropdownMenuLink"

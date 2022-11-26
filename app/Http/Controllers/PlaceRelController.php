@@ -11,13 +11,6 @@ use Illuminate\Support\Facades\Storage;
 
 class PlaceRelController extends Controller
 {
-
-    public function dashboards(){
-        $places=Place::get();
-        return view('admin.dashboard.dashboards',compact('places'));
-      }
-
-
     public function showReligious(){
         $places=Place::paginate(5);
         return view('admin.dashboard.ReligiousDashboard',compact('places'));

@@ -16,6 +16,11 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Controller extends BaseController
 {
+// admin dashboard function
+    public function dashboards(){
+        $places=Place::get();
+        return view('admin.dashboard.dashboards',compact('places'));
+      }
 
     public function store(Request $request){
 
