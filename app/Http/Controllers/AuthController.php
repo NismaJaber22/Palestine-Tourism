@@ -71,11 +71,11 @@ class AuthController extends Controller
         return redirect(url('/'));
     }
 
-    // public function Myprofile(){
+    public function Myprofile(){
 
-    //     $blogs = Blog::get();
-    //     return view('user.MyProfile',compact('blogs'));
-    // }
+        $blogs = Blog::get();
+        return view('user.MyProfile',compact('blogs'));
+    }
 
     //-----edit in profile user -----
     public function updatemyprofile(Request $request, $id)
