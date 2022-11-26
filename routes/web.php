@@ -8,10 +8,10 @@ use App\Http\Controllers\PlaceCulController;
 use App\Http\Controllers\PlaceMedController;
 use App\Http\Controllers\PlaceRelController;
 use App\Http\Controllers\PlaceLeisController;
-use App\Http\Controllers\PlaceMedController;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\AuthController;
+// use App\Http\Controllers\PlaceMedController;
+// use App\Http\Controllers\BlogController;
+// use App\Http\Controllers\Controller;
+// use App\Http\Controllers\AuthController;
 
 
 Route::get('/all',[Controller::class,'store']);
