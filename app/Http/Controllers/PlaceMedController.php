@@ -27,8 +27,10 @@ class PlaceMedController extends Controller
 
 
     public function showMedTours(){
-        $places=Place::paginate(5);
-        return view('user.MedicalTours',compact('places'));
+        $places=Place::get();
+        $randomPlaces=Place::inRandomOrder()->limit(9)->get();
+        return view('user.MedicalTours')->with(compact('places','randomPlaces')) ;
+
       }
 
 

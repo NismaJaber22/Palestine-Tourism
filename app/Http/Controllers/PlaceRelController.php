@@ -21,17 +21,17 @@ class PlaceRelController extends Controller
     //     $select=Place::select('location')->get();
     //     return view('user.ReligiousTours',compact('select'));
     //   }
+
+
     public function showRelTours(){
         $places=Place::get();
-        return view('user.ReligiousTours',compact('places'));
+        $randomPlaces=Place::inRandomOrder()->limit(9)->get();
+        return view('user.ReligiousTours')->with(compact('places','randomPlaces')) ;
       }
 
     public function create(){
         return view('admin.create');
     }
-
-
-
 // ------------------Delete-------------------------------------------------------------------
 
         public function destroy($id){
@@ -45,14 +45,11 @@ class PlaceRelController extends Controller
         }
 
 // -------------------------------------------------------------------------------------
-
        public function edit($id){
         return $id;
             $places=Place::findOrFail($id);
              return view('admin.ReligiousDashboard',['places'=>$places]);
         }
-
-
 // --------------search------------------------------
 
 //     public function search(Request $request){
@@ -67,13 +64,4 @@ class PlaceRelController extends Controller
 //             return view('admin.search', compact('places'));
 
 //  }
-
-
-//  ---------------
-
-public function CustomersRes(){
-
-    return 'aaa';
-  }
-
 }

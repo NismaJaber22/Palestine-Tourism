@@ -65,13 +65,13 @@
                         </ul>
                     </li>
                     <li class="nav-item Nav-items">
-                        <a href="{{ url('/admin/dashboards') }}" class="nav-link into-Nav">Dashboard</a>
-                    </li>
-
-
-
-                <li class="nav-item Nav-items">
-                    <a href="{{ url('/BlogDashboard') }}" class="nav-link into-Nav"> Blog Dashboard
+                    @auth
+                    @if (Auth::user()->is_admin == 1)
+                        <li class="nav-item Nav-items">
+                            <a href="{{ url('/admin/dashboards') }}" class="nav-link into-Nav">Dashboard</a>
+                        </li>
+                    @endif
+                @endauth
                     </a>
                 </li>
 </ul>

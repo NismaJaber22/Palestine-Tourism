@@ -18,7 +18,8 @@ class PlaceCulController extends Controller
 
     public function showCulTours(){
         $places=Place::get();
-        return view('user.CulturalTours',compact('places'));
+        $randomPlaces=Place::inRandomOrder()->limit(9)->get();
+        return view('user.CulturalTours')->with(compact('places','randomPlaces')) ;
     }
 
     // public function culp(){
@@ -31,10 +32,7 @@ class PlaceCulController extends Controller
         return view('admin.create');
     }
 
-
-
 // -------------------------------------------------------------------------------------
-
         public function destroy($id){
             $places=Place::findOrfail($id);
             Storage::delete($places->image);

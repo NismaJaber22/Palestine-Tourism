@@ -12,16 +12,15 @@ use Illuminate\Support\Facades\Storage;
 
 class PlaceLeisController extends Controller
 {
-
-
     public function showLeisure(){
         $places=Place::get();
         return view('admin.dashboard.LeisureDashboard',compact('places'));
     }
-
+    
     public function showLeisTours(){
-        $places=Place::paginate(5);
-        return view('user.LeisureTours',compact('places'));
+        $places=Place::get();
+        $randomPlaces=Place::inRandomOrder()->limit(9)->get();
+        return view('user.LeisureTours')->with(compact('places','randomPlaces')) ;
     }
 
     // public function showLeisure(){
@@ -29,16 +28,11 @@ class PlaceLeisController extends Controller
     //     return view('admin.dashboard.LeisureDashboard',compact('places'));
     // }
 
-
-
     //     public function showLeisTours(){
     //         $places=Place::paginate(5);
     //         return view('user.LeisureTours',compact('places'));
     //     }
-
-
     // -------------------------------------------------------------------------------------
-
             public function destroy($id){
                 $places=Place::findOrfail($id);
                 Storage::delete($places->image);
@@ -48,18 +42,13 @@ class PlaceLeisController extends Controller
                 return redirect(url('LeisureDashboard'));
 
             }
-
     // -------------------------------------------------------------------------------------
-
     public function edit($id){
         return $id;
             $places=Place::findOrFail($id);
              return view('admin.dashboard.LeisureDashboard',['places'=>$places]);
         }
-
-
     // --------------search----------------------------------------------------
-
     //     public function search(Request $request){
 
     //         $search = $request->input('search');
@@ -72,5 +61,4 @@ class PlaceLeisController extends Controller
     //         return view('admin.search', compact('places'));
 
     // }
-
     }

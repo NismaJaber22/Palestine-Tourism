@@ -1,6 +1,9 @@
 @extends('user.layout.master')
 @section('head')
     <link rel="stylesheet" href="{{ asset('user/css/Tours.css') }}">
+    {{-- owl carousel --}}
+    <link rel="stylesheet" href="{{ asset('owl_carousel/owl-carousel/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ asset('owl_carousel/owl-carousel/owl.theme.css') }}">
 @endsection
 
 @section('content')
@@ -23,7 +26,7 @@
                 </ul>
                 <div>
                     <div class="search-city">
-                        <h5 style="display:inline-block ;">Search with city</h5>
+                        <h4 class="text-capitalize ps-3" style="display:inline-block ;">Search with city</h4>
                         <form method="GET"
                             style="display:flex;  margin-left: 1%;width: 20%; justify-content: space-between;">
                             <select style="display:inline-block ; width: 70%;" class="form-select"
@@ -49,210 +52,72 @@
 
                 <section>
                     <div class="Top-Dests">
-                        <div class="container">
-                            <div class="row" style="justify-content: space-between;">
-
+                            {{-- <div class="row" style="justify-content: space-between;"> --}}
+                            <div class="owl-carousel owl-theme">
                                 @foreach ($places as $place)
                                     @if ($place->type == '4')
-                                        <div class="Top-Dest col-3 ">
-                                            <img style="width:96%" class="mt-2"  src="{{ asset("storage/$place->image") }}" />
-                                            <div class="time my-2">
+                                        <div class="Top-Dest">
+                                            <img src="{{ asset("storage/$place->image") }}" />
+                                            <div class="time">
                                                 <i class="fa-regular fa-clock"></i>&nbsp;
                                                 <span>{{ $place->start }}:{{ $place->AddRem1 }} </span> &nbsp; to &nbsp;
                                                 <span> {{ $place->close }}:{{ $place->AddRem2 }}</span>
                                             </div>
-                                            <h5 calss="place-name">{{$place->description}}</h5>
 
-                                            {{-- <h6 class="Place-Type"><span style="color:#ff4838 ;">{{ $place->start}}</span> Leisure</h6> --}}
+                                            <h5 calss="place-name">{{ $place->description }}</h5>
+                                            {{-- <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span> Leisure</h6> --}}
                                             <h6 class="Place-Type"><span style="color:#ff4838 ;">Location: </span>
-                                                {{ $place->location }}
+                                                {{ $place->location }}</h6>
 
-                                            </h6>
+                                            <div class="booking">
+                                                <button class="py-2 btn book-btn">BOOK NOW <i class="fa-solid fa-arrow-right"></i></button>
+                                            </div>
 
-                                            <button class="btn book-btn">BOOK NOW <i
-                                                    class="fa-solid fa-arrow-right"></i></button>
-                                            <h5><span class="price">{{ $place->Price }}</span> per person</h5>
+                                            <h5 class="py-3">
+                                                <span class="price">{{ $place->Price }} $</span> per person
+                                            </h5>
                                         </div>
                                     @endif
                                 @endforeach
                             </div>
-                        </div>
+                            {{-- </div> --}}
+
                     </div>
                 </section>
-                <div class="search-city">
-                    <h5 style="display:inline-block ;">Explore Place</h5>
 
+
+                <div class="search-city">
+                    <h2 style="display:inline-block">Explore Place</h2>
                 </div>
 
-                <section>
-                    <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0"
-                                class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
-                                aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
-                                aria-label="Slide 3"></button>
-                        </div>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="row" style="justify-content: space-between;">
-                                    <div class="Top-Dest col-3">
-                                        <img style="width:100%"
-                                            src="{{ asset('user/images/home-images/p-alpha1.png') }}" />
-                                        <div class="time">
-                                            <i class="fa-regular fa-clock"></i> <span>8:00</span> to <span>22:30</span>
-                                        </div>
-                                        <h5 calss="place-name">Etiam placerat dictum consequat an Pellentesque habitant
-                                            morbi.</h5>
+                <section class="explore_places">
 
-                                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span> Leisure</h6>
-                                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Location: </span> Nablus</h6>
-
-                                        <button class="btn book-btn">BOOK NOW <i
-                                                class="fa-solid fa-arrow-right"></i></button>
-                                        <h5><span class="price">$79.00</span> per person</h5>
-                                    </div>
-
-
+                    <div class="owl-carousel owl-theme">
+                        @foreach ($randomPlaces as $randomPlace)
+                            {{-- <div class="row" style="justify-content: space-between;"> --}}
+                            <div class="Top-Dest">
+                                <img src="{{ asset("storage/$randomPlace->image") }}" />
+                                <div class="time">
+                                    <span>{{ $randomPlace->start }}:{{ $randomPlace->AddRem1 }} </span> &nbsp;
+                                    to &nbsp;
+                                    <span> {{ $randomPlace->close }}:{{ $randomPlace->AddRem2 }}</span>
                                 </div>
+                                <h5 calss="place-name">{{ $randomPlace->description }}.</h5>
+                                <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span>{{ $randomPlace->type }}
+                                </h6>
+                                <h6 class="Place-Type"><span style="color:#ff4838 ;">Location:
+                                    </span>{{ $randomPlace->location }}</h6>
+
+                                    <div class="booking">
+                                        <button class="py-2 btn book-btn">BOOK NOW <i class="fa-solid fa-arrow-right"></i></button>
+                                    </div>
+
+                                <h5 class="py-3">
+                                    <span class="price">{{ $randomPlace->Price }}$</span> per person
+                                </h5>
                             </div>
-                            <div class="carousel-item">
-                                <div class="row" style="justify-content: space-between;">
-                                    <div class="Top-Dest col-3">
-                                        <img style="width:100%"
-                                            src="{{ asset('user/images/home-images/p-alpha1.png') }}" />
-                                        <div class="time">
-                                            <i class="fa-regular fa-clock"></i> <span>8:00</span> to <span>22:30</span>
-                                        </div>
-                                        <h5 calss="place-name">Etiam placerat dictum consequat an Pellentesque habitant
-                                            morbi.</h5>
-
-                                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span> Leisure</h6>
-                                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Location: </span> Nablus</h6>
-
-                                        <button class="btn book-btn">BOOK NOW <i
-                                                class="fa-solid fa-arrow-right"></i></button>
-                                        <h5><span class="price">$79.00</span> per person</h5>
-                                    </div>
-
-                                    <div class="Top-Dest col-3">
-                                        <img style="width:100%" src="images/home-images/p-alpha2.png" />
-                                        <div class="time">
-                                            <i class="fa-regular fa-clock"></i> <span>10:00</span> to <span>20:00</span>
-                                        </div>
-                                        <h5>varius condimentum consequat frin Aenean pretium risus eu.</h5>
-                                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span> Leisure</h6>
-                                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Location: </span> Nablus</h6>
-
-                                        <button class="btn book-btn">BOOK NOW <i
-                                                class="fa-solid fa-arrow-right"></i></button>
-                                        <h5><span class="price">$259.00</span> per person</h5>
-                                    </div>
-                                    <div class="Top-Dest col-3">
-                                        <img style="width:100%"
-                                            src="{{ asset('user/images/home-images/p-alpha1.png') }}" />
-                                        <div class="time">
-                                            <i class="fa-regular fa-clock"></i> <span>8:00</span> to <span>22:30</span>
-                                        </div>
-                                        <h5>Praesent sed elit mi. In risus nullaam efficitur non elementum.</h5>
-                                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span> Leisure</h6>
-                                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Location: </span> Nablus</h6>
-
-                                        <button class="btn book-btn">BOOK NOW <i
-                                                class="fa-solid fa-arrow-right"></i></button>
-                                        <h5><span class="price">$179.00</span> per person</h5>
-                                    </div>
-
-                                    <div class="Top-Dest col-3">
-                                        <img style="width:100%" src="images/home-images/p-alpha4.png" />
-                                        <div class="time">
-                                            <i class="fa-regular fa-clock"></i> <span>8:00</span> to <span>24:00</span>
-                                        </div>
-                                        <h5>Praesent sed elit mi. In risus nullaam efficitur non elementum.</h5>
-                                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span> Leisure</h6>
-                                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Location: </span> Nablus</h6>
-
-                                        <button class="btn book-btn">BOOK NOW <i
-                                                class="fa-solid fa-arrow-right"></i></button>
-                                        <h5><span class="price">$199.00</span> per person</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="row" style="justify-content: space-between;">
-                                    <div class="Top-Dest col-3">
-                                        <img style="width:100%" src="images/home-images/p-alpha1.png" />
-                                        <div class="time">
-                                            <i class="fa-regular fa-clock"></i> <span>8:00</span> to <span>22:30</span>
-                                        </div>
-                                        <h5 calss="place-name">Etiam placerat dictum consequat an Pellentesque habitant
-                                            </h5>
-
-                                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span> Leisure</h6>
-                                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Location: </span> Nablus</h6>
-
-                                        <button class="btn book-btn">BOOK NOW <i
-                                                class="fa-solid fa-arrow-right"></i></button>
-                                        <h5><span class="price">$79.00</span> per person</h5>
-                                    </div>
-
-                                    <div class="Top-Dest col-3">
-                                        <img style="width:100%"
-                                            src="{{ asset('user/images/home-images/p-alpha1.png') }}" />
-                                        <div class="time">
-                                            <i class="fa-regular fa-clock"></i> <span>10:00</span> to <span>20:00</span>
-                                        </div>
-                                        <h5>varius condimentum consequat frin Aenean pretium risus eu.</h5>
-                                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span> Leisure</h6>
-                                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Location: </span> Nablus</h6>
-
-                                        <button class="btn book-btn">BOOK NOW <i
-                                                class="fa-solid fa-arrow-right"></i></button>
-                                        <h5><span class="price">$259.00</span> per person</h5>
-                                    </div>
-                                    <div class="Top-Dest col-3">
-                                        <img style="width:100%"
-                                            src="{{ asset('user/images/home-images/p-alpha1.png') }}" />
-                                        <div class="time">
-                                            <i class="fa-regular fa-clock"></i> <span>8:00</span> to <span>22:30</span>
-                                        </div>
-                                        <h5>Praesent sed elit mi. In risus nullaam efficitur non elementum.</h5>
-                                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span> Leisure</h6>
-                                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Location: </span> Nablus</h6>
-
-                                        <button class="btn book-btn">BOOK NOW <i
-                                                class="fa-solid fa-arrow-right"></i></button>
-                                        <h5><span class="price">$179.00</span> per person</h5>
-                                    </div>
-
-                                    <div class="Top-Dest col-3">
-                                        <img style="width:100%"
-                                            src="{{ asset('user/images/home-images/p-alpha1.png') }}" />
-                                        <div class="time">
-                                            <i class="fa-regular fa-clock"></i> <span>8:00</span> to <span>24:00</span>
-                                        </div>
-                                        <h5>Praesent sed elit mi. In risus nullaam efficitur non elementum.</h5>
-                                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span> Leisure</h6>
-                                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Location: </span> Nablus</h6>
-
-                                        <button class="btn book-btn">BOOK NOW <i
-                                                class="fa-solid fa-arrow-right"></i></button>
-                                        <h5><span class="price">$199.00</span> per person</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+                            {{-- </div> --}}
+                        @endforeach
                     </div>
                 </section>
 
@@ -262,5 +127,41 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('user/js/Tours.js') }}"></script>
+
+    <script src="{{ asset('owl_carousel/owl-carousel/owl.carousel.js') }}"></script>
+
+    {{-- owl carousel --}}
+    <script>
+        $(document).ready(function() {
+            $('.owl-carousel').owlCarousel();
+        });
+
+        $(".owl-carousel").owlCarousel({
+
+            // default
+            //Basic Speeds
+            slideSpeed: 200,
+            paginationSpeed: 800,
+
+            //Autoplay
+            autoPlay: true,
+            goToFirst: true,
+            goToFirstSpeed: 1000,
+
+            // Navigation
+            navigation: false,
+            navigationText: ["prev", "next"],
+            pagination: true,
+            paginationNumbers: false,
+
+            // Responsive
+            responsive: true,
+            items: 4,
+            itemsDesktop: [1199, 4],
+            itemsDesktopSmall: [980, 3],
+            itemsTablet: [768, 2],
+            itemsMobile: [479, 1]
+
+        })
+    </script>
 @endsection

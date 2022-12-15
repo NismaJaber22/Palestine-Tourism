@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('userfname');
             $table->string('userlname');
             $table->string('image')->nullable();
+            $table->boolean('is_admin');
             $table->string('email')->unique();
             $table->string('password');
             $table->text('liveIn')->default("1");

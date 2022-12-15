@@ -51,13 +51,13 @@ Route::controller(Controller::class)->group(function(){
     Route::post('/admin/updateMed/{id}','update');
     Route::get('/searchRel','search');
     Route::get('/addBlog','addBlog');
-    Route::get('/admin/dashboards','dashboards');
+    Route::get('/admin/dashboards','dashboards')->middleware('is_admin');
 });
 
 // ----------Religious----------------------------
 Route::controller(PlaceRelController::class)->group(function(){
     Route::get('/admin/createRel','create');
-    Route::get('/ReligiousDashboard','showReligious');
+    Route::get('/ReligiousDashboard','showReligious')->middleware('is_admin');
     Route::get('/ReligiousTours','showRelTours');
     Route::delete('/admin/deleteRel/{id}','destroy');
     Route::get('/admin/editRel/{id}','edit');
@@ -69,7 +69,7 @@ Route::controller(PlaceRelController::class)->group(function(){
 // -----------Cultural-----------------------------
 Route::controller(PlaceCulController::class)->group(function(){
     Route::get('/admin/createCul','create');
-    Route::get('/CulturalDashboard','showCultural');
+    Route::get('/CulturalDashboard','showCultural')->middleware('is_admin');
     Route::get('/CulturalTours','showCulTours');
     Route::delete('/admin/deleteCul/{id}','destroy');
     Route::get('/admin/editCul/{id}','edit');
@@ -79,7 +79,7 @@ Route::controller(PlaceCulController::class)->group(function(){
 // -----------Leisure-----------------------------
 Route::controller(PlaceLeisController::class)->group(function(){
     Route::get('/admin/createLeis','create');
-    Route::get('/LeisureDashboard','showLeisure');
+    Route::get('/LeisureDashboard','showLeisure')->middleware('is_admin');
     Route::get('/LeisureTours','showLeisTours');
     Route::delete('/admin/deleteLeis/{id}','destroy');
     Route::get('/admin/editLeis/{id}','edit');
@@ -89,7 +89,7 @@ Route::controller(PlaceLeisController::class)->group(function(){
 // -----------Medical-----------------------------
 Route::controller(PlaceMedController::class)->group(function(){
     Route::get('/admin/createMed','create');
-    Route::get('/MedicalDashboard','showMedical');
+    Route::get('/MedicalDashboard','showMedical')->middleware('is_admin');
     Route::get('/MedicalTours','showMedTours');
     Route::delete('/admin/deleteMed/{id}','destroy');
     Route::get('/admin/editMed/{id}','edit');
@@ -118,7 +118,7 @@ Route::controller(BlogController::class)->group(function(){
     Route::get('showcheckbox','showcheckbox');
     Route::post('checkbox','checkbox');
     Route::post('/storeBlog','storeBlog');
-    Route::get('/BlogDashboard','BlogDashboard');
+    Route::get('/BlogDashboard','BlogDashboard')->middleware('is_admin');
     Route::get('/BlogsHome','BlogsHome');
     Route::post('/editstatus/{id}','editstatus');
     Route::post('/Myprofile','showuserProfile');

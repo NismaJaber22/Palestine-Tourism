@@ -43,15 +43,8 @@ class Controller extends BaseController
                 $places=Place::create($data);
 
                  session()->flash('success',' inserted successfuly');
+                 return $data;
 
-                 if($data['type']==1)
-                    return redirect(url('ReligiousDashboard'));
-                    elseif($data['type']==2)
-                    return redirect(url('CulturalDashboard'));
-                    elseif($data['type']==3)
-                    return redirect(url('LeisureDashboard'));
-                    elseif($data['type']==4)
-                    return redirect(url('MedicalDashboard'));
 
 
             }
