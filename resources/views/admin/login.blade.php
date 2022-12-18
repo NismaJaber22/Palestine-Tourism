@@ -1,75 +1,51 @@
-@include('admin.layout.head')
+@extends('user.layout.master')
+@section('head')
+    <link rel="stylesheet" href="{{ asset('user/css/login.css') }}">
+@endsection
 
-<div class="d-flex justify-content-center align-items-center my-5 ">
-    <div class="login-box py-5">
-        <!-- /.login-logo -->
-        <div class="card card-outline card-primary">
-            <div class="card-header text-center">
-                <a href="" class="h1"><b>Login</b></a>
-            </div>
-            <div class="card-body">
-                {{-- <p class="login-box-msg">Login</p> --}}
+@section('content')
+<div class="login-background">
+    <div class="login-content">
+     <h1 class="login-header">Login</h1>
 
-                <form action="../../index3.html" method="post" class="py-4">
-                    <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row pt-3">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    Remember Me
-                                </label>
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-4 d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary btn-block w-75">login</button>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                </form>
+     @if (session()->has('success'))
+     <div class='alert alert-success w-75 text-center'><h2>{{ session()->get('success') }}</h2></div>
+ @endif
+     <form method="post" action="{{url('login')}}">
 
-                <!-- /.social-auth-links -->
-                <div class="d-flex justify-content-between ">
-                    <p class="mb-1">
-                        <a href="{{ url('admin/reset') }}">forgot password ?</a>
-                    </p>
-                    <p class="mb-0">
-                        <a href="{{url('admin/register')}}" class="text-center">Register Now</a>
-                    </p>
-                </div>
+        @csrf
+         <label class="login-label">Email</label>
+         <input onkeyup="email_validation(this)" class="input-group-text form-control login-input" type="email" name="email" placeholder="Your Email"/>
+         <p id="email-error"></p>
 
+         @error('email')
+             <div class="alert alert-danger">{{ $message }} </div>
+         @enderror
 
-                <p class="fs-5 text-center pt-2">Or login with</p>
-                <div class="social-auth-links text-center mt-1 mb-3 d-flex justify-content-start">
-                    <a href="#" class="text-primary">
-                        <i class="fab fa-facebook mx-2"></i>
-                    </a>
-                    <a href="#" class="text-danger">
-                        <i class="fab fa-google-plus mx-2"></i>
-                    </a>
-                </div>
+         <label  class="login-label">Password</label>
+         <input onkeyup="password_validation(this)" class="input-group-text form-control login-input" type="password" name="password"  placeholder="Your Password" />
+         <p id="pass-error"></p>
+         
+         @error('password')
+         <div class="alert alert-danger">{{ $message }} </div>
+         @enderror
 
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
+         <label class="signup-label  mt-3">Your Type</label>
+         <select class="form-select" aria-label="Default select example" name="is_admin" value="">
+             <option selected value="1">Admin</option>
+             <option selected value="0">User</option>
+         </select>
+
+         <label>remember me</label>
+         <input type="checkbox" name="remember"  />
+         <input id="js-btn" class="btn btn-primary login-btn disabled" type="submit" name="send" value="Login" />
+     </form>
+     <p>If you are a new user, you can <a href="{{url('signup')}}" class="go-signup">Sign up?</a></p>
     </div>
-</div>
+ </div>
 
-@include('admin.layout.script')
+@endsection
+
+@section('script')
+    <script src="{{ asset('user/js/login.js') }}"></script>
+@endsection

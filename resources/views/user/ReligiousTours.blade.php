@@ -11,7 +11,7 @@
         <div class="Dash-div">
             <div class="card text-center">
                 <ul class="nav nav-tabs">
-                    <li class="nav-item">
+                    <li class="nav-item"
                         <a class="nav-link dash-link active" aria-current="page"
                             href="{{ url('ReligiousTours') }}">Religious</a>
                     </li>
@@ -60,7 +60,11 @@
                         {{-- <div class="row" style="justify-content: space-between;"> --}}
                         <div class="owl-carousel owl-theme">
                             @foreach ($places as $place)
+<<<<<<< HEAD
                                 @if ($place->type == 'Religious')
+=======
+                                @if ($place->type == '1')
+>>>>>>> d2af0258d7f47faa004d5267dd22f3d8999a4cde
                                     <div class="Top-Dest">
                                         <img src="{{ asset("storage/$place->image") }}" />
                                         <div class="time">
@@ -73,6 +77,7 @@
                                         {{-- <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span> Leisure</h6> --}}
                                         <h6 class="Place-Type"><span style="color:#ff4838 ;">Location: </span>
                                             {{ $place->location }}</h6>
+<<<<<<< HEAD
 
                                                                     {{-- booking --}}
                             @auth
@@ -89,6 +94,13 @@
                             </div>
                         @endguest
 
+=======
+
+                                        <div class="booking">
+                                            <button class="py-2 btn book-btn">BOOK NOW <i
+                                                    class="fa-solid fa-arrow-right"></i></button>
+                                        </div>
+>>>>>>> d2af0258d7f47faa004d5267dd22f3d8999a4cde
 
                                         <h5 class="py-3">
                                             <span class="price">{{ $place->Price }} $</span> per person
@@ -126,6 +138,7 @@
                                         </span>{{ $randomPlace->location }}
                                     </h6>
 
+<<<<<<< HEAD
                             {{-- booking --}}
                             @auth
                                 <div class="booking w-10 text-end">
@@ -140,6 +153,12 @@
                                             class="fa-solid fa-arrow-right"></i></button>
                                 </div>
                             @endguest
+=======
+                                    <div class="booking">
+                                        <button class="py-2 btn book-btn">BOOK NOW <i
+                                                class="fa-solid fa-arrow-right"></i></button>
+                                    </div>
+>>>>>>> d2af0258d7f47faa004d5267dd22f3d8999a4cde
 
                                     <h5 class="py-3">
                                         <span class="price">{{ $randomPlace->Price }}$</span> per person

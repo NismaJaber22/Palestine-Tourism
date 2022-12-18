@@ -62,17 +62,28 @@
                             </li>
                         </ul>
                     </li>
+<<<<<<< HEAD
 
                 @auth
+=======
+                    <li class="nav-item Nav-items">
+                    @auth
+>>>>>>> d2af0258d7f47faa004d5267dd22f3d8999a4cde
                     @if (Auth::user()->is_admin == 1)
                         <li class="nav-item Nav-items">
                             <a href="{{ url('/admin/dashboards') }}" class="nav-link into-Nav">Dashboard</a>
                         </li>
                     @endif
                 @endauth
+<<<<<<< HEAD
 
 
                 </ul>
+=======
+                    </a>
+                </li>
+</ul>
+>>>>>>> d2af0258d7f47faa004d5267dd22f3d8999a4cde
             </div>
             <div class="d-flex">
                 @guest

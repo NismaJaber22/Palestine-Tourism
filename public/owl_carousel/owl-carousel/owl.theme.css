@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
 * 	Owl Carousel Owl Demo Theme
+=======
+* 	Owl Carousel Owl Demo Theme 
+>>>>>>> d2af0258d7f47faa004d5267dd22f3d8999a4cde
 *	v1.3.3
 */
 
@@ -14,9 +18,13 @@
 	color: #FFF;
 	display: inline-block;
 	zoom: 1;
+<<<<<<< HEAD
 	*display: inl
 
     ine;/*IE7 life-saver */
+=======
+	*display: inline;/*IE7 life-saver */
+>>>>>>> d2af0258d7f47faa004d5267dd22f3d8999a4cde
 	margin: 5px;
 	padding: 3px 10px;
 	font-size: 12px;
@@ -78,4 +86,8 @@
 .owl-item.loading{
 	min-height: 150px;
 	background: url(AjaxLoader.gif) no-repeat center center
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> d2af0258d7f47faa004d5267dd22f3d8999a4cde

@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http;
+<<<<<<< HEAD
 
+=======
+>>>>>>> d2af0258d7f47faa004d5267dd22f3d8999a4cde
 use App\Http\Middleware\isAdminMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -64,6 +67,10 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+<<<<<<< HEAD
         'is_admin'=>isAdminMiddleware::class
+=======
+        'is_admin' =>isAdminMiddleware::class
+>>>>>>> d2af0258d7f47faa004d5267dd22f3d8999a4cde
     ];
 }

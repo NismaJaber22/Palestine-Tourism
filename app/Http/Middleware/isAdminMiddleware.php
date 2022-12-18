@@ -21,4 +21,10 @@ class isAdminMiddleware
         }
         return $next($request);
     }
+<<<<<<< HEAD
+=======
+    
+    
+        
+>>>>>>> d2af0258d7f47faa004d5267dd22f3d8999a4cde
 }
