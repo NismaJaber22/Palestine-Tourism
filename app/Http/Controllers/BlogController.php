@@ -3,41 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Comment;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
-
-
-
-    // public function dashboards(){
-    //     $blogs = Blog::get();
-    //     return view('admin.dashboard.dashboards',compact('blogs'));
-    //   }
-
-
     public function BlogsHome()
     {
         $blogs = Blog::get();
-        return view('user.BlogsHome', compact('blogs'));
+        $comments = Comment::get();
+        return view('user.BlogsHome')->with(compact('blogs', 'comments'));
     }
-
-    // public function showBlogDashboard()
-    // {
-    //     $blogs = Blog::get();
-    //     return view('admin.dashboard.BlogDashboard', compact('blogs'));
-    // }
-
-
 
     public function showuserProfile()
     {
         $blogs = Blog::get();
         return view('user.Myprofile', compact('blogs'));
     }
-
 
     public function storeBlog(Request $request)
     {
@@ -49,36 +34,24 @@ class BlogController extends Controller
             'user_id' => "required|exists:users,id"
 
         ]);
-
         $FileName = Storage::putFile("blogimage", $data['image']);
         $data['image'] = $FileName;
-
-
         $blogs = Blog::create($data);
-          return $data;
-
-
-        // return redirect(url('BlogsHome'));
+        return redirect(url('BlogsHome'));
     }
-
 
     public function BlogDashboard()
     {
         $blogs = Blog::get();
         return view('admin.dashboard.BlogDashboard', compact('blogs'));
     }
-
     // --------------------------------
-
     public function showBlog()
     {
         $blogs = Blog::get();
         return view('admin.dashboard.BlogDashboard', compact('blogs'));
     }
-
-
     // -----------delete----------------
-
     public function destroy($id)
     {
         $blogs = Blog::findOrfail($id);
@@ -88,57 +61,22 @@ class BlogController extends Controller
         return redirect(url('BlogDashboard'));
     }
 
-    //------------------------------------
-    public function updateblog(Request $request, $id)
-    {
-
-        $data = $request->validate([
-            'title' => 'min:5|max:100',
-            'text' => 'min:20',
-            'image' => 'mimes:png,jpg,gif'
-
-        ]);
-
-        $blogs = Blog::findOrfail($id);
-
-        if ($request->has('image')) {
-            Storage::delete($blogs->image);
-
-            $FileName = Storage::putFile("blogimage", $data['image']);
-            $data['image'] = $FileName;
-        }
-
-        $blogs->update($data);
-
-        return 'qqq';
-        // return redirect(url('Myprofile'));
-    }
-
-
-
-
-// ---------------------------------------------------------------------------------------
-    // checkbox
+    // checkbox to admin for show a blog or not
 
     public function editstatus(Request $request, $id)
     {
-
         // dd('Is checked: ' . $request->isChecked . ' , id: ' . $id);
-
         try {
             $blog = Blog::findOrfail($id);
 
-            $status = $request->isChecked=="true" ? 1:0;
+            $status = $request->isChecked == "true" ? 1 : 0;
 
             $blog->update(['status' => $status]);
             // dd($blog);
 
             return response()->json(['success' => 'true']);
         } catch (Exception $e) {
-            return response()->json(['success' => 'false', 'error'=> $e->getMessage()]);
-
-    }
-
-
+            return response()->json(['success' => 'false', 'error' => $e->getMessage()]);
+        }
     }
 }

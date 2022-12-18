@@ -1,8 +1,10 @@
 @extends('user.layout.master')
 @section('head')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    {{-- <link rel="stylesheet" href="{{ asset('user/css/Dashboard-pages-css/dashboards.css') }}"> --}}
 
-    <link rel="stylesheet" href="{{ asset('user/css/Dashboard-pages-css/ReligiousDashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/assets/css/Dashboard-pages-css/dashboards.css') }}">
+
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -42,7 +44,7 @@
                                 </div>
                                 <div class="modal-body">
 
-                                    <form method="get" action="{{ url('/addBlog') }}" class="Add-form" enctype="multipart/form-data">
+                                    <form method="post" action="{{ url('/adminStoreBlog') }}" class="Add-form" enctype="multipart/form-data">
                                         @csrf
 
                                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
@@ -84,6 +86,8 @@
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Title</th>
+                            <th scope="col">added by</th>
+                            <th scope="col">Date</th>
                             <th scope="col">Text</th>
                             <th scope="col">Image</th>
                             <th scope="col">show</th>
@@ -93,17 +97,13 @@
                     </thead>
                     <tbody>
 
-
-
-
-                        {{ $i = 1 }}
+                        <input type="hidden" value="{{$i = 1 }}" >
                         @foreach ($blogs as $blog)
                             <tr>
-
-
                                 <td scope="col">{{ $i++ }}</td>
                                 <td scope="col">{{ $blog->title }}</td>
-
+                                <td style="margin:auto;">{{$blog->user->userfname}} {{$blog->user->userlname}}</td>
+                                <td style="margin:auto;">{{Carbon\carbon::parse($blog->created_at)->format('d M y') }}</td>
                                 {{-- text --}}
                                 <td style="margin:auto;"><button onclick="ShowText('{{ $blog->text }}')"
                                         class="btn btn-secondary btn-table"><i class="fa-solid fa-file-medical"></i>
@@ -119,34 +119,19 @@
                                     </button>
                                 </td>
 
+
                                 <td>
-                                    {{--
-                                    <form action="{{ url('/editstatus') }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
-
-                                        @csrf
-                                        <div class="form-check">
-                                            <input type="hidden" name="status" value="0" />
-                                            <input checked data-toggle="toggle" data-on="Yes"
-                                                @if (isset($blog->status) && $blog->status) checked="checked" @endif
-                                                data-onstyle="primary" data-offstyle="info" type="checkbox" value="1"{{  ($cat->adopted == 1 ? ' checked' : '') }}
-                                                name="status">
-                                        </div>
-                                    </form> --}}
-
-                                    {{-- ----------------- --}}
+{{-- -----edit status ------------ --}}
                                     <div class="container mt-3">
                                         {{-- <a href="{{ url("/editstatus/$blog->id")}}"> aaaa</a> --}}
                                         <form action="{{ url("/editstatus/$blog->id") }}" method="POST">
                                             @csrf
                                             <div class="form-check">
-                                                {{-- <button name="hidden" type="submit">submit</button> --}}
-
                                                 <input type="checkbox" class="form-check-input"
                                                     id="status{{ $blog->id }}" name="status" value="1"
                                                     {{ $blog->status === '1' ? ' checked' : '' }} >
                                                 <label class="form-check-label" for="check1">Show</label>
                                             </div>
-
                                         </form>
                                     </div>
                                 </td>
@@ -178,7 +163,7 @@
                                                                 <input name="title" placeholder="Blog Title"
                                                                     type="text" id="swal-input1"
                                                                     class="form-control  swal2-input "
-                                                                    style="width:80%" />
+                                                                    style="width:80%" value="{{$blog->title}}" />
                                                             </div>
                                                         </label>
 
@@ -187,7 +172,7 @@
                                                             <div style="width:100%">
                                                                 <input name="text" placeholder="Blog Text"
                                                                     type="text" id="swal-input2"
-                                                                    class="form-control swal2-input" style="width:80%" />
+                                                                    class="form-control swal2-input" style="width:80%" value="{{$blog->text}}" />
                                                             </div>
                                                         </label>
 
@@ -196,7 +181,10 @@
                                                             <input name="image" placeholder="BLog Image" type="file"
                                                                 id="swal-input4" class="form-control swal2-input"
                                                                 style="width:80%" />
+                                                                <img class="px-4"style="width:20%"
+                                                                src="{{ asset("storage/$blog->image") }}">
                                                         </label>
+
                                                         <input id="js-btn" type="submit" name="RelSub"
                                                             value="Update Blog" class="btn btn-primary"
                                                             style="width: 100px; margin-right: auto;  margin-left: auto; margin-top:40px;" />
@@ -208,11 +196,11 @@
                                 </td>
 
                                 {{-- delete------------------------------------- --}}
-                                <form name='myForm'method="post" action={{ url("deleteblog/$blog->id") }}>
+                                <form name='myForm'method="post" action={{ url("/admin/admindestroyblog/$blog->id") }}>
                                     @csrf
                                     @method('DELETE')
                                     <td style="width:10%;">
-                                        <button class="btn btn-danger btn-table show-alert-delete-box" title='Delete'>
+                                        <button  class="btn btn-danger btn-table show-alert-delete-box" title='Delete'>
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </td>
@@ -241,31 +229,36 @@
 
 
     <script type="text/javascript">
-        $('.show-alert-delete-box').click(function(event) {
-            var form = document.forms["myForm"]; // storing the form
 
-            // var form =  $(this).closest("form");
-            var name = $(this).data("name");
-            event.preventDefault();
-            swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this imaginary file!",
-                icon: "warning",
-                type: "warning",
-                buttons: ["Cancel", "Yes!"],
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((willDelete) => {
-                if (willDelete) {
-                    form.submit();
-                    swal({
-                        text: 'DELETE',
-                        icon: "warning"
-                    });
-                }
-            });
-        });
+
+        // $('.show-alert-delete-box').click(function(event) {
+        //     var form = document.forms["myForm"]; // storing the form
+
+        //     var form =  $(this).closest("form");
+        //     var name = $(this).data("myForm");
+
+        //     event.preventDefault();
+        //     swal({
+        //         title: "Are you sure?",
+        //         text: "Once deleted, you will not be able to recover this imaginary file!",
+        //         icon: "warning",
+        //         type: "warning",
+        //         buttons: ["Cancel", "Yes!"],
+        //         confirmButtonColor: '#3085d6',
+        //         cancelButtonColor: '#d33',
+        //         confirmButtonText: 'Yes, delete it!'
+        //     }).then((willDelete) => {
+        //         if (willDelete) {
+        //             form.submit();
+        //             swal({
+        //                 text: 'DELETE',
+        //                 icon: "warning"
+        //                 timer: 1500,
+
+        //             });
+        //         }
+        //     });
+        // });
 
 
 

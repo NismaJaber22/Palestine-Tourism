@@ -1,73 +1,72 @@
 @extends('user.layout.master')
 @section('head')
-    <link rel="stylesheet" href="{{ asset('user/css/Dashboard-pages-css/ReligiousDashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/assets/css/Dashboard-pages-css/dashboards.css') }}">
+    <link rel="stylesheet" href="{{ asset('user/css/Myreservations.css') }}">
 @endsection
 
 @section('content')
-    <div class="container conta">
-        <div class="Dash-div container">
-            <div class="header-div">
-                <h3 class="dash-header">My Reservations</h3>
-            </div>
-            <div class="card text-center">
-                <div class="table-div">
-                    <form method="POST" class="search-form">
-                        <input type="search" name="Research" class="form-control search-input"
-                            placeholder="Enter item name" />
-                        <input type="submit" class="btn search-submit" value="Search" name="sib" />
-                    </form>
+
+    <body>
+
+        <div class="container conta">
+            <div class="Dash-div container">
+                <div class="header-div">
+                    <h3 class="dash-header">My Reservations</h3>
                 </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">My Name</th>
-                            <th scope="col">Place</th>
-                            <th scope="col">Type</th>
-                            <th scope="col">Persons</th>
-                            <th scope="col">Total</th>
-                            <th scope="col">Ticket</th>
-                            <th scope="col">Image</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <div class="card text-center">
+                    <div class="table-div">
+                        <form method="POST" class="search-form">
+                            <input type="search" name="Research" class="form-control search-input"
+                                placeholder="Enter item name" />
+                            <input type="submit" class="btn search-submit" value="Search" name="sib" />
+                        </form>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">My Name</th>
+                                <th scope="col">Place</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Persons</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Ticket</th>
+                                <th scope="col">Image</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                        <?php
-                        $CustomerName = 'Ahmad Tamem';
-                        $PlaceName = 'Abbbb';
-                        $PlaceType = 'Leisure';
-                        $NumOfPerson = 5;
-                        $ImagePath = './images/home-images/p-alpha1.png';
-                        $TotalSalary = 500;
 
-                        ?>
-                        <!--php for loop-->
-                        <?php
+                            @foreach ($Myreservations as $Myreservation)
+                                @if ($Myreservation->user->id == Auth::user()->id)
+                                    <td scope="col">{{ $Myreservation->id }}</td>
+                                    {{-- <td scope="col">{{$Myreservation->userfname}}{{$Myreservation->userlname}}</td> --}}
 
-        $Count = 10;
-        for($i =0;$i < $Count ; $i = $i+1)
-        {
-          ?>
-                        <tr id="<?php echo $i; ?>">
-                            <td scope="col"><?php echo $i + 1; ?></td>
-                            <td scope="col"><?php echo $CustomerName; ?></td>
-                            <td scope="col"><?php echo $PlaceName; ?> </td>
-                            <td scope="col"><?php echo $PlaceType; ?></td>
-                            <td scope="col"><?php echo $NumOfPerson; ?></td>
-                            <td scope="col"><?php echo $TotalSalary; ?> <span style="color:#ff4838 ;">$</span></td>
-                            <td style="width:10%;"><a href="{{url('Ticket')}}" class="btn btn-warning btn-table"> <i
-                                        class="fa-solid fa-table-list"></i> </a></td>
-                            <td scope="col"> <img src="{{asset('user/images/home-images/p-alpha4.png')}}"" style="width:50%;;" /></td>
-                        </tr>
-                        <?php
-        }
-        ?>
-                        <!-- End php loop -->
-                    </tbody>
-                </table>
+                                    <td scope="col">{{ $Myreservation->user->userfname }}
+                                        {{ $Myreservation->user->userlname }}</td>
+                                    <td scope="col">{{ $Myreservation->place->name }}</td>
+                                    <td scope="col">{{ $Myreservation->place->type }}</td>
+                                    <td scope="col">{{ $Myreservation->peoplenum }} </td>
+                                    <td scope="col">{{$Myreservation->total * $Myreservation->peoplenum}} <span style="color:#ff4838 ;">$</span></td>
+
+                                    {{-- @foreach ($reserves as $reserve) --}}
+                                    <td style="width:10%;"><a href="{{ url("/Ticket/$Myreservation->id") }}"
+                                            class="btn btn-warning btn-table"> <i class="fa-solid fa-table-list"></i> </a>
+                                    </td>
+                                    {{-- @endforeach --}}
+                                    <td scope="col"><img src="{{ asset('storage/' . $Myreservation->place->image) }}"
+                                            alt="place image" style="width:50%;" /></td>
+                                    </tr>
+                                @endif
+                            @endforeach
+
+                            <!-- End php loop -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
+    </body>
 @endsection
 @section('script')
     <script src="{{ asset('user/js/Myreservations.js') }}"></script>

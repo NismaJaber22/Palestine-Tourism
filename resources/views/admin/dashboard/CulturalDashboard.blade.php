@@ -1,12 +1,11 @@
 @extends('user.layout.master')
 @section('head')
-<link rel="stylesheet" href="{{ asset('user/css/Dashboard-pages-css/ReligiousDashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/assets/css/Dashboard-pages-css/dashboards.css') }}">
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 @endsection
 
 @section('content')
@@ -32,12 +31,11 @@
                 </ul>
 
                 <div class="table-div">
-                    <form method="get" action="{{ url('searchCul') }}" class="search-form">
-                        <input type="search" name="Research" class="form-control search-input"
+                    <form method="get" action="{{ url('/Culsearch')}}" class="search-form">
+                        <input type="search" name="search" class="form-control search-input"
                             placeholder="Enter item name" />
                         <input type="submit" class="btn search-submit" value="Search" name="sib" />
                     </form>
-
 
                     {{-- Add --}}
 
@@ -60,7 +58,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <form enctype="multipart/form-data" class="Add-form" method="post"
-                                        action="{{ url('/admin/storeCul') }}">
+                                        action="{{ url('/admin/store') }}">
                                         @csrf
                                         <label class="d-flex">
                                             <p style="width:25%; margin-top: revert;">Name</p>
@@ -79,10 +77,10 @@
                                             <div class="w-100">
                                                 <select class="form-select swal2-input" aria-label="Default select example"
                                                     style="width:80%" name="type">
-                                                    <option value="1">Religious</option>
-                                                    <option value="2">Cultural</option>
-                                                    <option value="3">Leisure</option>
-                                                    <option value="4">Medical</option>
+                                                    <option value="Religious">Religious</option>
+                                                    <option value="Cultural">Cultural</option>
+                                                    <option value="Leisure">Leisure</option>
+                                                    <option value="Medical">Medical</option>
                                                 </select>
                                                 <p id="NameError"
                                                     style="color:red; font-size:11px; margin:0; font-weight: 500;"></p>
@@ -138,6 +136,17 @@
                                                 onchange="FileValidation(this)" />
                                         </label>
 
+                                        <label class="d-flex">
+                                            <p style="width:25%; margin-top: revert;">Date</p>
+                                            <div style="width:100%">
+                                                <input name="date" placeholder="date" type="date" id="swal-input1"
+                                                    class="form-control  swal2-input " style="width:80%" />
+
+                                                <p class="pb-2 text-start pt-1" id="NameError"
+                                                    style="color:red; font-size:11px; margin:0;font-weight: 500;"></p>
+                                            </div>
+                                        </label>
+
                                         <label class="d-flex pt-3">
                                             <p style="width:25%; margin-top: revert;">Start</p>
                                             <input name="start" placeholder="hours" onkeyup="hValidation(this,0)"
@@ -150,6 +159,9 @@
                                                 type="number" id="swal-input7" class="form-control swal2-input"
                                                 style="width:30%" />
                                         </label>
+
+
+
 
                                         <label class="d-flex pt-3">
                                             <p style="width:25%; margin-top: revert;">Close</p>
@@ -185,10 +197,10 @@
                         <tr>
                             <th scope="col"></th>
                             <th scope="col"></th>
-                            <th scope="col">Exp</th>
                             <th scope="col">Name</th>
                             <th scope="col">Cost</th>
                             <th scope="col">Location</th>
+                            <th scope="col">date</th>
                             <th scope="col">Start</th>
                             <th scope="col">Close</th>
                             <th scope="col">desc</th>
@@ -199,48 +211,35 @@
                     </thead>
                     <tbody>
 
-                        <?php
-                        $Explore = true;
-                        ?>
 
                         @if ($places->isNotEmpty())
-                            {{ $i = 1 }}
+                            <input type="hidden" value="{{ $i = 1 }}">
                             @foreach ($places as $place)
-                                @if ($place->type == '2')
+                                @if ($place->type == 'Cultural')
                                     <tr>
-                                        <td><a href="{{ url('Reservations') }}" class="btn btn-warning btn-table"><i
+                                        <td><a href="{{ url('CustomersRes') }}" class="btn btn-warning btn-table"><i
                                                     class="fa-solid fa-list-check"></i></a>
                                         </td>
 
-                                        {{-- @for ($i = 0; $i >= $place->count(); $i = $i + 1) --}}
-                                        {{-- <td scope="col">{{$i}}</td> --}}
-
-                                        {{-- @endfor --}}
                                         <td scope="col">{{ $i++ }}<br></td>
-                                        <?php if ($Explore) {
-                                            echo '<td> <div class="Explore"></div> </td>';
-                                        } else {
-                                            echo '<td> <div class="NotExplore"></div> </td>';
-                                        } ?>
 
                                         <td scope="col">{{ $place->name }}</td>
                                         <td scope="col">{{ $place->Price }} <span class="text-black">$</span></td>
                                         <td scope="col">{{ $place->location }} </td>
+                                        <td scope="col">{{ $place->date }} </td>
                                         <td scope="col">{{ $place->start }}:{{ $place->AddRem1 }}</td>
                                         <td scope="col">{{ $place->close }}:{{ $place->AddRem2 }}</td>
 
-{{-- --------------------------------------------------------------------------------- --}}
+                                        {{-- --------------------------------------------------------------------------------- --}}
+                                        {{-- description --}}
 
-{{-- description --}}
-
-                                              <td style="margin:auto;"><button
+                                        <td style="margin:auto;"><button
                                                 onclick="ShowDesc('{{ $place->description }}','{{ $place->name }}')"
                                                 class="btn btn-secondary btn-table">
                                                 <i class="fa-solid fa-file-medical"></i>
                                             </button>
                                         </td>
-
-{{-- image --}}
+                                        {{-- image --}}
                                         <td style="margin:auto;">
                                             <button
                                                 onclick="ShowImage('{{ asset('storage/' . $place->image) }}','{{ $place->name }}')"
@@ -248,7 +247,7 @@
                                                 <i class="fa-regular fa-image"></i>
                                             </button>
                                         </td>
-{{-- ----------------------------------------------------------------------------------- --}}
+                                        {{-- ----------------------------------------------------------------------------------- --}}
 
                                         {{-- edit --}}
                                         <td style="width:10%;">
@@ -257,7 +256,6 @@
                                                 data-bs-target="#editModal{{ $place->id }}">
                                                 <i style="color:white ;" class="fa-solid fa-pen"></i>
                                             </button>
-
 
                                             <!-- Modal -->
                                             <div class="modal fade" id="editModal{{ $place->id }}" tabindex="-1"
@@ -273,7 +271,7 @@
                                                         <div class="modal-body">
                                                             <form name="editform" enctype="multipart/form-data"
                                                                 class="Add-form" method="post" id='editForm'
-                                                                action="{{ url("admin/updateCul/$place->id") }}">
+                                                                action="{{ url("admin/update/$place->id") }}">
 
                                                                 @csrf
                                                                 <label class="d-flex">
@@ -294,16 +292,16 @@
                                                                 <label class="d-flex">
                                                                     <p style="width:25%; margin-top: revert;">Type</p>
                                                                     <div class="w-100">
-                                                                        <select class="form-select swal2-input" name='type'
+                                                                        <select class="form-select swal2-input"
+                                                                            name='type'
                                                                             aria-label="Default select example"
                                                                             style="width:80%" id="type">
-                                                                            <option value="1">Religious</option>
-                                                                            {{-- <option value="2" selected>Cultural</option> --}}
-                                                                            <option value="2"
-                                                                                @if ($place->type == 2) selected @endif>
+                                                                            <option value="Religious">Religious</option>
+                                                                            <option value="Cultural"
+                                                                                @if ($place->type == 'Cultural') selected @endif>
                                                                                 {{ $place->type }}</option>
-                                                                            <option value="3">Leisure</option>
-                                                                            <option value="4">Medical</option>
+                                                                            <option value="Leisure">Leisure</option>
+                                                                            <option value="Medical">Medical</option>
                                                                         </select>
                                                                         <p id="NameError"
                                                                             style="color:red; font-size:11px; margin:0; font-weight: 500;">
@@ -374,6 +372,21 @@
                                                                         onchange="FileValidation(this)" />
                                                                 </label>
 
+                                                                <label class="d-flex">
+                                                                    <p style="width:25%; margin-top: revert;">Date</p>
+                                                                    <div style="width:100%">
+                                                                        <input name="date" placeholder="date"
+                                                                            type="date" id="swal-input1"
+                                                                            value="{{ $place->date }}"
+                                                                            class="form-control  swal2-input "
+                                                                            style="width:80%" />
+
+                                                                        <p class="pb-2 text-start pt-1" id="NameError"
+                                                                            style="color:red; font-size:11px; margin:0;font-weight: 500;">
+                                                                        </p>
+                                                                    </div>
+                                                                </label>
+
                                                                 <label class="d-flex pt-3">
                                                                     <p style="width:25%; margin-top: revert;">Start</p>
                                                                     <input name="start" placeholder="hours"
@@ -407,41 +420,29 @@
                                                                         id="AddRem2" class="form-control swal2-input"
                                                                         style="width:30%" />
                                                                 </label>
-                                                                {{--
-                                                <label class="d-flex">
-                                                    <p style="width:25%; margin-top: revert;">Explore</p>
-                                                    <input name="Explore" type="checkbox" />
-                                                </label> --}}
 
                                                                 <input id="js-btn" type="submit" name="RelSub"
                                                                     value="Update" class="btn btn-primary "
                                                                     style="width: 100px; margin-right: auto;  margin-left: auto; margin-top:40px;" />
-
-
-
-
                                                             </form>
-
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
 
-
                                         {{-- delete --}}
-                                        <form onclick="del()"name='myForm'method="post"
+                                        <form onclick="deleteAlert()" name='myForm'method="post"
                                             action={{ url("admin/deleteCul/$place->id") }}>
                                             @csrf
                                             @method('DELETE')
                                             <td style="width:10%;">
-                                                <button class="btn btn-danger btn-table show-alert-delete-box"
-                                                    title='Delete'>
+                                                <button onclick="deleteAlert()"
+                                                    class="btn btn-danger btn-table show-alert-delete-box" title='Delete'>
                                                     <i class="fa-solid fa-trash"></i>
                                                 </button>
                                             </td>
                                         </form>
-
                                     </tr>
                                 @endif
                             @endforeach
@@ -461,37 +462,81 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('user/js/Dashboard-Pages-js/ReligiousDashboard.js') }}"></script>
+    {{-- <script src="{{ asset('user/js/Dashboard-Pages-js/ReligiousDashboard.js') }}"></script> --}}
+    <script src="{{ asset('user/js/Dashboard-Pages-js/dashboards.js') }}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-
+    {{--
+    <script>
+        $(document).ready(function () {
+            $("button").click(function (event) {
+                event.preventDefault();
+                alert("This form will not submit");
+            });
+        });
+    </script> --}}
 
     <script type="text/javascript">
         $('.show-alert-delete-box').click(function(event) {
             var form = document.forms["myForm"]; // storing the form
 
-            // var form =  $(this).closest("form");
-            var name = $(this).data("name");
-            event.preventDefault();
-            swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this imaginary file!",
-                icon: "warning",
-                type: "warning",
-                buttons: ["Cancel", "Yes!"],
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((willDelete) => {
-                if (willDelete) {
-                    form.submit();
-                    swal({
-                        text: 'DELETE',
-                        icon: "warning"
-                    });
-                }
-            });
+            var form = $(this).closest("form");
+            var name = $(this).data("myForm");
+
+
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'delete successfuly',
+                showConfirmButton: false,
+                timer: 3000,
+            })
         });
+
+
+        //         Swal.fire({
+        //   position: 'top-end',
+        //   icon: 'success',
+        //                 title: "Are you sure?",
+        //                  icon: "warning",
+        //                 type: "warning",
+        //                 timer: 1000,
+        // showConfirmButton: true,
+        //   confirmButtonText: 'Yes, delete it!',
+        // buttons: ["Cancel", "Yes!"],
+        // confirmButtonColor: '#3085d6',
+        // cancelButtonColor: '#d33',
+        // .then((willDelete) => {
+        // if (willDelete) {
+        //     form.submit();
+        //     swal({
+        //         text: 'DELETE',
+        //         icon: "warning"
+        //     });
+        // }
+        // })
+
+
+        // swal({
+        //     title: "Are you sure?",
+        //     text: "Once deleted, you will not be able to recover this imaginary file!",
+        //     icon: "warning",
+        //     type: "warning",
+        //     buttons: ["Cancel", "Yes!"],
+        //     confirmButtonColor: '#3085d6',
+        //     cancelButtonColor: '#d33',
+        //     confirmButtonText: 'Yes, delete it!'
+        // })
+        //  .then((willDelete) => {
+        //     if (willDelete) {
+        //         form.submit();
+        // swal({
+        //     text: 'DELETE',
+        //     icon: "warning"
+        // });
+        // }
+        // });
+        // });
     </script>
 @endsection

@@ -12,13 +12,30 @@
      <div class='alert alert-success w-75 text-center'><h2>{{ session()->get('success') }}</h2></div>
  @endif
      <form method="post" action="{{url('login')}}">
+
         @csrf
          <label class="login-label">Email</label>
          <input onkeyup="email_validation(this)" class="input-group-text form-control login-input" type="email" name="email" placeholder="Your Email"/>
          <p id="email-error"></p>
+
+         @error('email')
+             <div class="alert alert-danger">{{ $message }} </div>
+         @enderror
+
          <label  class="login-label">Password</label>
          <input onkeyup="password_validation(this)" class="input-group-text form-control login-input" type="password" name="password"  placeholder="Your Password" />
          <p id="pass-error"></p>
+         
+         @error('password')
+         <div class="alert alert-danger">{{ $message }} </div>
+         @enderror
+
+         <label class="signup-label  mt-3">Your Type</label>
+         <select class="form-select" aria-label="Default select example" name="is_admin" value="">
+             <option selected value="1">Admin</option>
+             <option selected value="0">User</option>
+         </select>
+
          <label>remember me</label>
          <input type="checkbox" name="remember"  />
          <input id="js-btn" class="btn btn-primary login-btn disabled" type="submit" name="send" value="Login" />

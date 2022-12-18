@@ -83,15 +83,19 @@
                     <option value="11">Tubas</option>
                 </select>
 
+                <label class="signup-label  mt-3">Your Type</label>
+                <select class="form-select" aria-label="Default select example" name="is_admin" value="">
+                    <option selected value="1">Admin</option>
+                    <option selected value="0">User</option>
+                </select>
+
 
                 {{-- <div class="form-check form-check-inline">
                     Female <input type="radio" name="useremail" />
                 </div>
 
                 <div class="form-check form-check-inline">
-
                     Male <input type="radio" name="useremail" />
-
                 </div> --}}
 
                 <label class="signup-label ">Your Image</label>

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Blog;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class BlogSeeder extends Seeder
@@ -16,19 +17,19 @@ class BlogSeeder extends Seeder
     public function run()
     {
 
+        Blog::create([
+        'title' => 'Jerusalem',
+        'text' => 'It is the capital of the Palestinian state and its largest city,with a total area of about 19,331 km², and it was attacked 52 times
+                    and was invaded approximately 44 times. It was founded by the Canaanites nearly 3000 years ago BC, and inhabited by the Jebusites, so it was named after
+                    (Jebus), and the flag of Jerusalem since ancient times was shattered. Many are like the Crusaders, the Persians and the Romans, and the foot has many names,
+                     including: Bayt al-Maqdis, the first two qiblas, and al-Quds al-Sharif.',
 
-        //     $blog = Blog::create();
+        'image' =>"{{asset('user/images/home-images/p-alpha1.png') }}",
 
-        //     // Blog::create([
-
-        //   Blog::table('blogs')->insert([
-        //     'text'=>'Church of the Holy Sepulchre',
-        //     'title',
-        //     // 'title'=>'Church of the Holy Sepulchre, also called Holy Sepulchre, church built on the traditional site of Jesus Crucifixion and burial. According to the Bible his tomb was close to the place of the Crucifixion, and so the church was planned to enclose the site of both the cross and the tomb',
-        //     'image'=>$blogs->image,
-        //     'created_at',
-        //     'updated_at'
-            // 'image'=> "{{asset('user/images/home-images/p-alpha1.png')}}",
-        // ]);
+        // 'ststus'=>'1',
+        // 'image'=>Storage::path('user/images/home-images/p-alpha1.png'),
+        // 'image'=>'',
+        'user_id' => '1'
+        ]);
     }
 }

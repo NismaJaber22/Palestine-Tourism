@@ -3,7 +3,7 @@ let speed =100;
 let i=0;
 function showPalestine() {
   if (i < txt.length) {
-   
+
     document.getElementById("auto-write").innerHTML += txt.charAt(i);
     i++;
     setTimeout(showPalestine, speed);
@@ -14,7 +14,7 @@ let j=0;
 let text = "Tourism";
 function showTourism() {
   if (j < text.length) {
-   
+
     document.getElementById("auto-write-Tourism").innerHTML += text.charAt(j);
     j++;
     setTimeout(showTourism, speed);
