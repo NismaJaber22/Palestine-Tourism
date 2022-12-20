@@ -47,7 +47,7 @@
                                     <td scope="col">{{ $Myreservation->place->name }}</td>
                                     <td scope="col">{{ $Myreservation->place->type }}</td>
                                     <td scope="col">{{ $Myreservation->peoplenum }} </td>
-                                    <td scope="col">{{$Myreservation->total * $Myreservation->peoplenum}} <span style="color:#ff4838 ;">$</span></td>
+                                    <td scope="col">{{$Myreservation->place->Price* $Myreservation->peoplenum}} <span style="color:#ff4838 ;">$</span></td>
 
                                     {{-- @foreach ($reserves as $reserve) --}}
                                     <td style="width:10%;"><a href="{{ url("/Ticket/$Myreservation->id") }}"
