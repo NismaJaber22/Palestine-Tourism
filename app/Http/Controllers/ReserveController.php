@@ -16,27 +16,22 @@ class ReserveController extends Controller
     }
 
     // reserve
-    
+
 
     public function reserve(Request $request)
     {
         $data = $request->validate([
             'peoplenum' => 'required|numeric',
-            'total' => 'required|numeric',
+            // 'total' => 'required|numeric',
             // 'end' => 'required|numeric',
             'phone' => 'required|numeric',
             'user_id' => 'required|exists:users,id',
             'place_id' => 'required|exists:places,id',
          ]);
 
-
-
         $reserve = Reserve::create($data);
          return redirect(url("Myreservations"));
     }
-
-
-
 
 
     public function Ticket($id)
