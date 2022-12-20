@@ -52,8 +52,8 @@
                             {{-- booking --}}
                             @auth
                                 <div class="booking w-10 text-end">
-                                    <a href="{{url("/BookNow/$randomPlace->id")}}" name="book" class="py-2 btn book-btn">BOOK NOW <i
-                                        class="fa-solid fa-arrow-right"></i></a>
+                                    <a href="{{ url("/BookNow/$randomPlace->id") }}" name="book"
+                                        class="py-2 btn book-btn">BOOK NOW <i class="fa-solid fa-arrow-right"></i></a>
                                 </div>
                             @endauth
                             @guest
@@ -77,71 +77,53 @@
 
     <section>
         <h2 class="container" style="margin-top:50px">For You</h2>
-        <div class="Top-Dests container">
+
+        <div class="Top-Dests container-fluid justify-content-center">
             <div class="row justify-content-between">
-                <div class="Top-Dest col-4" style="width: 30%;">
-                    <img style="width:100%" src="{{ asset('user/images/home-images/p-alpha1.png') }}" />
-                    <div class="time">
-                        <i class="fa-regular fa-clock"></i> <span>8:00</span> to <span>22:30</span>
-                    </div>
-                    <h5 calss="place-name">Etiam placerat dictum consequat an Pellentesque habitant morbi.</h5>
+                @foreach ($lasttours as $lasttour)
+                    <div class="Top-Dest col-3" style="width: 24%;">
 
-                    <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span> Leisure</h6>
-                    <h6 class="Place-Type"><span style="color:#ff4838 ;">Location: </span> Nablus</h6>
+                        <img style="width:100%" src="{{ asset("storage/$lasttour->image") }}" />
+                        <div class="time">
+                            {{-- <i class="fa-regular fa-clock"></i> <span>{{$lasttour->start}}</span> to <span>22:30</span> --}}
+                            <span>{{ $lasttour->start }}:{{ $lasttour->AddRem1 }} </span> &nbsp;
+                            to &nbsp;
+                            <span> {{ $lasttour->close }}:{{ $lasttour->AddRem2 }}</span>
+                        </div>
+                        <h5 calss="place-name">{{ $lasttour->description }}</h5>
 
-                    <div class="booking " tabindex="0" data-bs-toggle="tooltip"
-                        title="you should have an account to booking">
-                        <a href="{{url('/BookNow')}}" name="book" class="py-2 btn book-btn">BOOK NOW <i
-                            class="fa-solid fa-arrow-right"></i></a>
-                    </div>
+                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span> {{ $lasttour->type }}</h6>
+                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Location: </span>{{ $lasttour->location }}
+                        </h6>
 
-                    <h5 class="py-3">
-                        <span class="price">$79.00</span> per person
-                    </h5>
-                </div>
+ {{-- booking --}}
+ @auth
+ <div class="booking w-10 text-end">
+     <a href="{{ url("/BookNow/$randomPlace->id") }}" name="book"
+         class="py-2 btn book-btn">BOOK NOW <i class="fa-solid fa-arrow-right"></i></a>
+ </div>
+@endauth
+@guest
+ <div class="booking " tabindex="0" data-bs-toggle="tooltip"
+     title="you should have an account to booking">
+     <button name="book" class="py-2 btn book-btn" disabled>BOOK NOW <i
+             class="fa-solid fa-arrow-right"></i></button>
+ </div>
+@endguest
+  {{-- <div class="booking " tabindex="0" data-bs-toggle="tooltip"
+                            title="you should have an account to booking">
+                            <a href="{{ url('/BookNow') }}" name="book" class="py-2 btn book-btn">BOOK NOW <i
+                                    class="fa-solid fa-arrow-right"></i></a>
+                        </div> --}}
 
-                <div class="Top-Dest col-4"style="width: 30%;">
-                    <img style="width:100%" src="{{ asset('user/images/home-images/p-alpha1.png') }}" />
-                    <div class="time">
-                        <i class="fa-regular fa-clock"></i> <span>8:00</span> to <span>22:30</span>
-                    </div>
-                    <h5 calss="place-name">Etiam placerat dictum consequat an Pellentesque habitant morbi.</h5>
-
-                    <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span> Leisure</h6>
-                    <h6 class="Place-Type"><span style="color:#ff4838 ;">Location: </span> Nablus</h6>
-
-                    <div class="booking " tabindex="0" data-bs-toggle="tooltip"
-                        title="you should have an account to booking">
-                        <a href="{{url('/BookNow')}}" name="book" class="py-2 btn book-btn">BOOK NOW <i
-                                class="fa-solid fa-arrow-right"></i></a>
-                    </div>
-
-                    <h5 class="py-3">
-                        <span class="price">$79.00</span> per person
-                    </h5>
-                </div>
-
-                <div class="Top-Dest col-4"style="width: 30%;">
-                    <img style="width:100%" src="{{ asset('user/images/home-images/p-alpha1.png') }}" />
-                    <div class="time">
-                        <i class="fa-regular fa-clock"></i> <span>8:00</span> to <span>22:30</span>
-                    </div>
-                    <h5 calss="place-name">Etiam placerat dictum consequat an Pellentesque habitant morbi.</h5>
-
-                    <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span> Leisure</h6>
-                    <h6 class="Place-Type"><span style="color:#ff4838 ;">Location: </span> Nablus</h6>
-
-                    <div class="booking " tabindex="0" data-bs-toggle="tooltip"
-                        title="you should have an account to booking">
-                        <a href="{{url('/BookNow')}}" name="book" class="py-2 btn book-btn">BOOK NOW <i
-                            class="fa-solid fa-arrow-right"></i></a>
+                        <h5 class="py-3">
+                            <span class="price">{{ $lasttour->Price }}</span> $ per person
+                        </h5>
                     </div>
 
-                    <h5 class="py-3">
-                        <span class="price">$79.00</span> per person
-                    </h5>
-                </div>
-            </div>
+
+                    @endforeach
+</div>
         </div>
 
     </section>

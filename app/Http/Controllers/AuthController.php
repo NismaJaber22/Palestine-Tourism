@@ -28,20 +28,10 @@ class AuthController extends Controller
             'email' => 'required|email|unique:Users,email',
             'password' => 'required|min:8|max:30|confirmed',
             'liveIn',
-<<<<<<< HEAD
             'is_admin' => 'required',
             'image' => 'image|mimes:png,jpg,gif',
         ]);
 
-=======
-            'is_admin'=>'required',
-            'image' => 'image|mimes:png,jpg,gif',
-        ]);
-
-        // $fileName = Storage::putFile("placeimage", $data['image']);
-        // $data['image'] = $fileName;
-
->>>>>>> d2af0258d7f47faa004d5267dd22f3d8999a4cde
         if ($request->has('image')) {
             $fileName = Storage::putFile("placeimage", $data['image']);
             $data['image'] = $fileName;
@@ -53,18 +43,6 @@ class AuthController extends Controller
 
         session()->flash('success', ' inserted successfuly');
         // return redirect(url('login'));
-<<<<<<< HEAD
-=======
-
-        if($data['is_admin']==0){
-            return redirect(url('login'));
-        }else if($data['is_admin']==1){
-            return redirect(url('/admin/dashboards'));
-        }
-    }
-          
-    
->>>>>>> d2af0258d7f47faa004d5267dd22f3d8999a4cde
 
         if ($data['is_admin'] == 0) {
             return redirect(url('login'));
@@ -80,12 +58,11 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-       
-    
+
+
         $data = $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:8|max:30',
-<<<<<<< HEAD
             'is_admin' => 'required'
         ]);
 
@@ -95,20 +72,8 @@ class AuthController extends Controller
         } else if ($data['is_admin'] == "0" && $isLogin == true) {
             return redirect(url('/'));
         } else {
-=======
-            'is_admin'=>'required'
-        ]);
-
-        $isLogin = Auth::attempt(['email' => $request->email, 'password' => $request->password, 'is_admin'=>$request->is_admin]);
-        if ($data['is_admin']=="1" && $isLogin == true) {
-            return redirect(url('admin/dashboards'));
-            }else if ($data['is_admin']=="0" && $isLogin == true) {
-                return redirect(url('/'));
-            }
-         else {
->>>>>>> d2af0258d7f47faa004d5267dd22f3d8999a4cde
             return redirect(url('login'));
-        
+
 
     }
     }
@@ -119,20 +84,11 @@ class AuthController extends Controller
         return redirect(url('/'));
     }
 
-<<<<<<< HEAD
     public function Myprofile()
     {
         $blogs = Blog::get();
         return view('user.MyProfile', compact('blogs'));
     }
-=======
-    public function Myprofile(){
-
-        $blogs = Blog::get();
-        return view('user.MyProfile',compact('blogs'));
-    }
-
->>>>>>> d2af0258d7f47faa004d5267dd22f3d8999a4cde
     //-----edit in profile user -----
     public function updatemyprofile(Request $request, $id)
     {

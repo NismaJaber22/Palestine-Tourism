@@ -22,8 +22,8 @@ class UserSeeder extends Seeder
             'userlname' => 'Jaber',
             'email' => 'nisma@gmail.com',
             'password' => Hash::make('123456789Nn'),
-            'liveIn'=>'4',
-            'is_admin'=>'1',
+            'liveIn'=>4,
+            'is_admin'=>1,
             'image'=>'',
         ]);
         User::create([
@@ -31,8 +31,8 @@ class UserSeeder extends Seeder
             'userlname' => 'mahmoud',
             'email' => 'nismajaber@gmail.com',
             'password' => Hash::make('123456789Nn'),
-            'liveIn'=>'3',
-            'is_admin'=>'0',
+            'liveIn'=>3,
+            'is_admin'=>0,
             'image'=>'',
         ]);
     }

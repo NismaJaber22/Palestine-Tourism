@@ -20,7 +20,7 @@ return new class extends Migration
             // $table->time('start');
             // $table->time('end');
             $table->Integer('phone');
-            $table->decimal('total',8,2);
+            // $table->decimal('total',8,2);
             $table->foreignId('user_id')->constrained();
             $table->foreignId('place_id')->constrained()->onDelete("cascade");
             $table->timestamps();

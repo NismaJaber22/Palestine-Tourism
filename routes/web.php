@@ -25,7 +25,6 @@ Route::get('/login', function () {
 });
 
 Route::controller(Controller::class)->group(function(){
-<<<<<<< HEAD
     Route::get('/','home');
     Route::post('/admin/store','store');
     Route::post('/admin/update/{id}','update');
@@ -37,29 +36,12 @@ Route::controller(Controller::class)->group(function(){
     Route::delete('/admin/admindestroyblog/{id}','admindestroyblog');
 
     // admindestroyblog
-=======
-    Route::post('/admin/storeLeis','store');
-    Route::post('/admin/storeMed','store');
-    Route::post('/admin/storeRel','store');
-    Route::post('/admin/storeCul','store');
-    Route::post('/admin/updateRel/{id}','update');
-    Route::post('/admin/updateCul/{id}','update');
-    Route::post('/admin/updateLeis/{id}','update');
-    Route::post('/admin/updateMed/{id}','update');
-    Route::get('/searchRel','search');
-    Route::get('/addBlog','addBlog');
-    Route::get('/admin/dashboards','dashboards')->middleware('is_admin');
->>>>>>> d2af0258d7f47faa004d5267dd22f3d8999a4cde
 });
 
 // ----------Religious----------------------------
 Route::controller(PlaceRelController::class)->group(function(){
     Route::get('/admin/createRel','create');
-<<<<<<< HEAD
     Route::get('/ReligiousDashboard','showReligious')->middleware('auth');
-=======
-    Route::get('/ReligiousDashboard','showReligious')->middleware('is_admin');
->>>>>>> d2af0258d7f47faa004d5267dd22f3d8999a4cde
     Route::get('/ReligiousTours','showRelTours');
     Route::delete('/admin/deleteRel/{id}','destroy');
     Route::get('/admin/editRel/{id}','edit');

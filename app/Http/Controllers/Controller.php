@@ -21,8 +21,9 @@ class Controller extends BaseController
     public function home()
     {
         $places = Place::get();
+        $lasttours = Place::orderBy('created_at', 'desc')->get()->take(4);
         $randomPlaces = Place::inRandomOrder()->limit(9)->get();
-        return view('user.index')->with(compact('places', 'randomPlaces'));
+        return view('user.index')->with(compact('places', 'randomPlaces','lasttours'));
     }
 
     // admin dashboard function
@@ -64,15 +65,9 @@ class Controller extends BaseController
         $FileName = Storage::putFile("placeimage", $data['image']);
         $data['image'] = $FileName;
 
-<<<<<<< HEAD
         $places = Place::create($data);
 
         session()->flash('success', ' inserted successfuly');
-=======
-                 session()->flash('success',' inserted successfuly');
-                 return $data;
-
->>>>>>> d2af0258d7f47faa004d5267dd22f3d8999a4cde
 
         if ($data['type'] == 'Religious')
             return redirect(url('ReligiousDashboard'));
