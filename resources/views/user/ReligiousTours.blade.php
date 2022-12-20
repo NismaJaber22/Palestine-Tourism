@@ -60,10 +60,7 @@
                         {{-- <div class="row" style="justify-content: space-between;"> --}}
                         <div class="owl-carousel owl-theme">
                             @foreach ($places as $place)
-                                <<<<<<< HEAD @if ($place->type == 'Religious')
-                                    =======
-                                    @if ($place->type == '1')
-                                        >>>>>>> d2af0258d7f47faa004d5267dd22f3d8999a4cde
+                                 @if ($place->type == 'Religious')
                                         <div class="Top-Dest">
                                             <img src="{{ asset("storage/$place->image") }}" />
                                             <div class="time">
