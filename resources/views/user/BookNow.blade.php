@@ -53,7 +53,7 @@
                 {{-- <label>Journey Date</label>
                 <input class="form-control" type="date" name="Date" value="" /> --}}
 
-                <input name="total" value="{{($places->Price)}} $ per person " class="text-danger">
+                {{-- <input name="total" value="{{($places->Price)}} $ per person " class="text-danger"> --}}
                 {{-- <h5 name="total" class="Total">Total : <span style="color:#ff4838 ;">200$</span></h5> --}}
 
             </div>
