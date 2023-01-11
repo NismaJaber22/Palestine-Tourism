@@ -13,18 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('blogs', function (Blueprint $table) {
+        Schema::create('reserves', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('text');
-            $table->string('image');
-            $table->boolean('status')->default(false);
+            $table->boolean('book')->default(true);
+            $table->tinyInteger('peoplenum');
+            // $table->time('start');
+            // $table->time('end');
+            $table->Integer('phone');
+            // $table->decimal('total',8,2);
             $table->foreignId('user_id')->constrained();
-            // $table->foreignId('user_id')->constrained();
-            // $table->foreignId('comment_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('place_id')->constrained()->onDelete("cascade");
             $table->timestamps();
         });
-
     }
 
     /**
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blogs');
+        Schema::dropIfExists('reserves');
     }
 };

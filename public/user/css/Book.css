@@ -14,18 +14,19 @@ body
     display: flex;
     padding-top: 100px;
 }
-.left-header
+/* .left-header
 {
     width: 60%;
-}
+} */
 .Place-image
 {
     width: 100%;
+    border-radius: 15px;
 }
-.right-header
+/* .right-header
 {
     width: 40%;
-}
+} */
 .Name-Location
 {
     display: flex;
@@ -112,13 +113,19 @@ body
     .left-header
     {
         width: 100%;
+
     }
+
     .right-header
     {
         width:100%;
+
     }
     .Recervation
     {
         width: 100% !important;
     }
+
+
+
 }

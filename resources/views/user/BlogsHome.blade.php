@@ -2,6 +2,8 @@
 @section('head')
     <link rel="stylesheet" href="{{ asset('user/css/Blogs.css') }}">
     {{-- <link rel="stylesheet" href="{{'node_modules/jquery/dist/jquery.js'}}"> --}}
+
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.3.3/sweetalert2.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
@@ -11,7 +13,6 @@
 @section('content')
     <div class=" Blogs container">
         <h1>Explore Blogs</h1>
-
         <div class="Explore-blogs container">
 
             <div class="row">
@@ -19,11 +20,12 @@
                     @if ($blog->status == '1')
                         <div class="Blog mt-5 col-5 mx-5">
                             <div class="d-flex" style="align-items: center; justify-content: flex-start;">
-                                <img src="{{ asset('storage/' . $blog->user->image) }}" class="profile-img" />
+                                <img src="{{ asset("storage/".$blog->user->image)}}" class="profile-img" />
                                 <h5 class="user-name pt-3">{{ $blog->user->userfname }} {{ $blog->user->userlname }}</h5>
                             </div>
                             <div class="container">
-                                <p class="post-time">{{ $blog->created_at }}</p>
+                                {{-- <p class="post-time">{{ $blog->created_at }}</p> --}}
+                                <p class="post-time">{{Carbon\carbon::parse($blog->created_at)->format('d M Y') }}</p>
 
                                 <h3 class="blog-title pb-2">{{ $blog->title }}</h3>
 
@@ -39,30 +41,41 @@
                                         <p class="num likes">324</p>
                                         <i class="fa-regular fa-heart foot-icons" onclick="heart(this, 'likes')"></i>
                                     </div>
+{{-- @foreach ( as ) --}}
+
+
                                     <div class="d-flex" style="align-items: center;">
-                                        <p class="num">87</p>
-                                        <i class="fa-regular fa-comment foot-icons comm_icon" onclick="opens()"></i>
+
+                                        <p class="numComment">{{$comments->count()}}</p>
+
+                                        <i id="comment" class="fa-regular fa-comment foot-icons comm_icon" onclick="opens()"></i>
                                     </div>
+
                                     <div class="d-flex" style="align-items: center;">
                                         <p class="num">12</p>
                                         <i class="fa-solid fa-share foot-icons"></i>
                                     </div>
                                 </div>
+{{-- @endforeach --}}
 
-                                <div class="comment">
-                                    <div class="d-flex">
-                                        <img src="{{ asset('storage') }}" class="profile-img1" />
-                                        <h6 class="user-name1">name</h6>
+
+                                @foreach ($comments as $comment)
+                                    <div class="comment">
+                                        <div class="d-flex">
+                                            <img src="{{ asset("storage/".$comment->user->image) }}" class="profile-img1" />
+
+                                            <h6 class="user-name1">{{ $comment->user->userfname }} {{$comment->user->userlname}}</h6>
+                                            <p class="post-time px-4">{{Carbon\carbon::parse($comment->created_at)->format('d M Y') }}</p>
+</div>
+                                        <p class="comment-text">{{ $comment->comment }}</p>
                                     </div>
-                                    <p class="post-time">10-2-2022 4:32 PM</p>
-                                    <p class="comment-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
-                                        aliquam quidem vero ea, ipsa quae. Consequatur atque ea quo ipsam natus, sed
-                                        asperiores,
-                                        quasi amet, esse nihil id? Soluta, quia?</p>
-                                </div>
+                                @endforeach
 
-                                <form class="d-flex mb-3">
-                                    <input type="text" name="newcom" placeholder="Add Comment" class="form-control" />
+                                <form class="d-flex mb-3" method="POST" action="{{ url("addComment") }}">
+                                    @csrf
+                                    <input type="text" name="comment" placeholder="Add Comment" class="form-control" />
+                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                    <input type="hidden" name="blog_id" value="{{ $blog->id }}">
                                     <input type="submit" name="sub" class="btn btn-success" value="Comment"
                                         style="background-color: var(--main-color) !important; border: 0;" />
                                 </form>
@@ -81,7 +94,7 @@
         <div class="inner-MyBlog">
             <h1 class="Add-new">Add New Blog?
                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" class="btn btn-success me-1"
-                    data-bs-target="#exampleModal" style="background-color: var(--main-color) !important; border: 0;">
+                    data-bs-target="#exampleModalblog" style="background-color: var(--main-color) !important; border: 0;">
                     <i class="fa-solid fa-blog"></i>
                 </button>
             </h1>
@@ -90,11 +103,11 @@
     </div>
 
     <!-- Modal Add-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModalblog" tabindex="-1" aria-labelledby="exampleModalLabelblog" aria-hidden="true">
         <div class="modal-dialog pt-5">
             <div class="modal-content mt-5">
                 <div class="modal-header">
-                    <h5 class="modal-title m-auto" id="exampleModalLabel">Add New Religious place</h5>
+                    <h5 class="modal-title m-auto" id="exampleModalLabelblog">Add New Religious place</h5>
                 </div>
                 <div class="modal-body">
                     <form method="post" action="{{ url('/storeBlog') }}" class="Add-form" enctype="multipart/form-data">
@@ -137,7 +150,6 @@
                         @enderror
 
 
-
                         <div class="text-center">
                             <input id="js-btn" type="submit" name="RelSub" value="Add Blog"
                                 class="btn btn-primary mt-5" />
@@ -149,13 +161,16 @@
     </div>
     {{-- -------------------------------------------------------------- --}}
     <button onclick="slideMyBlog(this)" class="My-btn btn btn-primary"><i class="fa-solid fa-angles-right"></i></button>
-@endsection
+
+    @endsection
 
 @section('script')
     <script src="{{ asset('user/js/Blogs.js') }}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+    {{-- <script src{{asset('user/js/jquery-3.6.0.min.js')}}></script> --}}
 
     {{-- @if ($errors->has('title') || $errors->has('text') || $errors->has('image'))
         <script>
@@ -165,5 +180,14 @@
                 });
             });
         </script>
+
     @endif --}}
+
+    {{-- <script>
+        $(document).ready(function(){
+          $("#comment").click(function(){
+            $(".comment").toggle();
+          });
+        });
+        </script> --}}
 @endsection

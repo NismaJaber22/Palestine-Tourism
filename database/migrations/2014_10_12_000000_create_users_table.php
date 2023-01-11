@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('userfname');
             $table->string('userlname');
-            $table->string('image')->nullable();
-            $table->boolean('is_admin');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('image')->nullable();
+            $table->boolean('is_admin');
             $table->text('liveIn')->default("1");
             $table->rememberToken();
             $table->timestamps();

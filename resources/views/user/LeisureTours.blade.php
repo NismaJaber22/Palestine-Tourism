@@ -53,7 +53,7 @@
                 {{-- <div class="row" style="justify-content: space-between;"> --}}
                 <div class="owl-carousel owl-theme">
                     @foreach ($places as $place)
-                        @if ($place->type == '3')
+                        @if ($place->type == 'Leisure')
                             <div class="Top-Dest">
                                 <img src="{{ asset("storage/$place->image") }}" />
                                 <div class="time">
@@ -67,9 +67,19 @@
                                 <h6 class="Place-Type"><span style="color:#ff4838 ;">Location: </span>
                                     {{ $place->location }}</h6>
 
-                                <div class="booking">
-                                    <button class="py-2 btn book-btn">BOOK NOW <i class="fa-solid fa-arrow-right"></i></button>
-                                </div>
+                                    @auth
+                                    <div class="booking w-10 text-end">
+                                        <a href="{{url("/BookNow/$place->id")}}" name="book" class="py-2 btn book-btn">BOOK NOW <i
+                                            class="fa-solid fa-arrow-right"></i></a>
+                                    </div>
+                                @endauth
+                                @guest
+                                    <div class="booking " tabindex="0" data-bs-toggle="tooltip"
+                                        title="you should have an account to booking">
+                                        <button name="book" class="py-2 btn book-btn" disabled>BOOK NOW <i
+                                                class="fa-solid fa-arrow-right"></i></button>
+                                    </div>
+                                @endguest
 
                                 <h5 class="py-3">
                                     <span class="price">{{ $place->Price }} $</span> per person
@@ -103,9 +113,20 @@
                     <h6 class="Place-Type"><span style="color:#ff4838 ;">Location:
                         </span>{{ $randomPlace->location }}</h6>
 
-                        <div class="booking">
-                            <button class="py-2 btn book-btn">BOOK NOW <i class="fa-solid fa-arrow-right"></i></button>
-                        </div>
+                            {{-- booking --}}
+                            @auth
+                                <div class="booking w-10 text-end">
+                                    <a href="{{url("/BookNow/$randomPlace->id")}}" name="book" class="py-2 btn book-btn">BOOK NOW <i
+                                        class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            @endauth
+                            @guest
+                                <div class="booking " tabindex="0" data-bs-toggle="tooltip"
+                                    title="you should have an account to booking">
+                                    <button name="book" class="py-2 btn book-btn" disabled>BOOK NOW <i
+                                            class="fa-solid fa-arrow-right"></i></button>
+                                </div>
+                            @endguest
 
                     <h5 class="py-3">
                         <span class="price">{{ $randomPlace->Price }}$</span> per person

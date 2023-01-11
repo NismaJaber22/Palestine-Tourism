@@ -21,7 +21,4 @@ class isAdminMiddleware
         }
         return $next($request);
     }
-    
-    
-        
 }

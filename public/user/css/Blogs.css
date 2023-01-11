@@ -40,7 +40,7 @@ textarea {
 {
     font-size: 12px;
     color: rgb(160, 160, 160);
-    margin-left: 60px;
+    margin-left: 10px;
 }
 .Post-image
 {
@@ -78,7 +78,7 @@ textarea {
 {
     background-color: #bdbaba;
     border-radius: 1.5rem;
-    width: 60%;
+    width: 100%;
     padding: 5%;
     margin-bottom: 20px;
 }
@@ -150,6 +150,14 @@ header
     }
 
 
+/*
+    textarea {
+        resize: vertical;
+        pointer-events: none;
+        outline: none;
+        overflow: auto;
+
+    } */
 
 
 }

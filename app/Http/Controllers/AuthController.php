@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Reserve;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -11,8 +12,15 @@ use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
+    // my reservation
+    public function Myreservations()
+    {
+        $Myreservations = Reserve::get();
+        return view('user.Myreservations', compact('Myreservations'));
+    }
 
-    public function register(Request $request){
+    public function register(Request $request)
+    {
 
         $data = $request->validate([
             'userfname' => 'required|min:2|max:10|',
@@ -20,12 +28,9 @@ class AuthController extends Controller
             'email' => 'required|email|unique:Users,email',
             'password' => 'required|min:8|max:30|confirmed',
             'liveIn',
-            'is_admin'=>'required',
+            'is_admin' => 'required',
             'image' => 'image|mimes:png,jpg,gif',
         ]);
-
-        // $fileName = Storage::putFile("placeimage", $data['image']);
-        // $data['image'] = $fileName;
 
         if ($request->has('image')) {
             $fileName = Storage::putFile("placeimage", $data['image']);
@@ -39,71 +44,62 @@ class AuthController extends Controller
         session()->flash('success', ' inserted successfuly');
         // return redirect(url('login'));
 
-        if($data['is_admin']==0){
+        if ($data['is_admin'] == 0) {
             return redirect(url('login'));
-        }else if($data['is_admin']==1){
+        } else if ($data['is_admin'] == 1) {
             return redirect(url('/admin/dashboards'));
         }
     }
-          
-    
-
 
     public function signup()
     {
         return view('user.register');
     }
 
-
     public function login(Request $request)
     {
-       
-    
+
+
         $data = $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:8|max:30',
-            'is_admin'=>'required'
+            'is_admin' => 'required'
         ]);
 
-        $isLogin = Auth::attempt(['email' => $request->email, 'password' => $request->password, 'is_admin'=>$request->is_admin]);
-        if ($data['is_admin']=="1" && $isLogin == true) {
+        $isLogin = Auth::attempt(['email' => $request->email, 'password' => $request->password, 'is_admin' => $request->is_admin]);
+        if ($data['is_admin'] == "1" && $isLogin == true) {
             return redirect(url('admin/dashboards'));
-            }else if ($data['is_admin']=="0" && $isLogin == true) {
-                return redirect(url('/'));
-            }
-         else {
+        } else if ($data['is_admin'] == "0" && $isLogin == true) {
+            return redirect(url('/'));
+        } else {
             return redirect(url('login'));
-        
+
 
     }
     }
 
     public function logout()
     {
-
         Auth::logout();
         return redirect(url('/'));
     }
 
-    public function Myprofile(){
-
+    public function Myprofile()
+    {
         $blogs = Blog::get();
-        return view('user.MyProfile',compact('blogs'));
+        return view('user.MyProfile', compact('blogs'));
     }
-
     //-----edit in profile user -----
     public function updatemyprofile(Request $request, $id)
     {
-
         $data = $request->validate([
             'userfname' => 'min:2|max:10|',
             'userlname' => 'min:2|max:20|',
-            // 'email'=>'email|unique:Users,email',
+            'email' => 'email',
             'password' => 'min:8|max:30|confirmed',
             'liveIn',
             'image' => 'image|mimes:png,jpg,gif'
         ]);
-        // $id = Auth::user()->id;
 
         $user = User::findOrfail($id);
 
@@ -114,15 +110,38 @@ class AuthController extends Controller
         }
 
         $data['password'] = bcrypt($data['password']);
-        $user = User::create($data);
-
 
         $user->update($data);
+        return redirect(url('Myprofile'));
+    }
 
-        // session()->flash('success',' inserted successfuly');
+    // update blog in myprofile
+    public function update(Request $request, $id)
+    {
+        $data = $request->validate([
+            'title' => 'min:5|max:100',
+            'text' => 'min:20',
+            'image' => 'mimes:png,jpg,gif',
+            'user_id',
+        ]);
 
-        // return redirect(url('Myprofile'));
-        //  return $request->id;
-        return $data;
+        $blogs = Blog::findOrfail($id);
+
+        if ($request->has('image')) {
+            Storage::delete($blogs->image);
+            $FileName = Storage::putFile("blogimage", $data['image']);
+            $data['image'] = $FileName;
+        }
+        $blogs->update($data);
+        return redirect(url('Myprofile'));
+    }
+
+    // deleteblog in myprofile
+    public function destroy($id)
+    {
+        $blogs = Blog::findOrfail($id);
+        Storage::delete($blogs->image);
+        $blogs->delete();
+        return redirect(url('Myprofile'));
     }
 }

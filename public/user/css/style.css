@@ -114,6 +114,8 @@ body
    color: var(--main-color) !important;
    border: solid var(--main-color) 1px !important;
 }
+
+
 @media(max-width:991px)
 {
     .row
@@ -138,47 +140,59 @@ body
 .Top-Dests
 {
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: space-between;
+    margin-top: 50px;
 }
 .Top-Dest
 {
-    width: 30%;
+    /* width: 100%; */
     box-shadow: 3px 4px 5px 4px #b4b2b2;
     margin-bottom: 20px;
     border-radius: 10px;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
     border: 1px solid #b4b2b2;
-    padding-bottom: 20px;
+    padding:5px;
     margin-left: auto;
     margin-right: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+.Top-Dest img{
+    width:100%;
+    height:220px;
+    border-radius: 2%;
+}
+.owl-carousel .owl-wrapper, .owl-carousel .owl-item {
+    margin: 10px;
+}
 .time
 {
     background-color: var(--main-color);
     width: 50%;
+    margin:20px 0px;
     color: white;
-    font-size: 10px;
+    font-size: 16px;
     font-weight: 500;
+    bottom: 10px;
+    padding:7px;
+    text-align: center;
     border-radius: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-
+.Top-Dest .booking{
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
 .book-btn {
-    width: 80%;
+    width: 50%;
     color: var(--main-color);
     border: solid var(--main-color) 1px;
     font-size: 15px;
     font-weight: 500;
     transition: all .6s;
-    margin-right: 40px;
+    margin-right: 0px;
 }
 .book-btn:hover
 {
@@ -189,6 +203,16 @@ body
 {
     animation: slide-right alternate .7s;
 }
+
+/* booking disabled style */
+.btn.disabled, .btn:disabled, fieldset:disabled .btn {
+    color: var(--main-color);
+    pointer-events: none;
+    background-color: var(--bs-btn-disabled-bg);
+    border-color: var(--bs-btn-disabled-border-color);
+    opacity: var(--bs-btn-disabled-opacity);
+}
+
 @keyframes slide-right
 {
     50%

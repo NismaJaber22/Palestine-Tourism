@@ -1,6 +1,11 @@
-function opens(i)
+function opens()
 {
-    $(`.commentes${i}`).toggle(500);
+    // $(`.commentes`).toggle(500);
+
+        $("#comment").click(function(){
+          $(".comment").toggle();
+        });
+        
 }
 
 // async function AddNewBlog()

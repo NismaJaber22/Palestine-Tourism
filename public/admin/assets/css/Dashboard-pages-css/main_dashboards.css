@@ -12,31 +12,29 @@ body
 .Dashboards-div
 {
     display: flex;
-    width: 80%;
-    /* margin:100px; */
+    width: 100%;
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding-top: 50px;
+    padding-top: 40px;
 
 }
 .Dash-content
 {
-    width: 60%;
+    width: 45%;
     box-shadow: 2px 3px 5px 2px  rgb(87, 84, 84) ;
     margin-bottom: 30px;
     text-decoration: none;
     display: block;
     border-radius: 1rem;
     background-color: white;
-
 }
 .Dash-image
 {
     width: 100%;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
-    height: 35vh;
+    height: 50vh;
 
 }
 .Dash-name
@@ -111,9 +109,4 @@ body
 nav
 {
     z-index: 100 !important;
-}
-
-
-.offset-1 {
-    margin-left: 100px;
 }
