@@ -13,7 +13,10 @@ PrintPage();
 
 let delayInMilliseconds = 100; //0.1 second
 
-setTimeout(function() {
-    location.href = 'http://127.0.0.1:8000/Myreservations';
-}, delayInMilliseconds);
+// setTimeout(function() {
+//     url= "{{ route('myMyreservations') }}";
+//     // location.href = "http://127.0.0.1:8000/Myreservations";
+//     location.href = url;
+// }, delayInMilliseconds);
+
 

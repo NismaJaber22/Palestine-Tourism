@@ -5,13 +5,13 @@
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="d-flex">
                 <div class="image">
-                        @if (Auth::user()->image !=null)
+                    @if (Auth::user()->image != null)
                         <img src="{{ asset('storage/' . Auth::user()->image) }}" type="button" alt="user photo"
                             class="user__image" aria-haspopup="true" aria-expanded="false" />
-                        @else
-                        <img src="{{asset('user/images/avatar.PNG') }}" type="button" alt="user photo"
-                        class="user__image"  aria-haspopup="true" aria-expanded="false" />
-                        @endif
+                    @else
+                        <img src="{{ asset('user/images/avatar.PNG') }}" type="button" alt="user photo"
+                            class="user__image" aria-haspopup="true" aria-expanded="false" />
+                    @endif
                 </div>
                 <div class="info">
                     <a href="{{ url('Myprofile') }}" class="d-block">
@@ -27,11 +27,12 @@
 
 
 
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+        {{-- <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."
+            title="Type in a name"> --}}
 
 
 
-{{-- ------------------------------------------------------------------------------------- --}}
+        {{-- ------------------------------------------------------------------------------------- --}}
         {{-- <div class="form-inline px-2">
             <div class="input-group" data-widget="sidebar-search">
                 <input class="form-control form-control-sidebar" type="search" placeholder="Search..."
@@ -63,7 +64,7 @@
             <p class="p-3 text-gray text-uppercase">modules</p>
         </div>
         <!-- Sidebar Menu -->
-        <nav  id="myUL" class="mt-2">
+        <nav id="myUL" class="mt-2">
             <ul id="myUL" class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
@@ -111,7 +112,7 @@
                                 <p>Medical Dashboard</p>
                             </a>
                         </li>
-                         <li class="item">
+                        <li class="item">
                             <a href="{{ url('BlogDashboard') }}" class="nav-link text-white">
                                 <i class="nav-icon far fa-circle "></i>
                                 <p>Blog Dashboard</p>
@@ -120,8 +121,6 @@
                 </li>
             </ul>
             </li>
-
-
 
             <li class="nav-item">
                 <a href="#" class="nav-link">
@@ -132,14 +131,14 @@
                 </a>
                 <ul class="nav nav-treeview pl-2">
                     <li class="nav-item">
-                    <li class="item">
-                        <a href="{{ url('admin/add_category') }}" class="nav-link text-white">
-                            <i class="nav-icon far fa-circle "></i>
-                            <p>add category</p>
-                        </a>
+                        <li class="item">
+                          <a href="{{ route('show.city') }}" class="nav-link text-white">
+                             <i class="nav-icon far fa-circle "></i>
+                             <p>add city</p>
+                          </a>
+                        </li>
                     </li>
-            </li>
-            </ul>
+                </ul>
             </li>
 
             <li class="nav-item">
@@ -157,22 +156,22 @@
 
             <script>
                 function myFunction() {
-      var input, filter, ul, li, a, i, txtValue;
-      input = document.getElementById("myInput");
-      filter = input.value.toUpperCase();
-      ul = document.getElementById("myUL");
-      li = ul.getElementsByTagName("li");
-      for (i = 0; i < li.length; i++) {
-          a = li[i].getElementsByTagName("a")[0];
-          txtValue = a.textContent || a.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              li[i].style.display = "";
-          } else {
-              li[i].style.display = "none";
-          }
-      }
-  }
-  </script>
+                    var input, filter, ul, li, a, i, txtValue;
+                    input = document.getElementById("myInput");
+                    filter = input.value.toUpperCase();
+                    ul = document.getElementById("myUL");
+                    li = ul.getElementsByTagName("li");
+                    for (i = 0; i < li.length; i++) {
+                        a = li[i].getElementsByTagName("a")[0];
+                        txtValue = a.textContent || a.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            li[i].style.display = "";
+                        } else {
+                            li[i].style.display = "none";
+                        }
+                    }
+                }
+            </script>
         </nav>
         <!-- /.sidebar-menu -->
     </div>
@@ -184,6 +183,3 @@
 @section('script')
 
 @endsection --}}
-
-
-

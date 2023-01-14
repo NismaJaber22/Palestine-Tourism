@@ -27,7 +27,7 @@
         </section>
     </header>
     <section>
-        <h2 class="container" style="margin-top:50px; margin-bottom: 50px;">Explore Top Destinations</h2>
+        <h2 class="container" style="font-weight:700; margin-top:50px; margin-bottom: 50px; ">Explore Top Destinations</h2>
         {{-- booking modal --}}
         <section class="explore_places">
             <div class="Top-Dests">
@@ -37,32 +37,23 @@
                             <img src="{{ asset("storage/$randomPlace->image") }}" />
                             <div class="time">
                                 <i class="fa-regular fa-clock"></i>&nbsp;
-                                <span>{{ $randomPlace->start }}:{{ $randomPlace->AddRem1 }} </span> &nbsp;
+                                <span>{{ $randomPlace->start }}:{{ $randomPlace->AddRem1 }}AM</span> &nbsp;
                                 to &nbsp;
-                                <span> {{ $randomPlace->close }}:{{ $randomPlace->AddRem2 }}</span>
+                                <span> {{ $randomPlace->close }}:{{ $randomPlace->AddRem2 }}BM</span>
                             </div>
-                            <h5 calss="place-name">{{ $randomPlace->description }}.</h5>
+                            <h5 calss="place-name">{{ $randomPlace->name }}.</h5>
                             <h6 class="Place-Type"><span style="color:#ff4838 ;">Type:
                                 </span>{{ $randomPlace->type }}
                             </h6>
                             <h6 class="Place-Type"><span style="color:#ff4838 ;">Location:
-                                </span>{{ $randomPlace->location }}
+                                </span>{{ $randomPlace->cities->cityName }}
                             </h6>
 
                             {{-- booking --}}
-                            @auth
-                                <div class="booking w-10 text-end">
-                                    <a href="{{ url("/BookNow/$randomPlace->id") }}" name="book"
-                                        class="py-2 btn book-btn">BOOK NOW <i class="fa-solid fa-arrow-right"></i></a>
-                                </div>
-                            @endauth
-                            @guest
-                                <div class="booking " tabindex="0" data-bs-toggle="tooltip"
-                                    title="you should have an account to booking">
-                                    <button name="book" class="py-2 btn book-btn" disabled>BOOK NOW <i
-                                            class="fa-solid fa-arrow-right"></i></button>
-                                </div>
-                            @endguest
+                            <div class="booking w-10 text-end">
+                                <a href="{{ url("/BookNow/$randomPlace->id") }}" name="book"
+                                    class="py-2 btn book-btn">BOOK NOW <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
 
                             <h5 class="py-3">
                                 <span class="price">{{ $randomPlace->Price }}$</span> per person
@@ -76,57 +67,85 @@
     </section>
 
     <section>
-        <h2 class="container" style="margin-top:50px">For You</h2>
+        <h2 class="container" style="margin-top:50px; font-weight:700;">For You</h2>
+        <div class="Top-Dests justify-content-center">
+            <div class="container-fluid">
+                <div class="row justify-content-between">
 
-        <div class="Top-Dests container-fluid justify-content-center">
-            <div class="row justify-content-between">
-                @foreach ($lasttours as $lasttour)
-                    <div class="Top-Dest col-3" style="width: 24%;">
+                    @foreach ($lasttours as $lasttour)
+                        <div class="col-3">
+                            <div class="Top-Dest">
+                                <img style="width:100%" src="{{ asset("storage/$lasttour->image") }}" />
+                                <div class="time">
+                                    <i class="fa-regular fa-clock"></i>&nbsp;
+                                    <span>{{ $lasttour->start }}:{{ $lasttour->AddRem1 }}AM</span> &nbsp;
+                                    to &nbsp;
+                                    <span> {{ $lasttour->close }}:{{ $lasttour->AddRem2 }}BM</span>
+                                </div>
+                                <h5 calss="place-name">{{ $lasttour->name }}</h5>
 
-                        <img style="width:100%" src="{{ asset("storage/$lasttour->image") }}" />
-                        <div class="time">
-                            {{-- <i class="fa-regular fa-clock"></i> <span>{{$lasttour->start}}</span> to <span>22:30</span> --}}
-                            <span>{{ $lasttour->start }}:{{ $lasttour->AddRem1 }} </span> &nbsp;
-                            to &nbsp;
-                            <span> {{ $lasttour->close }}:{{ $lasttour->AddRem2 }}</span>
-                        </div>
-                        <h5 calss="place-name">{{ $lasttour->description }}</h5>
+                                <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span> {{ $lasttour->type }}
+                                </h6>
+                                <h6 class="Place-Type"><span style="color:#ff4838 ;">Location:
+                                    </span>{{ $lasttour->cities->cityName }}
+                                </h6>
 
-                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span> {{ $lasttour->type }}</h6>
-                        <h6 class="Place-Type"><span style="color:#ff4838 ;">Location: </span>{{ $lasttour->location }}
-                        </h6>
+                                {{-- booking --}}
+                                <div class="booking w-10 text-end">
+                                    <a href="{{ url("/BookNow/$lasttour->id") }}" name="book"
+                                        class="py-2 btn book-btn">BOOK
+                                        NOW <i class="fa-solid fa-arrow-right"></i></a>
+                                </div>
 
- {{-- booking --}}
- @auth
- <div class="booking w-10 text-end">
-     <a href="{{ url("/BookNow/$randomPlace->id") }}" name="book"
-         class="py-2 btn book-btn">BOOK NOW <i class="fa-solid fa-arrow-right"></i></a>
- </div>
-@endauth
-@guest
- <div class="booking " tabindex="0" data-bs-toggle="tooltip"
-     title="you should have an account to booking">
-     <button name="book" class="py-2 btn book-btn" disabled>BOOK NOW <i
-             class="fa-solid fa-arrow-right"></i></button>
- </div>
-@endguest
-  {{-- <div class="booking " tabindex="0" data-bs-toggle="tooltip"
+                                {{-- <div class="booking " tabindex="0" data-bs-toggle="tooltip"
                             title="you should have an account to booking">
                             <a href="{{ url('/BookNow') }}" name="book" class="py-2 btn book-btn">BOOK NOW <i
                                     class="fa-solid fa-arrow-right"></i></a>
                         </div> --}}
-
-                        <h5 class="py-3">
-                            <span class="price">{{ $lasttour->Price }}</span> $ per person
-                        </h5>
-                    </div>
-
-
+                                <h5 class="py-3">
+                                    <span class="price">{{ $lasttour->Price }}</span> $ per person
+                                </h5>
+                            </div>
+                        </div>
                     @endforeach
-</div>
-        </div>
 
+
+                </div>
+            </div>
+        </div>
     </section>
+    {{-- ***---/*****-*-*-*-*-*------------------------ --}}
+    <section class="reviews my-5">
+        <div class="Top-Reviwes py-5">
+            <div class="container">
+                <h2>our happy clients</h2>
+                <div class="Top-Rev">
+                    <div class="owl-carousel owl-theme">
+                        @foreach ($reviews as $reviews)
+                            <div class="Top-Rev-item text-center">
+                                @if ($reviews->user->image != null)
+                                    <img src="{{ asset('storage/' . $reviews->user->image) }}" alt="user img" />
+                                @else
+                                    <img src="{{ asset('user/images/avatar.PNG') }}" alt="user img" />
+                                @endif
+
+                                <h6>{{ $reviews->user->userfname }} {{ $reviews->user->userlname }}</h6>
+
+                                <div class="quote">
+                                    <i class="fas fa-quote-left"></i>
+                                    <span>
+                                        <textarea class="text text-center" disabled>{{ $reviews->opinion }}</textarea>
+                                    </span>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- {{$reviews}} --}}
 @endsection
 
 @section('script')

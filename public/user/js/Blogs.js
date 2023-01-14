@@ -1,12 +1,9 @@
-function opens()
-{
-    // $(`.commentes`).toggle(500);
 
-        $("#comment").click(function(){
-          $(".comment").toggle();
-        });
-        
-}
+$(document).ready(function () {
+    $(".comments i").click(function () {
+        $(".comment").toggle("slow");
+    });
+});
 
 // async function AddNewBlog()
 // {
@@ -36,75 +33,59 @@ function opens()
 //             </form>
 
 //                 `,
-
 //         focusConfirm: true,
-
 //     })
 // }
 
-function heart(V,index,className)
-{
-    let num =document.getElementsByClassName(className);
-    if(window.getComputedStyle( V ,null).getPropertyValue('color')=="rgb(33, 37, 41)")
-    {
-     V.style.color = "red";
-     num[index].innerHTML = Number(num[index].innerHTML) +1;
+function heart(V, index, className) {
+    let num = document.getElementsByClassName(className);
+    if (window.getComputedStyle(V, null).getPropertyValue('color') == "rgb(33, 37, 41)") {
+        V.style.color = "red";
+        //  num[index].innerHTML = Number(num[index].innerHTML) +1;
     }
-    else
-    {
+    else {
         V.style.color = "rgb(33, 37, 41)";
-      num[index].innerHTML = Number(num[index].innerHTML) -1;
+        //   num[index].innerHTML = Number(num[index].innerHTML) -1;
     }
 }
-function slideMyBlog(btn)
-{
-    if(window.screen.width > 991)
-    {
-        if($(btn).css("left") == "0px")
-        {
-        $(btn).css("left","50%");
-        $('.My-Blogs').css("left","0%");
+function slideMyBlog(btn) {
+    if (window.screen.width > 991) {
+        if ($(btn).css("left") == "0px") {
+            $(btn).css("left", "50%");
+            $('.My-Blogs').css("left", "0%");
         }
-        else
-        {
-            $(btn).css("left","0");
-            $('.My-Blogs').css("left","-50%");
+        else {
+            $(btn).css("left", "0");
+            $('.My-Blogs').css("left", "-50%");
         }
     }
-   else
-   {
-    if($(btn).css("left") == "0px")
-    {
-    $(btn).css("left","92%");
-    $('.My-Blogs').css("left","0%");
-    }
-    else
-    {
-        $(btn).css("left","0");
-        $('.My-Blogs').css("left","-100%");
-    }
-   }
-
-
-
-// Show description function
-async function ShowDesc(Description, PlaceName) {
-    Swal.fire({
-        title: 'Description for ' + PlaceName,
-        text: Description,
-        showClass: {
-            popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
+    else {
+        if ($(btn).css("left") == "0px") {
+            $(btn).css("left", "92%");
+            $('.My-Blogs').css("left", "0%");
         }
-    })
-}
+        else {
+            $(btn).css("left", "0");
+            $('.My-Blogs').css("left", "-100%");
+        }
+    }
 
-function ellipsis(){
+    // Show description function
+    async function ShowDesc(Description, PlaceName) {
+        Swal.fire({
+            title: 'Description for ' + PlaceName,
+            text: Description,
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        })
+    }
 
+    function ellipsis() {
 
-}
-
+    }
 
 }

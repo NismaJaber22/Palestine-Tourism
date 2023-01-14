@@ -21,8 +21,8 @@ return new class extends Migration
             // $table->time('end');
             $table->Integer('phone');
             // $table->decimal('total',8,2);
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('place_id')->constrained()->onDelete("cascade");
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('place_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

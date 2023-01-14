@@ -6,11 +6,12 @@ use App\Models\Blog;
 use App\Models\Place;
 use App\Models\Reserve;
 
+use App\Models\Reviews;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
-
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -23,9 +24,9 @@ class Controller extends BaseController
         $places = Place::get();
         $lasttours = Place::orderBy('created_at', 'desc')->get()->take(4);
         $randomPlaces = Place::inRandomOrder()->limit(9)->get();
-        return view('user.index')->with(compact('places', 'randomPlaces','lasttours'));
+        $reviews = Reviews::orderBy('created_at', 'desc')->select('id','opinion','user_id')->get()->take(15);
+        return view('user.index')->with(compact('places', 'randomPlaces','lasttours','reviews'));
     }
-
     // admin dashboard function
     public function dashboards()
     {
@@ -48,10 +49,10 @@ class Controller extends BaseController
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required | min:2 | max:20',
+            'name' => 'required | min:2 | max:20|string',
             'description' => 'required | min:5 | max:100',
             'type' => 'required',
-            'location' => 'required',
+            'cities_id' => 'required',
             'start' => 'required',
             'Price' => 'required|numeric',
             'date' => 'required',
@@ -81,7 +82,6 @@ class Controller extends BaseController
     // admin add blog
     public function adminStoreBlog(Request $request)
     {
-
         $data = $request->validate([
             'title' => 'required|min:5|max:100',
             'text' => 'required|min:20',
@@ -102,7 +102,6 @@ class Controller extends BaseController
     {
         $blogs = Blog::findOrfail($id);
         Storage::delete($blogs->image);
-
         $blogs->delete();
         return redirect(url('BlogDashboard'));
     }
@@ -111,10 +110,10 @@ class Controller extends BaseController
     public function update(Request $request, $id)
     {
         $data = $request->validate([
-            'name' => 'required | min:2 | max:20',
+            'name' => 'required | min:2 | max:20 |string',
             'description' => 'required | min:5 | max:100',
             'type' => 'required',
-            'location' => 'required',
+            'cities_id' => 'required',
             'Price' => 'required|numeric',
             'start' => 'required',
             'AddRem1' => 'required',
@@ -142,4 +141,5 @@ class Controller extends BaseController
         elseif ($data['type'] == 'Medical')
             return redirect(url('MedicalDashboard'));
     }
+
 }

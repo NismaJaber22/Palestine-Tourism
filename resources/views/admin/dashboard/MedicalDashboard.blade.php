@@ -1,4 +1,5 @@
 @extends('user.layout.master')
+
 @section('head')
     <link rel="stylesheet" href="{{ asset('admin/assets/css/Dashboard-pages-css/dashboards.css') }}">
 
@@ -17,8 +18,7 @@
             <div class="card text-center">
                 <ul class="nav nav-tabs">
                     <li class="nav-item ">
-                        <a class="nav-link dash-link" aria-current="page"
-                            href="{{ 'ReligiousDashboard' }}">Religious</a>
+                        <a class="nav-link dash-link" aria-current="page" href="{{ 'ReligiousDashboard' }}">Religious</a>
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link dash-link" href="{{ 'CulturalDashboard' }}">Cultural</a>
@@ -67,7 +67,7 @@
                                                     onkeyup="NameValidation(this)" type="text" id="swal-input1"
                                                     class="form-control  swal2-input " style="width:80%" />
 
-                                         Cu       <p class="pb-2 text-start pt-1" id="NameError"
+                                                <p class="pb-2 text-start pt-1" id="NameError"
                                                     style="color:red; font-size:11px; margin:0;     font-weight: 500;"></p>
                                             </div>
                                         </label>
@@ -101,19 +101,12 @@
                                         <label class="d-flex">
                                             <p style="width:25%; margin-top: revert;">Location</p>
                                             <div style="width:100%">
-                                                <select id="swal-input6" class="form-control swal2-input" style="width:80%"
-                                                    name="location">
-                                                    <option selected value="1">Jerusalem</option>
-                                                    <option value="2">Nablus</option>
-                                                    <option value="3">Jenin</option>
-                                                    <option value="4">Tulkarm</option>
-                                                    <option value="5">Hebron</option>
-                                                    <option value="6">Bethlehem</option>
-                                                    <option value="7">Ramallah</option>
-                                                    <option value="8">Jericho</option>
-                                                    <option value="9">Qalqilya</option>
-                                                    <option value="10">Salfit</option>
-                                                    <option value="11">Tubas</option>
+                                                <select id="location" class="form-control swal2-input text-capitalize"
+                                                    style="width:80%" name="cities_id">
+                                                    @foreach ($city as $cities)
+                                                        <option selected value="{{ $cities->id }}"
+                                                            class="text-capitalize">{{ $cities->cityName }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </label>
@@ -136,11 +129,10 @@
                                                 onchange="FileValidation(this)" />
                                         </label>
 
-                                         <label class="d-flex">
+                                        <label class="d-flex">
                                             <p style="width:25%; margin-top: revert;">Date</p>
                                             <div style="width:100%">
-                                                <input name="date" placeholder="date"
-                                                   type="date" id="swal-input1"
+                                                <input name="date" placeholder="date" type="date" id="swal-input1"
                                                     class="form-control  swal2-input " style="width:80%" />
 
                                                 <p class="pb-2 text-start pt-1" id="NameError"
@@ -160,9 +152,6 @@
                                                 type="number" id="swal-input7" class="form-control swal2-input"
                                                 style="width:30%" />
                                         </label>
-
-
-
 
                                         <label class="d-flex pt-3">
                                             <p style="width:25%; margin-top: revert;">Close</p>
@@ -207,36 +196,34 @@
                         </tr>
                     </thead>
                     <tbody>
-
-                        <?php
-                        $Explore = true;
-                        ?>
-
                         @if ($places->isNotEmpty())
                             <input type="hidden" value="{{ $i = 1 }}">
                             @foreach ($places as $place)
-                                @if ($place->type == 'Medical')
+                                {{-- @if ($place->type == 'Medical') --}}
                                     <tr>
-                                        <td><a href="{{ url('CustomersRes') }}" class="btn btn-warning btn-table"><i
-                                                    class="fa-solid fa-list-check"></i></a>
+                                        <tr>
+                                            <td><a href="{{ url("/CustomersRes2/$place->id") }}"
+                                                class="btn btn-warning btn-table"><i class="fa-solid fa-list-check"></i></a>
+                                        </td>
+
 
                                         <td scope="col">{{ $i++ }}<br></td>
 
+
                                         <td scope="col">{{ $place->name }}</td>
                                         <td scope="col">{{ $place->Price }} <span class="text-black">$</span></td>
-                                        <td scope="col">{{ $place->location }} </td>
+                                        <td scope="col">{{ $place->cities->cityName }}</td>
                                         <td scope="col">{{ $place->date }} </td>
                                         <td scope="col">{{ $place->start }}:{{ $place->AddRem1 }}</td>
                                         <td scope="col">{{ $place->close }}:{{ $place->AddRem2 }}</td>
 
-
                                         {{-- description --}}
-
                                         <td style="margin:auto;"><button
                                                 onclick="ShowDesc('{{ $place->description }}','{{ $place->name }}')"
                                                 class="btn btn-secondary btn-table"><i
-                                                    class="fa-solid fa-file-medical"></i></button></td>
-
+                                                    class="fa-solid fa-file-medical"></i>
+                                            </button>
+                                        </td>
                                         {{-- image --}}
                                         <td style="margin:auto;">
                                             <button
@@ -246,8 +233,7 @@
                                             </button>
                                         </td>
 
-
-                                        {{-- edit --}}
+                                        {{-- edit--------------------------------- --}}
                                         <td style="width:10%;">
                                             <!-- Button trigger modal -->
                                             <button type="button" class="btn btn-info btn-table" data-bs-toggle="modal"
@@ -288,19 +274,22 @@
                                                                         </p>
                                                                     </div>
                                                                 </label>
+
                                                                 <label class="d-flex">
                                                                     <p style="width:25%; margin-top: revert;">Type</p>
                                                                     <div class="w-100">
                                                                         <select class="form-select swal2-input"
-                                                                            name='type'
                                                                             aria-label="Default select example"
-                                                                            style="width:80%" id="type">
+                                                                            style="width:80%" name="type">
                                                                             <option value="Religious">Religious</option>
                                                                             <option value="Cultural">Cultural</option>
+
                                                                             <option value="Leisure">Leisure</option>
-                                                                            <option value="Medical" @if ($place->type == 'Medical') selected @endif>
+                                                                            <option value="Medical"
+                                                                            @if ($place->type == 'Medical') selected @endif>
                                                                             {{ $place->type }}</option>
                                                                         </select>
+
                                                                         <p id="NameError"
                                                                             style="color:red; font-size:11px; margin:0; font-weight: 500;">
                                                                         </p>
@@ -326,21 +315,12 @@
                                                                     <p style="width:25%; margin-top: revert;">Location</p>
                                                                     <div style="width:100%">
                                                                         <select id="location"
-                                                                            class="form-control swal2-input"
-                                                                            style="width:80%" name="location">
-                                                                            <option selected value="1">Jerusalem
-                                                                            </option>
-                                                                            <option value="2">Nablus</option>
-                                                                            <option value="3">Jenin</option>
-                                                                            <option value="4">Tulkarm</option>
-                                                                            <option value="5">Hebron</option>
-                                                                            <option value="6">Bethlehem</option>
-                                                                            <option value="7">Ramallah</option>
-                                                                            <option value="8">Jericho</option>
-                                                                            <option value="9">Qalqilya</option>
-                                                                            <option value="10">Salfit</option>
-                                                                            <option value="11">Tubas</option>
-                                                                        </select>
+                                                                        class="form-control swal2-input text-capitalize" style="width:80%"
+                                                                        name="cities_id">
+                                                                        @foreach ($city as $cities)
+                                                                        <option selected value="{{$cities->id}}" class="text-capitalize">{{$cities->cityName}}</option>
+                                                                        @endforeach
+                                                                    </select>
                                                                     </div>
                                                                 </label>
 
@@ -362,26 +342,27 @@
                                                                 </label>
 
                                                                 <label class="d-flex">
+                                                                    <p style="width:25%; margin-top: revert;">Date</p>
+                                                                    <div style="width:100%">
+                                                                        <input name="date" placeholder="date"
+                                                                            type="date" id="swal-input1"
+                                                                            value="{{ $place->date }}"
+                                                                            class="form-control  swal2-input "
+                                                                            style="width:80%" />
+                                                                        <p class="pb-2 text-start pt-1" id="NameError"
+                                                                            style="color:red; font-size:11px; margin:0;font-weight: 500;">
+                                                                        </p>
+                                                                    </div>
+                                                                </label>
+
+                                                                <label class="d-flex ">
                                                                     <p style="width:25%; margin-top: revert;">Image</p>
                                                                     <input name="image" placeholder="Place Image"
                                                                         type="file" id="image"
                                                                         value="{{ $place->image }}"
                                                                         class="form-control swal2-input" style="width:80%"
                                                                         onchange="FileValidation(this)" />
-                                                                </label>
 
-                                                                <label class="d-flex">
-                                                                    <p style="width:25%; margin-top: revert;">Date</p>
-                                                                    <div style="width:100%">
-                                                                        <input name="date" placeholder="date"
-                                                                           type="date" id="swal-input1"
-                                                                           value="{{ $place->date }}"
-
-                                                                            class="form-control  swal2-input " style="width:80%" />
-
-                                                                        <p class="pb-2 text-start pt-1" id="NameError"
-                                                                            style="color:red; font-size:11px; margin:0;font-weight: 500;"></p>
-                                                                    </div>
                                                                 </label>
 
                                                                 <label class="d-flex pt-3">
@@ -417,39 +398,39 @@
                                                                         id="AddRem2" class="form-control swal2-input"
                                                                         style="width:30%" />
                                                                 </label>
+                                                                {{--
+                                                                <label class="d-flex">
+                                                                  <p style="width:25%; margin-top: revert;">Explore</p>
+                                                                  <input name="Explore" type="checkbox" />
+                                                                </label> --}}
 
                                                                 <input id="js-btn" type="submit" name="RelSub"
                                                                     value="Update" class="btn btn-primary "
                                                                     style="width: 100px; margin-right: auto;  margin-left: auto; margin-top:40px;" />
 
 
-
-
-
                                                             </form>
-
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
 
-
-                                        {{-- delete --}}
-                                        <form onclick="deleteAlert()" id='myForm'name='myForm'method="post"
-                                        action={{ url("admin/deleteMed/$place->id") }}>
-                                        @csrf
-                                        @method('DELETE')
-                                        <td style="width:10%;">
-                                            <button  onclick="deleteAlert()" class="btn btn-danger btn-table show-alert-delete-box"
-                                                title='Delete'>
-                                                <i class="fa-solid fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </form>
+                                        {{-- delete--------------------------------- --}}
+                                        <form onclick="deleteAlert()"name='myForm'method="post"
+                                            action={{ url("admin/deleteLeis/$place->id") }}>
+                                            @csrf
+                                            @method('DELETE')
+                                            <td style="width:10%;">
+                                                <button onclick="deleteAlert()"
+                                                    class="btn btn-danger btn-table show-alert-delete-box" title='Delete'>
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </form>
 
                                     </tr>
-                                @endif
+                                {{-- @endif --}}
                             @endforeach
                         @else
                             <div>
@@ -468,7 +449,6 @@
 
 @section('script')
     {{-- <script src="{{ asset('user/js/Dashboard-Pages-js/ReligiousDashboard.js') }}"></script> --}}
-    dashboards
     <script src="{{ asset('user/js/Dashboard-Pages-js/dashboards.js') }}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -497,11 +477,10 @@
 
 
 
-    //    $('.show-alert-delete-box').click(function(event) {
-    //         var form = document.forms["myForm"]; // storing the form
-
-    //         var form = $(this).closest("form");
-    //         var name = $(this).data("myForm");
+    {{-- //    $('.show-alert-delete-box').click(function(event) {
+            var form = document.forms["myForm"]; // storing the form
+             var form = $(this).closest("form");
+             var name = $(this).data("myForm");
 
 
     //         // event.deleteAlert();
@@ -524,7 +503,7 @@
     //         //         });
     //         //     }
     //         });
-    //     });
+    //     }); --}}
     {{-- </script> --}}
 @endsection
 

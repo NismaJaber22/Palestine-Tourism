@@ -3,9 +3,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Place;
-use Illuminate\Http\Request;
 
+use App\Models\Reserve;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,8 +15,10 @@ class PlaceMedController extends Controller
 {
     public function showMedical()
     {
-        $places = Place::paginate(30);
-        return view('admin.dashboard.MedicalDashboard', compact('places'));
+        $city = City::select('id', 'cityName')->get();
+
+        $places = Place::paginate(30)->where('type', 'Medical');
+        return view('admin.dashboard.MedicalDashboard', compact('places', 'city'));
     }
 
     public function showMedTours()
@@ -40,14 +44,36 @@ class PlaceMedController extends Controller
         $places = Place::findOrFail($id);
         return view('admin.dashboard.MedicalDashboard', ['places' => $places]);
     }
+
+    // -----------------------------
+
+    public function CustomersRes($id)
+    {
+        $places = Place::findOrfail($id);
+        $Myreservations = Reserve::get();
+        return view('admin.dashboard.Reservations', compact('places', 'Myreservations'));
+    }
     // --------------search----------------------------------------------------
     public function Medsearch(Request $request)
     {
+        $city = City::get();
         $search = $request->input('search');
         $places = Place::query()
             ->where('name', 'LIKE', "%{$search}%")
-            ->orWhere('location', 'LIKE', "%{$search}%")
-            ->get();
-        return view('admin.dashboard.MedicalDashboard', compact('places'));
+            ->orWhere('cities_id', 'LIKE', "%{$search}%")
+            ->get()->where('type', 'Medical');
+        return view('admin.dashboard.MedicalDashboard', compact('places', 'city'));
+    }
+
+    public function searchToures(Request $request)
+    {
+
+        $randomPlaces = Place::get();
+        $search = $request->input('search');
+        $places = Place::query()
+            ->where('name', 'LIKE', "%{$search}%")
+            ->get()->where('type', 'Medical');
+
+        return view('user.MedicalTours', compact('places', 'randomPlaces'));
     }
 }

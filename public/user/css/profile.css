@@ -1,0 +1,30 @@
+:root
+{
+    --main-color:#ff4838;
+}
+body
+{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    background-color: #fafafa;
+}
+.edit-userInfo .modal-body{
+     border:solid 1px Gainsboro;
+     padding:20px;
+}
+
+.edit-userInfo .fName,.lName,.live,.img{
+    width: 45%;
+}
+
+.edit-userInfo .lName,.email,.password,.repet{
+    display: flex;
+    justify-content:space-between;
+}
+
+@media (max-width: 575.98px) {
+    .edit-userInfo{
+        padding-top: 20px;
+    }
+}

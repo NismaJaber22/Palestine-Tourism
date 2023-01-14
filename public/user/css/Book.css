@@ -32,12 +32,28 @@ body
     display: flex;
     justify-content: space-between;
     margin-bottom: 50px;
+    padding-top: 20px;
+    margin-bottom: 0;
 }
 .Place-name
 {
     color: var(--main-color);
 }
-.Description
+.img-header img{
+    height:600px;
+}
+
+.text-header textarea {
+    resize: none;
+    width: 100%;
+    height: 250px;
+    background-color: transparent;
+    border: none;
+    padding: 20px;
+
+
+}
+textarea .Description
 {
     font-size: 20px;
     margin-bottom: 30px;

@@ -1,9 +1,13 @@
 @extends('user.layout.master')
+
+@section('')
+@endsection
+
 @section('head')
     <link rel="stylesheet" href="{{ asset('admin/assets/css/Dashboard-pages-css/dashboards.css') }}">
-
+{{--
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script> --}}
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endsection
 
@@ -100,20 +104,13 @@
                                         <label class="d-flex">
                                             <p style="width:25%; margin-top: revert;">Location</p>
                                             <div class="w-100">
-                                                <select id="swal-input6" class="form-control swal2-input" style="width:80%"
-                                                    name="location">
-                                                    <option selected value="1">Jerusalem</option>
-                                                    <option value="2">Nablus</option>
-                                                    <option value="3">Jenin</option>
-                                                    <option value="4">Tulkarm</option>
-                                                    <option value="5">Hebron</option>
-                                                    <option value="5">Bethlehem</option>
-                                                    <option value="7">Ramallah</option>
-                                                    <option value="8">Jericho</option>
-                                                    <option value="9">Qalqilya</option>
-                                                    <option value="10">Salfit</option>
-                                                    <option value="11">Tubas</option>
-                                                </select>
+                                                <select id="location"
+                                                class="form-control swal2-input text-capitalize" style="width:80%"
+                                                name="cities_id">
+                                                @foreach ($city as $cities)
+                                                <option selected value="{{$cities->id}}" class="text-capitalize">{{$cities->cityName}}</option>
+                                                @endforeach
+                                            </select>
                                             </div>
                                         </label>
 
@@ -204,10 +201,11 @@
                         @if ($places->isNotEmpty())
                             <input type="hidden" value="{{ $i = 1 }}">
                             @foreach ($places as $place)
-                                @if ($place->type == 'Leisure')
+                                {{-- @if ($place->type == 'Leisure') --}}
                                     <tr>
-                                        <td><a href="{{ url('CustomersRes') }}" class="btn btn-warning btn-table"><i
-                                                    class="fa-solid fa-list-check"></i></a>
+                                        <tr>
+                                            <td><a href="{{ url("/CustomersRes2/$place->id") }}"
+                                                class="btn btn-warning btn-table"><i class="fa-solid fa-list-check"></i></a>
                                         </td>
 
 
@@ -216,7 +214,7 @@
 
                                         <td scope="col">{{ $place->name }}</td>
                                         <td scope="col">{{ $place->Price }} <span class="text-black">$</span></td>
-                                        <td scope="col">{{ $place->location }} </td>
+                                        <td scope="col">{{ $place->cities->cityName }}</td>
                                         <td scope="col">{{ $place->date }} </td>
                                         <td scope="col">{{ $place->start }}:{{ $place->AddRem1 }}</td>
                                         <td scope="col">{{ $place->close }}:{{ $place->AddRem2 }}</td>
@@ -244,7 +242,6 @@
                                                 data-bs-target="#editModal{{ $place->id }}">
                                                 <i style="color:white ;" class="fa-solid fa-pen"></i>
                                             </button>
-
 
                                             <!-- Modal -->
                                             <div class="modal fade" id="editModal{{ $place->id }}" tabindex="-1"
@@ -320,21 +317,12 @@
                                                                     <p style="width:25%; margin-top: revert;">Location</p>
                                                                     <div style="width:100%">
                                                                         <select id="location"
-                                                                            class="form-control swal2-input"
-                                                                            style="width:80%" name="location">
-                                                                            <option selected value="1">Jerusalem
-                                                                            </option>
-                                                                            <option value="2">Nablus</option>
-                                                                            <option value="3">Jenin</option>
-                                                                            <option value="4">Tulkarm</option>
-                                                                            <option value="5">Hebron</option>
-                                                                            <option value="6">Bethlehem</option>
-                                                                            <option value="7">Ramallah</option>
-                                                                            <option value="8">Jericho</option>
-                                                                            <option value="9">Qalqilya</option>
-                                                                            <option value="10">Salfit</option>
-                                                                            <option value="11">Tubas</option>
-                                                                        </select>
+                                                                        class="form-control swal2-input text-capitalize" style="width:80%"
+                                                                        name="cities_id">
+                                                                        @foreach ($city as $cities)
+                                                                        <option selected value="{{$cities->id}}" class="text-capitalize">{{$cities->cityName}}</option>
+                                                                        @endforeach
+                                                                    </select>
                                                                     </div>
                                                                 </label>
 
@@ -444,7 +432,7 @@
                                         </form>
 
                                     </tr>
-                                @endif
+                                {{-- @endif --}}
                             @endforeach
                         @else
                             <div>

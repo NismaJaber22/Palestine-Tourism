@@ -24,13 +24,16 @@ class ReserveController extends Controller
             'peoplenum' => 'required|numeric',
             // 'total' => 'required|numeric',
             // 'end' => 'required|numeric',
-            'phone' => 'required|numeric',
+            'phone' => 'required|numeric|digits:10',
             'user_id' => 'required|exists:users,id',
             'place_id' => 'required|exists:places,id',
          ]);
 
         $reserve = Reserve::create($data);
-         return redirect(url("Myreservations"));
+
+        session()->flash('success', ' inserted successfuly');
+
+         return redirect()->back();
     }
 
 
@@ -39,4 +42,16 @@ class ReserveController extends Controller
         $reserves = Reserve::findOrfail($id);
         return view('user.Ticket', compact('reserves'));
     }
+
+    public function destroy($id) {
+        $Reserve = Reserve::findOrfail($id)->delete();
+        return redirect()->back();;
+    }
+
+    public function deleteMultiple(Request $request)
+{
+    $ids = $request->ids;
+    Reserve::whereIn('id',explode(",",$ids))->delete();
+    return response()->json(['status'=>true,'message'=>"deleted successfully."]);
+}
 }

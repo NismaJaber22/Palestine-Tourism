@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('text');
             $table->string('image');
             $table->boolean('status')->default(false);
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             // $table->foreignId('user_id')->constrained();
             // $table->foreignId('comment_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

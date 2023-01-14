@@ -20,7 +20,7 @@
             </div>
 
             <div class="First-body">
-                <h6 class="Your-Name"><span style="color:black">User Name : </span> {{$reserves->user->userfname}}{{$reserves->user->userlname}}</h6>
+                <h6 class="Your-Name"><span style="color:black">User Name : </span> {{$reserves->user->userfname}} {{$reserves->user->userlname}}</h6>
                 <h6 class="Your-Name"><span style="color:black">Number of Person :</span> {{$reserves->peoplenum}}</h6>
             </div>
             <div class="First-body">
@@ -36,6 +36,10 @@
 @section('script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{ asset('user/js/Ticket.js') }}"></script>
+<script defer>
+
+    window.print();
+    </script>
 
 @endsection
 

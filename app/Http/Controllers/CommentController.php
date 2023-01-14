@@ -26,4 +26,11 @@ class CommentController extends Controller
         // ]);
 
     }
+
+    public function destroy($id)
+    {
+        $comment = Comment::findOrfail($id)->delete();
+        return redirect(url('BlogsHome'));
+    }
+
 }

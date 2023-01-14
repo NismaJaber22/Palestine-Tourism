@@ -12,8 +12,8 @@
             <div class="card text-center">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                         <a class="nav-link dash-link active" aria-current="page"
-                        href="{{ url('ReligiousTours') }}">Religious</a>
+                        <a class="nav-link dash-link active" aria-current="page"
+                            href="{{ url('ReligiousTours') }}">Religious</a>
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link dash-link " href="{{ url('CulturalTours') }}">Cultural</a>
@@ -26,41 +26,31 @@
                     </li>
                 </ul>
 
-                {{-- {{ $select }} --}}
-
+                {{-- search toures --}}
                 <div>
                     <div class="search-city">
                         <h4 class="text-capitalize ps-3" style="display:inline-block ;">Search with city</h4>
-                        <form method="GET" action="{{ url('ReligiousTours') }}"
-                            style="display:flex;  margin-left: 1%;width: 20%; justify-content: space-between;">
-                            <select style="display:inline-block ; width: 70%;" class="form-select"
-                                aria-label="Default select example">
 
-                                <option selected value="1">Jerusalem</option>
-                                <option value="2">Nablus</option>
-                                <option value="3">Jenin</option>
-                                <option value="4">Tulkarm</option>
-                                <option value="5">Hebron</option>
-                                <option value="6">Bethlehem</option>
-                                <option value="7">Ramallah</option>
-                                <option value="8">Jericho</option>
-                                <option value="9">Qalqilya</option>
-                                <option value="10">Salfit</option>
-                                <option value="11">Tubas</option>
+                        <form method="get" action="{{ url('Religioussearch') }}" role="search">
 
-                            </select>
-                            <input type="submit" value="Search" class="btn btn-primary" name="Searchbtn"
-                                style="display:inline-block ;" />
+                            <input type="text" placeholder="Search.." name="search"
+                                value="{{ Request::get('Religioussearch') }}">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+
                         </form>
+
+
                     </div>
                 </div>
+
 
                 <section>
                     <div class="Top-Dests">
                         {{-- <div class="row" style="justify-content: space-between;"> --}}
                         <div class="owl-carousel owl-theme">
-                            @foreach ($places as $place)
-                                 @if ($place->type == 'Religious')
+                            @if ($places->isNotEmpty())
+                                @foreach ($places as $place)
+                                    @if ($place->type == 'Religious')
                                         <div class="Top-Dest">
                                             <img src="{{ asset("storage/$place->image") }}" />
                                             <div class="time">
@@ -69,10 +59,10 @@
                                                 <span> {{ $place->close }}:{{ $place->AddRem2 }}</span>
                                             </div>
 
-                                            <h5 calss="place-name">{{ $place->description }}</h5>
+                                            <h5 calss="place-name">{{ $place->name }}</h5>
                                             {{-- <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span> Leisure</h6> --}}
                                             <h6 class="Place-Type"><span style="color:#ff4838 ;">Location: </span>
-                                                {{ $place->location }}</h6>
+                                                {{ $place->cities_id }}</h6>
 
                                             {{-- booking --}}
                                             @auth
@@ -96,7 +86,12 @@
                                             </h5>
                                         </div>
                                     @endif
-                            @endforeach
+                                @endforeach
+                                @else
+                                <div>
+                                    No Data Found
+                                </div>
+                        @endif
                         </div>
                         {{-- </div> --}}
                     </div>
@@ -119,12 +114,12 @@
                                         to &nbsp;
                                         <span> {{ $randomPlace->close }}:{{ $randomPlace->AddRem2 }}</span>
                                     </div>
-                                    <h5 calss="place-name">{{ $randomPlace->description }}.</h5>
+                                    <h5 calss="place-name">{{ $randomPlace->name }}.</h5>
                                     <h6 class="Place-Type"><span style="color:#ff4838 ;">Type:
                                         </span>{{ $randomPlace->type }}
                                     </h6>
                                     <h6 class="Place-Type"><span style="color:#ff4838 ;">Location:
-                                        </span>{{ $randomPlace->location }}
+                                        </span>{{ $randomPlace->cities_id }}
                                     </h6>
 
                                     {{-- booking --}}

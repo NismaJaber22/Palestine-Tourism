@@ -1,5 +1,6 @@
     <!--Navebar for all pages ...-->
-    <nav class="navbar navbar-expand-lg " style="background-color:white">
+
+    <nav class="navbar navbar-expand-lg" style="background-color:white">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ url('/') }}"><img
                     src="{{ asset('user/images/home-images/airplane-57-48.ico') }}" style="width:50px" /> Palestine <span
@@ -41,7 +42,7 @@
                     <li class="nav-item Nav-items">
                         <a class="nav-link into-Nav" href="{{ url('BlogsHome') }}">Blogs</a>
                     </li>
-                    <li class="nav-item  Nav-items Contact">
+                    <li class="nav-item Nav-items Contact">
                         <a class="nav-link into-Nav" href="#">
                             Contact us <i class="fa-solid fa-plus plus-icon"></i>
                         </a>
@@ -50,28 +51,54 @@
                             <li class="list-item"
                                 style="width:100% ; margin: auto; display:flex ; flex-direction: column;">
                                 <h1 style="color:#ff4838;"> Contact Us</h1>
-                                <form class="contact-form container" method="POST" style="width:100%;">
+
+                                {{-- contact --}}
+                                <form class="contact-form container w-100" method="POST"
+                                    action="{{ route('contact.submit') }}">
+                                    @csrf
                                     <label>Message Title</label>
-                                    <input type="text" name="titel" class="form-control mb-1" />
+                                    <input type="text" name="title" class="form-control mb-1" />
+                                    @error('title')
+                                        <div class="alert alert-danger">{{ $message }} </div>
+                                    @enderror
+
                                     <label>Your Name</label>
-                                    <input type="text" name="Name" class="form-control mb-1" />
+                                    <input type="text" name="name" class="form-control mb-1" />
+                                    @error('name')
+                                        <div class="alert alert-danger">{{ $message }} </div>
+                                    @enderror
+
+                                    <label>Your Email</label>
+                                    <input type="text" name="email" class="form-control mb-1" />
+                                    @error('email')
+                                        <div class="alert alert-danger">{{ $message }} </div>
+                                    @enderror
+
                                     <label>Message</label>
                                     <textarea style="height:30vh" name="msg" class="form-control mb-1"> </textarea>
+                                    @error('msg')
+                                        <div class="alert alert-danger">{{ $message }} </div>
+                                    @enderror
+
                                     <input type="submit" value="Send" class="btn  d-block book" name="send">
                                 </form>
+
+                                @if (session()->has('success'))
+                                    <div class='alert alert-success w-75 text-center'>
+                                        <h2>{{ session()->get('success') }}</h2>
+                                    </div>
+                                @endif
                             </li>
                         </ul>
                     </li>
 
-                @auth
-                    @if (Auth::user()->is_admin == 1)
-                        <li class="nav-item Nav-items">
-                            <a href="{{ url('/admin/dashboards') }}" class="nav-link into-Nav">Dashboard</a>
-                        </li>
-                    @endif
-                @endauth
-
-
+                    @auth
+                        @if (Auth::user()->is_admin == 1)
+                            <li class="nav-item Nav-items">
+                                <a href="{{ url('/admin/dashboards') }}" class="nav-link into-Nav">Dashboard</a>
+                            </li>
+                        @endif
+                    @endauth
                 </ul>
             </div>
             <div class="d-flex">
@@ -90,7 +117,6 @@
                             <img src="{{ asset('user/images/avatar.PNG') }}" type="button" alt="user photo"
                                 class="user__image w-25" aria-haspopup="true" aria-expanded="false" />
                         @endif
-
 
                         <h4 class="dropdown-toggle mx-4 text-mainColor" role="button" id="dropdownMenuLink"
                             data-bs-toggle="dropdown" aria-expanded="false">{{ Auth::user()->userfname }}
@@ -111,16 +137,18 @@
 
                         </ul>
                     </div>
-
-                </div>
-            @endauth
-
-
-
-
+                @endauth
+            </div>
         </div>
-        </div>
-        </div>
-
     </nav>
     <!--End Navebar-->
+
+    @section('script')
+        @if ($errors->any())
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('.nav-item').modal('show');
+                });
+            </script>
+        @endif
+    @endsection

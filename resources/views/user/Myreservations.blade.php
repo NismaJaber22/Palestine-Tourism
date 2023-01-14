@@ -36,10 +36,11 @@
                         </thead>
                         <tbody>
 
+                                <input type="hidden" value="{{ $i = 1 }}">
 
                             @foreach ($Myreservations as $Myreservation)
                                 @if ($Myreservation->user->id == Auth::user()->id)
-                                    <td scope="col">{{ $Myreservation->id }}</td>
+                                    <td scope="col">{{ $i++ }}</td>
                                     {{-- <td scope="col">{{$Myreservation->userfname}}{{$Myreservation->userlname}}</td> --}}
 
                                     <td scope="col">{{ $Myreservation->user->userfname }}

@@ -3,9 +3,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Place;
-use Illuminate\Http\Request;
 
+use App\Models\Reserve;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,15 +15,18 @@ class PlaceLeisController extends Controller
 {
     public function showLeisure()
     {
-        $places = Place::paginate(30);
-        return view('admin.dashboard.LeisureDashboard', compact('places'));
+        $city=City::select('id','cityName')->get();
+
+        $places = Place::paginate(30)->where('type','Leisure');
+        return view('admin.dashboard.LeisureDashboard', compact('places','city'));
     }
 
     public function showLeisTours()
     {
         $places = Place::get();
+        $city=City::get();
         $randomPlaces = Place::inRandomOrder()->limit(9)->get();
-        return view('user.LeisureTours')->with(compact('places', 'randomPlaces'));
+        return view('user.LeisureTours')->with(compact('places', 'randomPlaces','city'));
     }
     // -------------------------------------------------------------------------------------
     public function destroy($id)
@@ -40,16 +45,40 @@ class PlaceLeisController extends Controller
         $places = Place::findOrFail($id);
         return view('admin.dashboard.LeisureDashboard', ['places' => $places]);
     }
+    // ---------------------------------------
+
+    public function CustomersRes($id)
+    {
+         $places = Place::findOrfail($id);
+        $Myreservations = Reserve::get();
+        return view('admin.dashboard.Reservations', compact('places', 'Myreservations'));
+
+    }
     // --------------search----------------------------------------------------
 
     public function Leisearch(Request $request)
     {
+        $city = City::get();
+        $search = $request->input('search');
+
+        $places = Place::query()
+            ->where('name', 'LIKE', "%{$search}%")
+            ->orWhere('cities_id', 'LIKE', "%{$search}%")
+            ->get()->where('type', 'Leisure');
+
+        return view('admin.dashboard.LeisureDashboard', compact('places','city'));
+    }
+
+
+    public function searchToures(Request $request)
+    {
+
+        $randomPlaces = Place::get();
         $search = $request->input('search');
         $places = Place::query()
             ->where('name', 'LIKE', "%{$search}%")
-            ->where('type', 'LIKE', "leisure")
-            ->orWhere('location', 'LIKE', "%{$search}%")
-            ->get();
-        return view('admin.dashboard.LeisureDashboard', compact('places'));
+            ->get()->where('type', 'Leisure');
+
+        return view('user.LeisureTours', compact('places', 'randomPlaces'));
     }
 }

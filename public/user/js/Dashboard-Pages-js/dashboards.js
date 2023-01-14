@@ -262,6 +262,16 @@ function ShowImage(ImageURL, PlaceName) {
         imageAlt: 'Place image',
     })
 }
+function ShowImageblog(ImageURL, BlogTitle) {
+    Swal.fire({
+        title: BlogTitle,
+        text: 'Place Image ...',
+        imageUrl: ImageURL,
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: 'Place image',
+    })
+}
 // Show description function
 async function ShowDesc(Description, PlaceName) {
     Swal.fire({

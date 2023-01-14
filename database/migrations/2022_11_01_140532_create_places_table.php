@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('type');
-            $table->string('location')->default("1");
+            // $table->string('location')->default("1");
             $table->decimal('Price',8,2);
             $table->text('description');
             $table->string('image');
@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('AddRem1');
             $table->string('close');
             $table->string('AddRem2');
+
+            $table->foreignId('cities_id');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -19,7 +19,7 @@
             <div class="card text-center">
 
                 <div class="table-div">
-                    <form method="get" action="{{ url('searchRel') }}" class="search-form">
+                    <form method="get" action="{{ url('Blogsearch') }}" class="search-form">
                         <input type="search" name="search" class="form-control search-input"
                             placeholder="Enter item name" />
                         <input type="submit" class="btn search-submit" value="Search" name="sib" />
@@ -113,11 +113,14 @@
                                 {{-- image --}}
                                 <td style="margin:auto;">
                                     <button
-                                        onclick="ShowImage('{{ asset('storage/' . $blog->image) }}','{{ $blog->title }}')"
-                                        class="btn btn-secondary btn-table">
+                                    {{-- onclick="ShowImage('{{ asset('storage/' . $place->image) }}','{{ $place->name }}')" --}}
+
+                                    onclick="ShowImage('{{ asset('storage/' . $blog->image)}}','{{$blog->title}}')"
+                                    class="btn btn-secondary btn-table">
                                         <i class="fa-regular fa-image"></i>
                                     </button>
                                 </td>
+
 
 
                                 <td>
@@ -181,8 +184,8 @@
                                                             <input name="image" placeholder="BLog Image" type="file"
                                                                 id="swal-input4" class="form-control swal2-input"
                                                                 style="width:80%" />
-                                                                <img class="px-4"style="width:20%"
-                                                                src="{{ asset("storage/$blog->image") }}">
+                                                                {{-- <img class="px-4"style="width:20%"
+                                                                src="{{ asset("storage/$blog->image") }}"> --}}
                                                         </label>
 
                                                         <input id="js-btn" type="submit" name="RelSub"
@@ -221,46 +224,31 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('user/js/Dashboard-Pages-js/ReligiousDashboard.js') }}"></script>
+
+<script src="{{ asset('user/js/Dashboard-Pages-js/dashboards.js') }}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
 
-
     <script type="text/javascript">
+        $('.show-alert-delete-box').click(function(event) {
+            var form = document.forms["myForm"]; // storing the form
+
+            var form = $(this).closest("form");
+            var name = $(this).data("myForm");
 
 
-        // $('.show-alert-delete-box').click(function(event) {
-        //     var form = document.forms["myForm"]; // storing the form
-
-        //     var form =  $(this).closest("form");
-        //     var name = $(this).data("myForm");
-
-        //     event.preventDefault();
-        //     swal({
-        //         title: "Are you sure?",
-        //         text: "Once deleted, you will not be able to recover this imaginary file!",
-        //         icon: "warning",
-        //         type: "warning",
-        //         buttons: ["Cancel", "Yes!"],
-        //         confirmButtonColor: '#3085d6',
-        //         cancelButtonColor: '#d33',
-        //         confirmButtonText: 'Yes, delete it!'
-        //     }).then((willDelete) => {
-        //         if (willDelete) {
-        //             form.submit();
-        //             swal({
-        //                 text: 'DELETE',
-        //                 icon: "warning"
-        //                 timer: 1500,
-
-        //             });
-        //         }
-        //     });
-        // });
-
-
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'delete successfuly',
+                showConfirmButton: false,
+                timer: 3000,
+            })
+        });
+    </script>
+    <script type="text/javascript">
 
         $(document).ready(function() {
             $.ajaxSetup({

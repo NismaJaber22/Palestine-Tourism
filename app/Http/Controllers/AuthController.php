@@ -21,7 +21,6 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-
         $data = $request->validate([
             'userfname' => 'required|min:2|max:10|',
             'userlname' => 'required|min:2|max:20|',
@@ -45,21 +44,17 @@ class AuthController extends Controller
         // return redirect(url('login'));
 
         if ($data['is_admin'] == 0) {
-            return redirect(url('login'));
+            return redirect(url('/'));
         } else if ($data['is_admin'] == 1) {
             return redirect(url('/admin/dashboards'));
         }
     }
-
     public function signup()
     {
         return view('user.register');
     }
-
     public function login(Request $request)
     {
-
-
         $data = $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:8|max:30',
@@ -73,8 +68,6 @@ class AuthController extends Controller
             return redirect(url('/'));
         } else {
             return redirect(url('login'));
-
-
     }
     }
 
@@ -116,32 +109,32 @@ class AuthController extends Controller
     }
 
     // update blog in myprofile
-    public function update(Request $request, $id)
-    {
-        $data = $request->validate([
-            'title' => 'min:5|max:100',
-            'text' => 'min:20',
-            'image' => 'mimes:png,jpg,gif',
-            'user_id',
-        ]);
+    // public function update(Request $request, $id)
+    // {
+    //     $data = $request->validate([
+    //         'title' => 'min:5|max:100',
+    //         'text' => 'min:20',
+    //         'image' => 'mimes:png,jpg,gif',
+    //         'user_id',
+    //     ]);
 
-        $blogs = Blog::findOrfail($id);
+    //     $blogs = Blog::findOrfail($id);
 
-        if ($request->has('image')) {
-            Storage::delete($blogs->image);
-            $FileName = Storage::putFile("blogimage", $data['image']);
-            $data['image'] = $FileName;
-        }
-        $blogs->update($data);
-        return redirect(url('Myprofile'));
-    }
+    //     if ($request->has('image')) {
+    //         Storage::delete($blogs->image);
+    //         $FileName = Storage::putFile("blogimage", $data['image']);
+    //         $data['image'] = $FileName;
+    //     }
+    //     $blogs->update($data);
+    //     return redirect(url('Myprofile'));
+    // }
 
     // deleteblog in myprofile
-    public function destroy($id)
-    {
-        $blogs = Blog::findOrfail($id);
-        Storage::delete($blogs->image);
-        $blogs->delete();
-        return redirect(url('Myprofile'));
-    }
+    // public function destroy($id)
+    // {
+    //     $blogs = Blog::findOrfail($id);
+    //     Storage::delete($blogs->image);
+    //     $blogs->delete();
+    //     return redirect(url('Myprofile'));
+    // }
 }

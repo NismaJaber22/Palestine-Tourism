@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
-use App\Models\Comment;
 use Exception;
+use App\Models\Blog;
+use App\Models\Like;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -14,9 +15,19 @@ class BlogController extends Controller
     public function BlogsHome()
     {
         $blogs = Blog::get();
-        $comments = Comment::get();
-        return view('user.BlogsHome')->with(compact('blogs', 'comments'));
+        // $comments = Comment::get();
+        $blog=Blog::with('comments')->get();
+        $like=Like::get();
+
+        return view('user.BlogsHome')->with(compact('blogs', 'blog','like'));
     }
+
+    // public function showComments($id)
+    // {
+    //     $blogs = Blog::get();
+    //     $comments = Comment::find($id);
+    //     return view('user.BlogsHome')->with(compact('blogs', 'comments'));
+    // }
 
     public function showuserProfile()
     {
@@ -26,9 +37,8 @@ class BlogController extends Controller
 
     public function storeBlog(Request $request)
     {
-
         $data = $request->validate([
-            'title' => 'required|min:5|max:100',
+            'title' => 'required|string|min:3|max:100',
             'text' => 'required|min:20',
             'image' => 'required|image|mimes:png,jpg,gif',
             'user_id' => "required|exists:users,id"
@@ -56,9 +66,8 @@ class BlogController extends Controller
     {
         $blogs = Blog::findOrfail($id);
         Storage::delete($blogs->image);
-
         $blogs->delete();
-        return redirect(url('BlogDashboard'));
+        return redirect(url('BlogsHome'));
     }
 
     // checkbox to admin for show a blog or not
@@ -72,11 +81,29 @@ class BlogController extends Controller
             $status = $request->isChecked == "true" ? 1 : 0;
 
             $blog->update(['status' => $status]);
-            // dd($blog);
-
-            return response()->json(['success' => 'true']);
+            return response()->json(['success' => 'true'])->save();
         } catch (Exception $e) {
-            return response()->json(['success' => 'false', 'error' => $e->getMessage()]);
+            return response()->json(['success' => 'false', 'error' => $e->getMessage()])->save();
         }
     }
+
+    // --------------search----------------------------------------------------
+    public function Blogsearch(Request $request)
+    {
+        $search = $request->input('search');
+        $blogs = Blog::query()
+            ->where('title', 'LIKE', "%{$search}%")
+            ->orWhere('created_at', 'LIKE', "%{$search}%")
+            ->get();
+        return view('admin.dashboard.BlogDashboard', compact('blogs'));
+    }
+
+    // edit blog
+
+    public function editBlog(){
+        return view('user.editblog');
+    }
+
+   
+
 }

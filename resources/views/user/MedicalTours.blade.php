@@ -4,6 +4,7 @@
     {{-- owl carousel --}}
     <link rel="stylesheet" href="{{ asset('owl_carousel/owl-carousel/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('owl_carousel/owl-carousel/owl.theme.css') }}">
+
 @endsection
 
 @section('content')
@@ -24,36 +25,29 @@
                         <a class="nav-link dash-link active" href="{{ url('MedicalTours') }}">Medical</a>
                     </li>
                 </ul>
+              {{-- search toures --}}
                 <div>
                     <div class="search-city">
                         <h4 class="text-capitalize ps-3" style="display:inline-block ;">Search with city</h4>
-                        <form method="GET"
-                            style="display:flex;  margin-left: 1%;width: 20%; justify-content: space-between;">
-                            <select style="display:inline-block ; width: 70%;" class="form-select"
-                                aria-label="Default select example">
-                                <option selected value="1">Jerusalem</option>
-                                <option value="2">Nablus</option>
-                                <option value="3">Jenin</option>
-                                <option value="4">Tulkarm</option>
-                                <option value="5">Hebron</option>
-                                <option value="6">Bethlehem</option>
-                                <option value="7">Ramallah</option>
-                                <option value="8">Jericho</option>
-                                <option value="9">Qalqilya</option>
-                                <option value="10">Salfit</option>
-                                <option value="9">Tubas</option>
-                            </select>
-                            <input type="submit" value="Search" class="btn btn-primary" name="Searchbtn"
-                                style="display:inline-block ;" />
+
+                        <form method="get" action="{{url('Medicalsearch')}}" role="search" >
+
+                            <input type="text" placeholder="Search.." name="search" value="{{Request::get('Medicalsearch')}}">
+                            <button type="submit"><i class="fa fa-search"></i></button>
 
                         </form>
+
+
                     </div>
                 </div>
 
                 <section>
+
                     <div class="Top-Dests">
                             {{-- <div class="row" style="justify-content: space-between;"> --}}
                             <div class="owl-carousel owl-theme">
+                                @if ($places->isNotEmpty())
+
                                 @foreach ($places as $place)
                                     @if ($place->type == 'Medical')
                                         <div class="Top-Dest">
@@ -64,10 +58,10 @@
                                                 <span> {{ $place->close }}:{{ $place->AddRem2 }}</span>
                                             </div>
 
-                                            <h5 calss="place-name">{{ $place->description }}</h5>
+                                            <h5 calss="place-name">{{ $place->name }}</h5>
                                             {{-- <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span> Leisure</h6> --}}
                                             <h6 class="Place-Type"><span style="color:#ff4838 ;">Location: </span>
-                                                {{ $place->location }}</h6>
+                                                {{ $place->cities->cityName }}</h6>
 
                                                 @auth
                                                 <div class="booking w-10 text-end">
@@ -89,6 +83,12 @@
                                         </div>
                                     @endif
                                 @endforeach
+                                    @else
+                                        <div>
+                                            No Data Found
+                                        </div>
+
+                                @endif
                             </div>
                             {{-- </div> --}}
 
@@ -112,11 +112,11 @@
                                     to &nbsp;
                                     <span> {{ $randomPlace->close }}:{{ $randomPlace->AddRem2 }}</span>
                                 </div>
-                                <h5 calss="place-name">{{ $randomPlace->description }}.</h5>
+                                <h5 calss="place-name">{{ $randomPlace->name }}.</h5>
                                 <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span>{{ $randomPlace->type }}
                                 </h6>
                                 <h6 class="Place-Type"><span style="color:#ff4838 ;">Location:
-                                    </span>{{ $randomPlace->location }}</h6>
+                                    </span>{{ $randomPlace->cities->cityName}}</h6>
 
                             {{-- booking --}}
                             @auth
