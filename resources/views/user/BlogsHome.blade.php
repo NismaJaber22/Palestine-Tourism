@@ -122,7 +122,7 @@
                                         @endif
                                       </div> --}}
 
-                                    {{--<form action="{{ url('like') }}" method="POST">
+                                    {{-- <form action="{{ url('like') }}" method="POST">
 
                                         @csrf
                                         <div class="d-flex LikeBlog" style="align-items: center;">
@@ -190,17 +190,18 @@
                                         </div>
                                         <p class="comment-text">{{ $comment->comment }}</p>
 
-                                        @if ($blog->user->id == Auth::user()->id)
-
-                                        <form class="text-end" method="post"
-                                            action={{ url("deleteComment/$comment->id") }}>
-                                            @csrf
-                                            @method('DELETE')
-                                            <td style="width:10%;">
-                                                <button class="btn btn-gray text-danger fs-5">delete</button>
-                                            </td>
-                                        </form>
-                                        @endif
+                                        @auth
+                                            @if ($blog->user->id == Auth::user()->id)
+                                                <form class="text-end" method="post"
+                                                    action={{ url("deleteComment/$comment->id") }}>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <td style="width:10%;">
+                                                        <button class="btn btn-gray text-danger fs-5">delete</button>
+                                                    </td>
+                                                </form>
+                                            @endif
+                                        @endauth
                                     </div>
                                 @endforeach
 
@@ -509,7 +510,7 @@
 
                     @guest
                         <div class="footer d-flex">
-                            <p class="btn bg-mainColor" >post</p>
+                            <p class="btn bg-mainColor">post</p>
                         </div>
                     @endguest
                 </form>

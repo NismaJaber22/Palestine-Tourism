@@ -32,7 +32,7 @@ Route::controller(Controller::class)->group(function(){
     Route::post('/admin/store','store');
     Route::post('/admin/update/{id}','update');
 
-    Route::get('/admin/dashboards','dashboards')->middleware('auth','is_admin');
+    Route::get('/admin/dashboards','dashboards')->middleware('guest');
     Route::post('/adminStoreBlog','adminStoreBlog');
 
     Route::delete('/admin/admindestroyblog/{id}','admindestroyblog');
@@ -49,9 +49,9 @@ Route::controller(PlaceRelController::class)->group(function(){
     Route::get('/admin/restoreRel/{id}','restore');
     Route::post('/admin/storeRel','store');
     Route::get('/Relsearch','Relsearch');
-    Route::get('/CustomersRes/{id}','CustomersRes');
     Route::get('/citySearch','citySearch')->name('search.city');
     Route::get('/Religioussearch','searchToures');
+    Route::get('/CustomersResrel/{id}','CustomersRes');
 
 
 });
@@ -66,6 +66,8 @@ Route::controller(PlaceCulController::class)->group(function(){
     Route::get('/admin/restoreCul/{id}','restore');
     Route::get('/Culsearch','Culsearch');
     Route::get('/Culturalsearch','searchToures');
+    Route::get('/CustomersRescul/{id}','CustomersRes');
+
 
 });
 
@@ -79,6 +81,8 @@ Route::controller(PlaceLeisController::class)->group(function(){
     Route::get('/admin/restoreLeis/{id}','restore');
     Route::get('/Leisearch','Leisearch');
     Route::get('/Leisuresearch','searchToures');
+    Route::get('/CustomersReslei/{id}','CustomersRes');
+
 
 });
 
@@ -94,6 +98,7 @@ Route::controller(PlaceMedController::class)->group(function(){
     Route::get('/Medsearch','Medsearch');
 
     Route::get('/Medicalsearch','searchToures');
+    Route::get('/CustomersResmed/{id}','CustomersRes');
 
 
 });

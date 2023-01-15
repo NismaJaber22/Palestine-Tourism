@@ -202,13 +202,11 @@
                                 {{-- @if ($place->type == 'Medical') --}}
                                     <tr>
                                         <tr>
-                                            <td><a href="{{ url("/CustomersRes2/$place->id") }}"
+                                            <td><a href="{{ url("/CustomersResmed/$place->id") }}"
                                                 class="btn btn-warning btn-table"><i class="fa-solid fa-list-check"></i></a>
                                         </td>
 
-
                                         <td scope="col">{{ $i++ }}<br></td>
-
 
                                         <td scope="col">{{ $place->name }}</td>
                                         <td scope="col">{{ $place->Price }} <span class="text-black">$</span></td>

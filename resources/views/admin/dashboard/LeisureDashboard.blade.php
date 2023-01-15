@@ -204,7 +204,7 @@
                                 {{-- @if ($place->type == 'Leisure') --}}
                                     <tr>
                                         <tr>
-                                            <td><a href="{{ url("/CustomersRes2/$place->id") }}"
+                                            <td><a href="{{ url("/CustomersReslei/$place->id") }}"
                                                 class="btn btn-warning btn-table"><i class="fa-solid fa-list-check"></i></a>
                                         </td>
 

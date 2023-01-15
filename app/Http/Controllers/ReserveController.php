@@ -31,7 +31,7 @@ class ReserveController extends Controller
 
         $reserve = Reserve::create($data);
 
-        session()->flash('success', ' inserted successfuly');
+        session()->flash('success', 'Reservation successful');
 
          return redirect()->back();
     }

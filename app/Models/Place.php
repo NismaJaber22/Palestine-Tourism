@@ -10,7 +10,7 @@ class Place extends Model
 {
     use HasFactory;
 
-    protected $fillable=['name','type' ,'cities_id','Price','description', 'image','date','start','AddRem1','close','AddRem2'];
+    protected $fillable=['name','type' ,'Price','description', 'image','date','start','AddRem1','close','AddRem2','cities_id'];
 
     public function cities(){
         return $this->belongsTo(City::class);

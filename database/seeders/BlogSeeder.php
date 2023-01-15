@@ -16,7 +16,6 @@ class BlogSeeder extends Seeder
      */
     public function run()
     {
-        http://localhost/larabijoux/public/images/
 
         Blog::create([
         'title' => 'Jerusalem',
@@ -25,8 +24,6 @@ class BlogSeeder extends Seeder
                     (Jebus), and the flag of Jerusalem since ancient times was shattered. Many are like the Crusaders, the Persians and the Romans, and the foot has many names,
                      including: Bayt al-Maqdis, the first two qiblas, and al-Quds al-Sharif.',
 
-
-        // 'image' =>"asset('user/images/home-images/p-alpha1.png')",
         'image'=> '../user/images/home-images/jerusalem.jpg',
         // 'image'=>Storage::path('user/images/home-images/jerusalem.jpg'),
 

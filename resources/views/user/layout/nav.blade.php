@@ -112,10 +112,10 @@
                     <div class="dropdown d-flex">
                         @if (Auth::user()->image != null)
                             <img src="{{ asset('storage/' . Auth::user()->image) }}" type="button" alt="user photo"
-                                class="user__image w-25" aria-haspopup="true" aria-expanded="false" />
+                                class="user__image" aria-haspopup="true" aria-expanded="false" />
                         @else
                             <img src="{{ asset('user/images/avatar.PNG') }}" type="button" alt="user photo"
-                                class="user__image w-25" aria-haspopup="true" aria-expanded="false" />
+                                class="user__image" aria-haspopup="true" aria-expanded="false" />
                         @endif
 
                         <h4 class="dropdown-toggle mx-4 text-mainColor" role="button" id="dropdownMenuLink"

@@ -16,7 +16,19 @@
                 {{-- user data  --}}
                 <div class="userInfo col-md-3" id="vayvo-progression-author-sidebar">
                     <div class="card">
-                        <img class="card-img-top" src="{{ asset('storage/' . Auth::user()->image) }}" alt="...">
+                        {{-- <img class="card-img-top" src="{{ asset('storage/' . Auth::user()->image) }}" alt="..."> --}}
+
+                        @if (Auth::user()->image != null)
+                            <img src="{{ asset('storage/' . Auth::user()->image) }}" type="button" alt="user photo"
+                            />
+                        @else
+                            <img src="{{ asset('user/images/avatar.PNG') }}" type="button" alt="user photo"
+                            />
+                        @endif
+
+
+
+
                         <div class="card-body">
                             <h5 class="card-title">{{ Auth::user()->userfname }} {{ Auth::user()->userlname }}</h5>
                         </div>

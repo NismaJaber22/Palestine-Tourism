@@ -204,7 +204,7 @@
                             @foreach ($places as $place)
                                 {{-- @if ($place->type == 'Cultural') --}}
                                     <tr>
-                                        <td><a href="{{ url("/CustomersRes1/$place->id") }}"
+                                        <td><a href="{{ url("/CustomersRescul/$place->id") }}"
                                             class="btn btn-warning btn-table"><i class="fa-solid fa-list-check"></i></a>
                                     </td>
                                         <td scope="col">{{ $i++ }}<br></td>
