@@ -50,7 +50,7 @@ class Controller extends BaseController
     {
         $data = $request->validate([
             'name' => 'required | min:2 | max:20|string',
-            'description' => 'required | min:5 | max:100',
+            'description' => 'required | min:5 ',
             'type' => 'required',
             'cities_id' => 'required',
             'start' => 'required',
@@ -111,7 +111,7 @@ class Controller extends BaseController
     {
         $data = $request->validate([
             'name' => 'required | min:2 | max:20 |string',
-            'description' => 'required | min:5 | max:100',
+            'description' => 'required | min:5 ',
             'type' => 'required',
             'cities_id' => 'required',
             'Price' => 'required|numeric',
