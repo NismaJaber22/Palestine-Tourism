@@ -3,24 +3,27 @@
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="d-flex">
-                <div class="image">
-                    @if (Auth::user()->image != null)
-                        <img src="{{ asset('storage/' . Auth::user()->image) }}" type="button" alt="user photo"
-                            class="user__image" aria-haspopup="true" aria-expanded="false" />
-                    @else
-                        <img src="{{ asset('user/images/avatar.PNG') }}" type="button" alt="user photo"
-                            class="user__image" aria-haspopup="true" aria-expanded="false" />
-                    @endif
-                </div>
-                <div class="info">
-                    <a href="{{ url('Myprofile') }}" class="d-block">
-                        <h4 class="text-mainColor" role="button" aria-expanded="false">{{ Auth::user()->userfname }}
-                            {{ Auth::user()->userlname }}</h4>
-                    </a>
-                </div>
-            </div>
+            @auth
+                <div class="d-flex">
+                    <div class="image">
 
+                        @if (Auth::user()->image != null)
+                            <img src="{{ asset('storage/' . Auth::user()->image) }}" type="button" alt="user photo"
+                                class="user__image" aria-haspopup="true" aria-expanded="false" />
+                        @else
+                            <img src="{{ asset('user/images/avatar.PNG') }}" type="button" alt="user photo"
+                                class="user__image" aria-haspopup="true" aria-expanded="false" />
+                        @endif
+                    </div>
+                    <div class="info">
+                        <a href="{{ url('Myprofile') }}" class="d-block">
+                            <h4 class="text-mainColor" role="button" aria-expanded="false">{{ Auth::user()->userfname }}
+                                {{ Auth::user()->userlname }}</h4>
+                        </a>
+                    </div>
+
+                </div>
+            @endauth
 
         </div>
         {{-- search --}}
@@ -131,14 +134,14 @@
                 </a>
                 <ul class="nav nav-treeview pl-2">
                     <li class="nav-item">
-                        <li class="item">
-                          <a href="{{ route('show.city') }}" class="nav-link text-white">
-                             <i class="nav-icon far fa-circle "></i>
-                             <p>add city</p>
-                          </a>
-                        </li>
+                    <li class="item">
+                        <a href="{{ route('show.city') }}" class="nav-link text-white">
+                            <i class="nav-icon far fa-circle "></i>
+                            <p>add city</p>
+                        </a>
                     </li>
-                </ul>
+            </li>
+            </ul>
             </li>
 
             <li class="nav-item">

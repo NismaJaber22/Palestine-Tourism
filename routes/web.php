@@ -22,9 +22,9 @@ Route::get('/all',[Controller::class,'store']);
 //     return view('admin.dashboard.search');
 // });
 
-Route::get('/login', function () {
-    return view('user.login');
-});
+// Route::get('/login', function () {
+//     return view('user.login');
+// });
 
 
 Route::controller(Controller::class)->group(function(){
@@ -32,7 +32,7 @@ Route::controller(Controller::class)->group(function(){
     Route::post('/admin/store','store');
     Route::post('/admin/update/{id}','update');
 
-    Route::get('/admin/dashboards','dashboards')->middleware('guest');
+    Route::get('/admin/dashboards','dashboards')->middleware(['auth','is_admin']);
     Route::post('/adminStoreBlog','adminStoreBlog');
 
     Route::delete('/admin/admindestroyblog/{id}','admindestroyblog');
@@ -42,7 +42,7 @@ Route::controller(Controller::class)->group(function(){
 // ----------Religious----------------------------
 Route::controller(PlaceRelController::class)->group(function(){
     Route::get('/admin/createRel','create');
-    Route::get('/ReligiousDashboard','showReligious')->middleware('auth');
+    Route::get('/ReligiousDashboard','showReligious')->middleware(['auth','is_admin']);
     Route::get('/ReligiousTours','showRelTours');
     Route::delete('/admin/deleteRel/{id}','destroy');
     Route::get('/admin/editRel/{id}','edit');
@@ -94,35 +94,28 @@ Route::controller(PlaceMedController::class)->group(function(){
     Route::delete('/admin/deleteMed/{id}','destroy');
     Route::get('/admin/editMed/{id}','edit');
     Route::get('/admin/restoreMed/{id}','restore');
-
     Route::get('/Medsearch','Medsearch');
-
     Route::get('/Medicalsearch','searchToures');
     Route::get('/CustomersResmed/{id}','CustomersRes');
-
-
 });
 
 //------------AuthController---------------------------
 Route::controller(AuthController::class)->group(function(){
-    Route::get('/signup','signup');
+    Route::get('/signup','signup')->middleware('guest');
     Route::post('/register','register');
-    Route::post('/login','login');
+    Route::get('/login','loginpage')->middleware('guest');
+    route::post('login',[AuthController::class,'login'])->name('login');
+
     Route::get('logout','logout');
     Route::get('Myprofile','Myprofile');
     Route::get('/Myreservations','Myreservations')->name('myMyreservations');
     Route::post('updatemyprofile/{id}','updatemyprofile');
-
-
-    // Route::post('updateBlog/{id}','update');
-
-    // Route::middleware(['auth', 'second'])->group(function () {
 });
 
 // -----------Blog-----------------------------
 Route::controller(BlogController::class)->group(function(){
     Route::get('/admin/createBlog','create');
-    Route::get('/BlogDashboard','showBlog');
+    Route::get('/BlogDashboard','showBlog')->middleware('is_admin');
     Route::delete('/admin/deleteblog/{id}','destroy');
     Route::get('/admin/editBlog/{id}','edit');
     Route::get('/admin/restoreBlog/{id}','restore');
@@ -132,16 +125,13 @@ Route::controller(BlogController::class)->group(function(){
     Route::get('/BlogDashboard','BlogDashboard');
     Route::post('/editstatus/{id}','editstatus');
 
-
     Route::post('/Myprofile','showuserProfile');
     Route::post('/Bdash','dashboards');
 
     // Route::get('/editBlog','editBlog')->name('blogEdit');
     // Route::post('/updateBlog/{id}','updateBlog');
 
-
     Route::delete('deleteblog/{id}','destroy');
-
     Route::get('/BlogsHome','BlogsHome');
     Route::get('/showComments/{id}','showComments');
 
@@ -171,27 +161,15 @@ Route::controller(LikeController::class)->group(function(){
     Route::post('/like','like');
 });
 
-
-// Route::get('contact',[ContactController::class,'show'])->name('contact.show');
 Route::post('contact',[ContactController::class,'submit'])->name('contact.submit');
-
-// Route::controller(ContactController::class)->group(function(){
-//     Route::post('/contact','contact')->name('contact');
-// });
-
-
 
 Route::controller(ReviewsController::class)->group(function(){
     Route::post('/review','review');
-    // Route::get('/showReviews','showReviews');
-
 });
 
 Route::controller(CityController::class)->group(function(){
-
     Route::get('admin/showCity','showCity')->name('show.city');
     Route::post('admin/storeCity','storeCity')->name('submit.city');
-    // admindestroyblog
 });
 
 // reviews

@@ -155,8 +155,7 @@
 
                                     <div class="comments d-flex" style="align-items: center;">
                                         <p class="numComment my-0">{{ $blog->comments->count() }}</p>
-                                        <i id="comment" class="fa-regular fa-comment foot-icons comm_icon"
-                                            onclick="opens()"></i>
+                                        <i data-blogid={{$blog->id}} class="toggleComments fa-regular fa-comment foot-icons comm_icon"></i>
                                     </div>
                                     <div class="d-flex" style="align-items: center;">
                                         <p class="num my-0">12</p>
@@ -165,6 +164,7 @@
                                 </div>
 
                                 {{-- comments --}}
+                                <div id="blogcomments{{$blog->id}}" data-id="{{$blog->id}}">
                                 @foreach ($blog->comments as $comment)
                                     <div class="comment">
                                         <div class="d-flex align-items-center justify-content-between">
@@ -204,7 +204,8 @@
                                         @endauth
                                     </div>
                                 @endforeach
-
+                                </div>
+                                <!-- end comments -->
                                 @auth
                                     <form class="d-flex mb-3" method="POST" action="{{ url('addComment') }}">
                                         @csrf

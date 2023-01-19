@@ -16,9 +16,15 @@ class isAdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        //dd(\Auth::check());
+        if(!\Auth::check()){
+            abort(403);
+        }else
         if(!auth()->user()->is_admin){
+
             abort(403);
         }
+
         return $next($request);
     }
 }

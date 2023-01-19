@@ -53,6 +53,11 @@ class AuthController extends Controller
     {
         return view('user.register');
     }
+
+    public function loginpage(){
+        return view('user.login');
+    }
+
     public function login(Request $request)
     {
         $data = $request->validate([

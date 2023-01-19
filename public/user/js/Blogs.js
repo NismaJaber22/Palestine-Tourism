@@ -1,7 +1,10 @@
 
 $(document).ready(function () {
-    $(".comments i").click(function () {
-        $(".comment").toggle("slow");
+
+    $(".toggleComments").click(function () {
+        blogid = $(this).data("blogid");
+        $("#blogcomments"+blogid).toggle("slow");
+        console.log("BlogID: "+blogid);
     });
 });
 
