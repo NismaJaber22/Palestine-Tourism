@@ -18,6 +18,7 @@ use App\Http\Controllers\PlaceLeisController;
 Route::get('/all',[Controller::class,'store']);
 
 // // search filter
+
 // Route::get('/search', function () {
 //     return view('admin.dashboard.search');
 // });

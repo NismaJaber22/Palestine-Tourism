@@ -33,7 +33,6 @@
                         <input type="submit" class="btn search-submit" value="Search" name="sib" />
                     </form>
                     <div class="add-new-div">
-                        <button class="btn btn-primary me-1 Bbb">Submit </button>
                         <button class="btn btn-danger me-1 Bbb delete-all">Delete all Consumed</button>
                     </div>
                 </div>

@@ -24,5 +24,8 @@ class CitySeeder extends Seeder
         City::create([
             'cityName' => 'Nablus',
         ]);
+        City::create([
+            'cityName' => 'Qalqelia',
+        ]);
     }
 }

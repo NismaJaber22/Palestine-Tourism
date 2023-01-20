@@ -213,7 +213,7 @@
                         @foreach ($places as $place)
                             {{-- @if ($place->type == 'Religious') --}}
                                 <tr>
-                                    <td><a href="{{ url("/CustomersRes/$place->id") }}"
+                                    <td><a href="{{ url("/CustomersResrel/$place->id") }}"
                                             class="btn btn-warning btn-table"><i class="fa-solid fa-list-check"></i></a>
                                     </td>
                                     <td scope="col">{{ $i++ }}<br></td>

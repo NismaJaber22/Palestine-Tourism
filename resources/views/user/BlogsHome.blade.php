@@ -134,21 +134,23 @@
                                         </div>
                                     </form> --}}
 
+                                    {{-- like --}}
                                     <form action="{{ url('like') }}" method="POST">
                                         @csrf
                                         <div class="form-check d-flex">
                                             <p class="num likes my-0">{{ $blog->likes->where('like', 1)->count() }}</p>
                                             {{-- <p class="num likes my-0">{{ $blog->likes->count() }}</p> --}}
-                                            <input type="checkbox" class="form-check-input" id="like{{ $blog->id }}"
-                                                name="like" value="1" {{ $blog->like === '1' ? ' checked' : '' }}>
+                                            {{-- <input type="checkbox" class="form-check-input" id="like{{ $blog->id }}"
+                                                name="like" value="1" {{ $blog->like === '1' ? ' checked' : '' }}> --}}
 
                                             @auth
                                                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                                 <input type="hidden" name="blog_id" value="{{ $blog->id }}">
                                             @endauth
 
+
                                             <i class="fa-regular fa-heart foot-icons" onclick="heart(this, 'likes')"></i>
-                                            <button type="submit"></button>
+                                            <button class="like" type="submit"></button>
                                         </div>
                                     </form>
 

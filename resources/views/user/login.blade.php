@@ -25,7 +25,7 @@
          <label  class="login-label">Password</label>
          <input onkeyup="password_validation(this)" class="input-group-text form-control login-input" type="password" name="password"  placeholder="Your Password" />
          <p id="pass-error"></p>
-         
+
          @error('password')
          <div class="alert alert-danger">{{ $message }} </div>
          @enderror
@@ -36,8 +36,8 @@
              <option selected value="0">User</option>
          </select>
 
-         <label>remember me</label>
-         <input type="checkbox" name="remember"  />
+         {{-- <label>remember me</label>
+         <input type="checkbox" name="remember"  /> --}}
          <input id="js-btn" class="btn btn-primary login-btn disabled" type="submit" name="send" value="Login" />
      </form>
      <p>If you are a new user, you can <a href="{{url('signup')}}" class="go-signup">Sign up?</a></p>

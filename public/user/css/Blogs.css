@@ -185,3 +185,17 @@ header
     }
 }
 }
+.form-check{
+    position: relative;
+}
+.form-check .like {
+ position: absolute;
+ right: 10px;
+ width: 30px;
+ height: 23px;
+ top: 11px;
+ opacity:0;
+}
+.form-check i:hover{
+    color: red;
+}
