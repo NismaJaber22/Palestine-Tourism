@@ -62,7 +62,7 @@
                                         <h5 calss="place-name">{{ $place->name }}</h5>
                                         {{-- <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span> Leisure</h6> --}}
                                         <h6 class="Place-Type"><span style="color:#ff4838 ;">Location: </span>
-                                            {{ $place->cities_id }}</h6>
+                                            {{ $place->cities->cityName }}</h6>
 
 
                                         @auth
@@ -113,7 +113,7 @@
                                 <h6 class="Place-Type"><span style="color:#ff4838 ;">Type: </span>{{ $randomPlace->type }}
                                 </h6>
                                 <h6 class="Place-Type"><span style="color:#ff4838 ;">Location:
-                                    </span>{{ $randomPlace->cities_id }}</h6>
+                                    </span>{{ $randomPlace->cities->cityName }}</h6>
 
                                 {{-- booking --}}
                                 @auth
